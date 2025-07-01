@@ -21,7 +21,7 @@ const ProfileCard = () => {
         <div className="flex flex-col md:flex-row items-center md:items-start justify-between mb-4 gap-4">
           <div className="w-full md:w-28 flex-shrink-0 rounded-xl overflow-hidden bg-transparent md:bg-muted">
             <img
-              src="https://cdn.pixabay.com/photo/2023/08/27/14/17/man-8217185_960_720.jpg"
+              src="/assets/avatar.jpg"
               alt="Profile"
               className="w-40 h-30 object-cover mx-auto md:mx-0 rounded-2xl"
             />
