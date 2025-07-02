@@ -25,6 +25,16 @@ const WorkProcess = () => {
         <CustomCard
           icon={
             <Icon
+              icon="material-symbols:problem"
+              className="w-5 h-5 mx-auto my-auto"
+            />
+          }
+          text="Problem Solving"
+          type="follow"
+        />
+        <CustomCard
+          icon={
+            <Icon
               icon="mdi:message-text-outline"
               className="w-5 h-5 mx-auto my-auto"
             />
@@ -33,18 +43,8 @@ const WorkProcess = () => {
           type="follow"
         />
         <CustomCard
-          icon={
-            <Icon
-              icon="mdi:gesture-tap-button"
-              className="w-5 h-5 mx-auto my-auto"
-            />
-          }
-          text="UX Thinking"
-          type="follow"
-        />
-        <CustomCard
-          icon={<Icon icon="mdi:magnify" className="w-5 h-5 mx-auto my-auto" />}
-          text="Attention to Detail"
+          icon={<Icon icon="iconoir:learning" className="w-5 h-5 mx-auto my-auto" />}
+          text="Continuous Learning"
           type="follow"
         />
         {/* <CustomCard

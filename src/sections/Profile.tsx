@@ -10,20 +10,21 @@ const badgesData = [
   { icon: "ion:code-slash-outline", label: "Full Stack" },
   { icon: "ion:ribbon-sharp", label: "Coderhouse" },
   { icon: "game-icons:graduate-cap", label: "UTN" },
-  { icon: "ion:language-sharp", label: "Español & Ingles" },
-  { icon: "famicons:happy-sharp", label: "Good Boy" },
+  { icon: "ion:language-sharp", label: "Español" },
+  { icon: "ion:language-sharp", label: "Ingles" },
+  // { icon: "famicons:happy-sharp", label: "Good Boy" },
 ];
 
 const ProfileCard = () => {
   return (
     <Card className="text-white p-4 bg-[#101010]">
-      <CardContent className="p-0 flex flex-col gap-4">
+      <CardContent className="p-0 flex flex-col gap-1.5">
         <div className="flex flex-col md:flex-row items-center md:items-start justify-between mb-4 gap-4">
           <div className="w-full md:w-28 flex-shrink-0 rounded-xl overflow-hidden bg-transparent md:bg-muted">
             <img
               src="/assets/avatar.jpg"
               alt="Profile"
-              className="w-40 h-30 object-cover mx-auto md:mx-0 rounded-2xl"
+              className="w-40 h-35 object-cover mx-auto md:mx-0 rounded-2xl"
             />
           </div>
 
@@ -72,6 +73,11 @@ const ProfileCard = () => {
             >
               <Icon icon={icon} className="text-indigo-400 h-6 w-6 mr-2" />
               {label}
+              {label === "Ingles" && (
+                <span className="ml-1 text-[10px] text-indigo-400">
+                  (In process)
+                </span>
+              )}
             </Badge>
           ))}
         </div>

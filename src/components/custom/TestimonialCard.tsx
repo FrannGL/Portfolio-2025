@@ -4,7 +4,7 @@ import { Separator } from "@/components/ui/separator";
 
 type TestimonialCardProps = {
   name: string;
-  country: string;
+  company: string;
   date: string;
   content: string;
   avatarUrl?: string;
@@ -12,7 +12,7 @@ type TestimonialCardProps = {
 
 const TestimonialCard = ({
   name,
-  country,
+  company,
   date,
   content,
   avatarUrl,
@@ -31,12 +31,12 @@ const TestimonialCard = ({
               <AvatarFallback>{name[0]}</AvatarFallback>
             </Avatar>
             <div>
-              <p className="text-base font-semibold">{name}</p>
-              <p className="text-sm text-muted-foreground">{country}</p>
+              <p className="text-sm font-semibold">{name}</p>
+              <p className="text-xs text-muted-foreground">{company}</p>
             </div>
           </div>
 
-          <p className="text-sm text-muted-foreground mt-1 whitespace-nowrap">
+          <p className="text-xs text-muted-foreground mt-1 whitespace-nowrap">
             {date}
           </p>
         </div>

@@ -4,7 +4,7 @@ import TestimonialCard from "@/components/custom/TestimonialCard";
 const testimonials = [
   {
     name: "Kevin Fiorentino",
-    country: "Argentina",
+    company: "Notimation",
     date: "16/10/2024",
     content:
       'Trabajé más de un año con Fran, indirectamente, como líder de su líder. Realmente ha sido exponencial ver su crecimiento como desarrollador front-end. Desde arrancar completamente de abajo, sabiendo lo básico, a hacerse cargo de proyectos y desarrollos grandes en poco tiempo. Fran hizo ese "clic" que considero deben hacer los programadores en donde demuestran haber "pasado de nivel". Un día comenzó a proponer, analizar, resolver a otro ritmo. Con mayor eficacia, eficiencia e incluso en cantidad de tareas. Sumado a su buen trato diario y gran comunicación constante que ha tenido con su líder o directamente conmigo. Tienen todos los soft y hard skills necesarios para este trabajo. Todo por delante como desarrollador de software.',
@@ -12,7 +12,7 @@ const testimonials = [
   },
   {
     name: "Lucía Dias",
-    country: "Argentina",
+    company: "Notimation",
     date: "25/03/2024",
     content:
       "Hace casi un año que trabajo con Franco en el equipo de desarrollo front-end en Notimation. Desde el principio, demostró un entusiasmo notable por aprender y una actitud proactiva por resolver sus tareas. Franco aborda sus responsabilidades con rapidez y eficacia. Destaca como una persona muy comunicativa, amigable y de confianza. Sin duda, se convirtió en un pilar fundamental de nuestro equipo. Recomiendo absolutamente trabajar con él.",
@@ -20,7 +20,7 @@ const testimonials = [
   },
   {
     name: "Sofía Pereira",
-    country: "Uruguay",
+    company: "Uruguay",
     date: "5/04/2025",
     content:
       "Muy buena comunicación y resultados. Me sentí acompañada en todo momento. Definitivamente volvería a elegirlo.",

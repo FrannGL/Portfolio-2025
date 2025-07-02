@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Icon } from "@iconify/react";
-import { useState, type ReactNode } from "react";
+import { useState, useEffect, type ReactNode } from "react";
 
 type TechIcon = {
   icon: string;
@@ -28,19 +28,66 @@ const CustomCard = ({
   className,
 }: IconCardProps) => {
   const [isPaused, setIsPaused] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
+
   const isStack = type === "stack";
   const isFollow = type === "follow" && href;
+
+  useEffect(() => {
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkIsMobile();
+    window.addEventListener("resize", checkIsMobile);
+
+    return () => window.removeEventListener("resize", checkIsMobile);
+  }, []);
+
+  const handleCardClick = (e: React.MouseEvent) => {
+    if (isMobile && isStack) {
+      e.preventDefault();
+      setIsClicked(!isClicked);
+    }
+  };
+
+  const handleIconMouseEnter = () => {
+    if (!isMobile) {
+      setIsPaused(true);
+    }
+  };
+
+  const handleIconMouseLeave = () => {
+    if (!isMobile) {
+      setIsPaused(false);
+    }
+  };
+
+  const handleIconClick = (e: React.MouseEvent) => {
+    if (isMobile) {
+      e.stopPropagation();
+      setIsPaused(!isPaused);
+    }
+  };
 
   const content = (
     <Card
       className={`group relative rounded-xl bg-[#191919] text-white shadow-sm border border-[#212121] transition-all duration-300 hover:bg-[#1f1f1f] hover:border-[#2a2a2a] hover:shadow-lg overflow-hidden ${
         width ?? "w-fit"
-      } ${className ?? ""}`}
+      } ${className ?? ""} ${isMobile && isStack ? "cursor-pointer" : ""}`}
+      onClick={handleCardClick}
     >
       <CardContent className="relative flex items-center py-1 px-2 gap-2 h-full">
         <div
           className={`flex items-center gap-2 transition-transform duration-500 ease-in-out ${
-            isStack ? "group-hover:-translate-x-[120%]" : ""
+            isStack
+              ? isMobile
+                ? isClicked
+                  ? "-translate-x-[120%]"
+                  : ""
+                : "group-hover:-translate-x-[120%]"
+              : ""
           }`}
         >
           <div
@@ -67,7 +114,11 @@ const CustomCard = ({
             className={`absolute inset-0 flex items-center justify-start px-4 overflow-hidden transform transition-all duration-500 ease-in-out
               ${
                 isStack
-                  ? "translate-x-full opacity-0 group-hover:translate-x-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto"
+                  ? isMobile
+                    ? isClicked
+                      ? "translate-x-0 opacity-100 pointer-events-auto"
+                      : "translate-x-full opacity-0 pointer-events-none"
+                    : "translate-x-full opacity-0 group-hover:translate-x-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto"
                   : ""
               }`}
           >
@@ -83,10 +134,13 @@ const CustomCard = ({
                   >
                     <div
                       title={tech.name}
-                      className="flex items-center justify-center w-8 h-8 bg-[#2e2e2e] rounded-lg
-                        transition-all duration-300 hover:bg-[#3a3a3a] hover:scale-105 group/icon"
-                      onMouseEnter={() => setIsPaused(true)}
-                      onMouseLeave={() => setIsPaused(false)}
+                      className={`flex items-center justify-center w-8 h-8 bg-[#2e2e2e] rounded-lg
+                        transition-all duration-300 hover:bg-[#3a3a3a] hover:scale-105 group/icon ${
+                          isMobile ? "cursor-pointer" : ""
+                        }`}
+                      onMouseEnter={handleIconMouseEnter}
+                      onMouseLeave={handleIconMouseLeave}
+                      onClick={handleIconClick}
                     >
                       <div
                         className="w-5 h-5
@@ -102,6 +156,10 @@ const CustomCard = ({
               </div>
             </div>
           </div>
+        )}
+
+        {isMobile && isStack && isClicked && (
+          <div className="absolute top-2 right-2 w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
         )}
       </CardContent>
     </Card>
