@@ -1,4 +1,5 @@
 import Header from "@/components/custom/Header";
+import { useTranslation } from "react-i18next";
 
 const cards = [
   {
@@ -17,11 +18,13 @@ const cards = [
 ];
 
 const Clients = () => {
+  const { t } = useTranslation();
+
   return (
     <div className="flex flex-col items-center justify-center pb-6.5 pt-5 gap-1 text-foreground">
       <Header
-        title="My Clients"
-        subtitle="Satisfied Partners"
+        title={t("clients.title")}
+        subtitle={t("clients.subtitle")}
         icon="ion:rocket-sharp"
       />
 

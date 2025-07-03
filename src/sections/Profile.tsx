@@ -4,6 +4,7 @@ import TypingText from "@/components/custom/TypingText";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Icon } from "@iconify/react";
+import { useTranslation } from "react-i18next";
 
 const badgesData = [
   { icon: "ion:location-sharp", label: "Argentina" },
@@ -16,6 +17,8 @@ const badgesData = [
 ];
 
 const ProfileCard = () => {
+  const { t } = useTranslation();
+
   return (
     <Card className="text-white p-4 bg-[#101010]">
       <CardContent className="p-0 flex flex-col gap-1.5">
@@ -33,13 +36,13 @@ const ProfileCard = () => {
               <div className="flex items-center gap-3 bg-[#191919] border border-[rgba(33,33,33,0.8)] w-fit pt-0.5 px-3 rounded-xl">
                 <BlinkingDot />
                 <span className="text-sm font-semibold text-muted-foreground whitespace-nowrap">
-                  Available To Work
+                  {t("profile.available")}
                 </span>
               </div>
 
               <div className="flex items-center gap-2 pr-2 hidden md:flex">
                 <p className="text-sm font-semibold text-[rgba(230,230,230,0.8)]">
-                  Resume
+                  {t("profile.resume")}
                 </p>
                 <a
                   href="/assets/CV.pdf"
@@ -72,10 +75,10 @@ const ProfileCard = () => {
               className="[&>svg]:size-4.5 text-sm text-white py-1 px-2 flex items-center bg-transparent shadow-none border border-[rgba(33,33,33,0.8)]"
             >
               <Icon icon={icon} className="text-indigo-400 h-6 w-6 mr-2" />
-              {label}
+              {t(`profile.badges.${label}`)}
               {label === "Ingles" && (
                 <span className="ml-1 text-[10px] text-indigo-400">
-                  (In process)
+                  {t("profile.badges.inProcess")}
                 </span>
               )}
             </Badge>
@@ -89,7 +92,7 @@ const ProfileCard = () => {
                 icon="mdi:email-outline"
                 className="size-6 mr-2 text-indigo-400"
               />
-              Email Me
+              {t("profile.emailMe")}
             </AnimatedBorderButton>
           </a>
           <a
@@ -103,7 +106,7 @@ const ProfileCard = () => {
                 icon="ic:baseline-whatsapp"
                 className="size-6 mr-2 text-indigo-400"
               />
-              WhatsApp Me
+              {t("profile.whatsappMe")}
             </AnimatedBorderButton>
           </a>
         </div>

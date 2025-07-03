@@ -1,6 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
+import { useMediaScreen } from "@/hooks/useMediaScreen";
 import { Icon } from "@iconify/react";
-import { useState, useEffect, type ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 
 type TechIcon = {
   icon: string;
@@ -28,22 +29,12 @@ const CustomCard = ({
   className,
 }: IconCardProps) => {
   const [isPaused, setIsPaused] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
+
+  const isMobile = useMediaScreen();
 
   const isStack = type === "stack";
   const isFollow = type === "follow" && href;
-
-  useEffect(() => {
-    const checkIsMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-
-    checkIsMobile();
-    window.addEventListener("resize", checkIsMobile);
-
-    return () => window.removeEventListener("resize", checkIsMobile);
-  }, []);
 
   const handleCardClick = (e: React.MouseEvent) => {
     if (isMobile && isStack) {
@@ -159,7 +150,7 @@ const CustomCard = ({
         )}
 
         {isMobile && isStack && isClicked && (
-          <div className="absolute top-2 right-2 w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
+          <div className="absolute top-2 right-2 w-2 h-2 bg-indigo-500 rounded-full animate-pulse"></div>
         )}
       </CardContent>
     </Card>

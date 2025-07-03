@@ -1,0 +1,76 @@
+{
+  "stacks": {
+    "title": "Mis Stacks",
+    "subtitle": "Arsenal Tecnológico"
+  },
+  "projects": {
+    "title": "Proyectos",
+    "subtitle": "Galería de Trabajos",
+    "button": "Ver proyectos"
+  },
+  "services": {
+    "title": "Servicios",
+    "subtitle": "Suite de Soluciones",
+    "ui": "Investigación UI",
+    "web": "Desarrollo Web",
+    "seo": "Optimización SEO",
+    "auth": "Integraciones de Autenticación",
+    "api": "Desarrollo de API",
+    "maps": "Mapas Interactivos",
+    "dashboard": "Diseño de Dashboards",
+    "deploy": "Despliegues",
+    "testing": "Testing"
+  },
+  "profile": {
+    "available": "Disponible para trabajar",
+    "resume": "CV",
+    "emailMe": "Email",
+    "whatsappMe": "WhatsApp",
+    "badges": {
+      "Argentina": "Argentina",
+      "Full Stack": "Full Stack",
+      "Coderhouse": "Coderhouse",
+      "UTN": "UTN",
+      "Español": "Español",
+      "Ingles": "Inglés",
+      "inProcess": "(En proceso)"
+    },
+    "name": "Franco Galluccio",
+    "roles": ["Diseñador", "Desarrollador", "Freelance", "Creador"],
+    "imA": "Soy un"
+  },
+  "clients": {
+    "title": "Mis Clientes",
+    "subtitle": "Socios Satisfechos"
+  },
+  "testimonials": {
+    "title": "Testimonios",
+    "subtitle": "Opiniones Destacadas"
+  },
+  "follow": {
+    "title": "Sígueme",
+    "subtitle": "Presencia Online",
+    "linkedin": "Linkedin",
+    "github": "Github",
+    "email": "Correo"
+  },
+  "workProcess": {
+    "title": "Proceso de Trabajo",
+    "subtitle": "Flujo de desarrollo",
+    "planning": "Planificación y Organización",
+    "problemSolving": "Resolución de Problemas",
+    "communication": "Comunicación",
+    "continuousLearning": "Aprendizaje Continuo"
+  },
+  "workTogether": {
+    "title": "Trabajemos Juntos",
+    "subtitle": "¡Hagamos magia!",
+    "email": "Email",
+    "whatsapp": "WhatsApp"
+  },
+  "indicators": {
+    "projects": "Proyectos",
+    "happyClients": "Clientes",
+    "yearExpertise": "Años"
+  }
+}

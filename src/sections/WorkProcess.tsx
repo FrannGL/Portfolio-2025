@@ -1,13 +1,16 @@
 import CustomCard from "@/components/custom/CustomCard";
 import Header from "@/components/custom/Header";
 import { Icon } from "@iconify/react";
+import { useTranslation } from "react-i18next";
 
 const WorkProcess = () => {
+  const { t } = useTranslation();
+
   return (
     <div className="flex flex-col items-center justify-center gap-1 pt-5 pb-3 text-foreground">
       <Header
-        title="Work Process"
-        subtitle="Workflow Highlights"
+        title={t("workProcess.title")}
+        subtitle={t("workProcess.subtitle")}
         icon="fluent:star-emphasis-16-filled"
       />
 
@@ -19,7 +22,7 @@ const WorkProcess = () => {
               className="w-5 h-5 mx-auto my-auto"
             />
           }
-          text="Planning & Organization"
+          text={t("workProcess.planning")}
           type="follow"
         />
         <CustomCard
@@ -29,7 +32,7 @@ const WorkProcess = () => {
               className="w-5 h-5 mx-auto my-auto"
             />
           }
-          text="Problem Solving"
+          text={t("workProcess.problemSolving")}
           type="follow"
         />
         <CustomCard
@@ -39,24 +42,16 @@ const WorkProcess = () => {
               className="w-5 h-5 mx-auto my-auto"
             />
           }
-          text="Communication"
+          text={t("workProcess.communication")}
           type="follow"
         />
         <CustomCard
-          icon={<Icon icon="iconoir:learning" className="w-5 h-5 mx-auto my-auto" />}
-          text="Continuous Learning"
+          icon={
+            <Icon icon="iconoir:learning" className="w-5 h-5 mx-auto my-auto" />
+          }
+          text={t("workProcess.continuousLearning")}
           type="follow"
         />
-        {/* <CustomCard
-          icon={
-            <Icon
-              icon="mdi:book-open-variant"
-              className="w-5 h-5 mx-auto my-auto"
-            />
-          }
-          text="Continuous Learning"
-          type="follow"
-        /> */}
       </div>
     </div>
   );

@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import Clients from "./sections/Clients";
 import Follow from "./sections/Follow";
 import Indicator from "./sections/Indicator";
@@ -10,10 +11,16 @@ import WorkProcess from "./sections/WorkProcess";
 import WorkTogether from "./sections/WorkTogether";
 
 function App() {
+  const { t } = useTranslation();
+
   const indicators = [
-    { value: 10, label: "Projects", iconName: "ion:flag" },
-    { value: 3, label: "Happy Clients", iconName: "mingcute:happy-fill" },
-    { value: "02", label: "Year Expertise", iconName: "ion:star" },
+    { value: 10, label: t("indicators.projects"), iconName: "ion:flag" },
+    {
+      value: 3,
+      label: t("indicators.happyClients"),
+      iconName: "mingcute:happy-fill",
+    },
+    { value: "02", label: t("indicators.yearExpertise"), iconName: "ion:star" },
   ];
 
   return (
@@ -72,6 +79,7 @@ function App() {
           </div>
         </div>
       </div>
+      {/* <LanguageSwitcher /> */}
     </div>
   );
 }

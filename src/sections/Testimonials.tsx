@@ -1,5 +1,6 @@
 import Header from "@/components/custom/Header";
 import TestimonialCard from "@/components/custom/TestimonialCard";
+import { useTranslation } from "react-i18next";
 
 const testimonials = [
   {
@@ -29,11 +30,13 @@ const testimonials = [
 ];
 
 const Testimonials = () => {
+  const { t } = useTranslation();
+
   return (
     <div className="flex flex-col items-center justify-center px-4 pt-5 gap-2 text-foreground">
       <Header
-        title="Testimonials"
-        subtitle="Rave Reviews Showcase"
+        title={t("testimonials.title")}
+        subtitle={t("testimonials.subtitle")}
         icon="ion:happy-sharp"
       />
 

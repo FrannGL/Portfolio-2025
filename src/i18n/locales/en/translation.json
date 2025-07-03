@@ -1,0 +1,76 @@
+{
+  "stacks": {
+    "title": "My Stacks",
+    "subtitle": "Tech Arsenal"
+  },
+  "projects": {
+    "title": "Projects",
+    "subtitle": "Works Gallery",
+    "button": "View Projects"
+  },
+  "services": {
+    "title": "Services",
+    "subtitle": "Solutions Suite",
+    "ui": "UI Research",
+    "web": "Web Development",
+    "seo": "SEO Optimization",
+    "auth": "Auth Integrations",
+    "api": "API Development",
+    "maps": "Interactive Maps",
+    "dashboard": "Dashboards Design",
+    "deploy": "Deployments",
+    "testing": "Testing"
+  },
+  "profile": {
+    "available": "Available To Work",
+    "resume": "Resume",
+    "emailMe": "Email Me",
+    "whatsappMe": "WhatsApp Me",
+    "badges": {
+      "Argentina": "Argentina",
+      "Full Stack": "Full Stack",
+      "Coderhouse": "Coderhouse",
+      "UTN": "UTN",
+      "Español": "Spanish",
+      "Ingles": "English",
+      "inProcess": "(In process)"
+    },
+    "name": "Franco Galluccio",
+    "roles": ["Designer", "Developer", "Freelancer", "Creator"],
+    "imA": "I'm a"
+  },
+  "clients": {
+    "title": "My Clients",
+    "subtitle": "Satisfied Partners"
+  },
+  "testimonials": {
+    "title": "Testimonials",
+    "subtitle": "Rave Reviews Showcase"
+  },
+  "follow": {
+    "title": "Follow Me",
+    "subtitle": "Online Presence",
+    "linkedin": "Linkedin",
+    "github": "Github",
+    "email": "Email"
+  },
+  "workProcess": {
+    "title": "Work Process",
+    "subtitle": "Workflow Highlights",
+    "planning": "Planning & Organization",
+    "problemSolving": "Problem Solving",
+    "communication": "Communication",
+    "continuousLearning": "Continuous Learning"
+  },
+  "workTogether": {
+    "title": "Let's Work Together",
+    "subtitle": "Let's Make Magic Happen Together!",
+    "email": "Email Me",
+    "whatsapp": "WhatsApp Me"
+  },
+  "indicators": {
+    "projects": "Projects",
+    "happyClients": "Happy Clients",
+    "yearExpertise": "Year Expertise"
+  }
+}

@@ -1,7 +1,10 @@
 import AnimatedBorderButton from "@/components/custom/AnimatedBorder";
 import { Icon } from "@iconify/react";
+import { useTranslation } from "react-i18next";
 
 const WorkTogether = () => {
+  const { t } = useTranslation();
+
   return (
     <div className="w-full flex flex-col items-center justify-center pb-2.5 pt-2 px-5 text-foreground">
       <div className="flex flex-col gap-1.5 items-center justify-center text-foreground">
@@ -12,10 +15,10 @@ const WorkTogether = () => {
           />
         </div>
         <h1 className="text-1xl font-semibold text-white">
-          Let's Work Together
+          {t("workTogether.title")}
         </h1>
         <span className="text-sm text-muted-foreground">
-          Let's Make Magic Happen Together!
+          {t("workTogether.subtitle")}
         </span>
       </div>
 
@@ -26,7 +29,7 @@ const WorkTogether = () => {
               icon="mdi:email-outline"
               className="size-6 mr-2 text-indigo-400"
             />
-            Email Me
+            {t("workTogether.email")}
           </AnimatedBorderButton>
         </a>
         <a
@@ -40,7 +43,7 @@ const WorkTogether = () => {
               icon="ic:baseline-whatsapp"
               className="size-6 mr-2 text-indigo-400"
             />
-            WhatsApp Me
+            {t("workTogether.whatsapp")}
           </AnimatedBorderButton>
         </a>
       </div>
