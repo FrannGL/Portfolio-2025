@@ -20,12 +20,20 @@ const testimonials = [
     avatarUrl: "/assets/testimonials-02.jfif",
   },
   {
-    name: "Sofía Pereira",
-    company: "Uruguay",
-    date: "5/04/2025",
+    name: "Emiliano Carasa",
+    company: "Finanex",
+    date: "03/07/2025",
     content:
-      "Muy buena comunicación y resultados. Me sentí acompañada en todo momento. Definitivamente volvería a elegirlo.",
-    avatarUrl: "https://randomuser.me/api/portraits/women/68.jpg",
+      "Trabajé con Franco como desarrollador Front-End y fue un verdadero placer. Es detallista, comprometido y siempre busca mejorar lo que hace, incluso cuando ya está bien. Tiene una gran actitud, aporta valor en cada entrega y eleva la calidad del equipo. Lo recomiendo sin dudas.",
+    avatarUrl: "/assets/testimonials-03.jfif",
+  },
+  {
+    name: "Ivan Klimberg",
+    company: "Finanex",
+    date: "03/07/2025",
+    content:
+      "Franco es alguien que se esfuerza en entender el producto en el que trabaja y no da vueltas en pensar y desarrollar soluciones para los problemas que se le presentan. Una persona responsable y facil de trabajar con el, recomiendo a futuros empleadores.",
+    avatarUrl: "/assets/testimonials-04.jfif",
   },
 ];
 
