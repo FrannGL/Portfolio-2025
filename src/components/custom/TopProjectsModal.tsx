@@ -9,6 +9,7 @@ import {
 import { Github, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Header from "./Header";
+import { motion } from "framer-motion";
 
 interface TopProjectsModalProps {
   open: boolean;
@@ -18,31 +19,37 @@ interface TopProjectsModalProps {
 
 const projects = [
   {
+    name: "Juguetes Perdidos",
     image: "/assets/juguetes-perdidos.png",
     githubUrl: "https://github.com/FrannGL/Juguetes-Perdidos-BEER",
     demoUrl: "https://juguetes-perdidos.vercel.app/",
   },
   {
+    name: "Helpdesk JST",
     image: "/assets/helpdesk.png",
     githubUrl: "https://github.com/FrannGL/front-jst-ot-helpdesk",
     demoUrl: "https://front-jst-ot-helpdesk.vercel.app/",
   },
   {
+    name: "Job Mapper",
     image: "/assets/job-mapper-2.png",
     githubUrl: "https://github.com/FrannGL/Job-Mapper-Backend",
     demoUrl: "https://job-mapper-web.vercel.app/",
   },
   {
+    name: "Finanex Backoffice",
     image: "/assets/backoffice.png",
     githubUrl: "https://github.com/FinanexApp/front-backoffice",
     demoUrl: "https://staging.backoffice.finanex.io/",
   },
   {
+    name: "Container IQ",
     image: "/assets/containeriq.png",
     githubUrl: "https://github.com/FinanexApp/front-containeriq",
     demoUrl: "https://staging.container-iq.finanex.io/",
   },
   {
+    name: "MNJ Dashboard",
     image: "/assets/mnj.png",
     githubUrl: "https://github.com/FrannGL/JST-Dashboard-Administrativo",
     demoUrl: "https://mnj-dashboard.vercel.app/",
@@ -72,36 +79,66 @@ const TopProjectsModal = ({
           {projects.map((project, index) => (
             <div
               key={index}
-              className="flex flex-col sm:flex-row w-full sm:w-[200px] rounded-lg overflow-hidden shadow-md border border-border bg-background"
+              className="rounded-xl overflow-hidden bg-[#121212] border border-[#2a2a2a] shadow-lg transition hover:shadow-xl group"
             >
-              <img
-                src={project.image}
-                alt={`Project ${index}`}
-                className="w-full sm:w-4/5 h-[150px] sm:h-[150px] object-cover"
-              />
+              <div className="relative w-full h-[150px] overflow-hidden">
+                <img
+                  src={project.image}
+                  alt={project.name}
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+              </div>
 
-              <div className="w-full sm:w-1/5 flex flex-row sm:flex-col items-center justify-center gap-4 bg-muted p-2">
-                <Button variant="ghost" size="icon" asChild>
-                  <a
-                    href={project.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="GitHub"
-                  >
-                    <Github className="w-5 h-5" />
-                  </a>
-                </Button>
+              <div className="p-4 flex items-center justify-between">
+                <div>
+                  <h3 className="text-white font-semibold text-sm">
+                    {project.name}
+                  </h3>
+                </div>
 
-                <Button variant="ghost" size="icon" asChild>
-                  <a
-                    href={project.demoUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="View Demo"
+                <div className="flex gap-2">
+                  <motion.div
+                    whileHover={{ scale: 1.2 }}
+                    whileTap={{ scale: 0.95 }}
                   >
-                    <ExternalLink className="w-5 h-5" />
-                  </a>
-                </Button>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="hover:bg-[#2a2a2a] rounded-full"
+                      asChild
+                    >
+                      <a
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="GitHub"
+                      >
+                        <Github className="w-4 h-4" />
+                      </a>
+                    </Button>
+                  </motion.div>
+
+                  <motion.div
+                    whileHover={{ scale: 1.2 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="hover:bg-[#2a2a2a] rounded-full"
+                      asChild
+                    >
+                      <a
+                        href={project.demoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="View Demo"
+                      >
+                        <ExternalLink className="w-4 h-4" />
+                      </a>
+                    </Button>
+                  </motion.div>
+                </div>
               </div>
             </div>
           ))}

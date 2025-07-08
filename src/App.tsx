@@ -24,7 +24,7 @@ function App() {
   ];
 
   return (
-    <div className="min-h-screen h-screen grid grid-cols-1 xl:grid-cols-[25%_32%_41%] gap-3 p-8 text-white">
+    <div className="min-h-screen h-screen items-center grid grid-cols-1 xl:grid-cols-[25%_32%_41%] gap-3 p-8 text-white">
       <div className="flex flex-col gap-3 order-2 md:order-none">
         <div className="bg-[#101010] rounded-3xl border border-[rgba(33,33,33,0.8)]">
           <Stacks />
