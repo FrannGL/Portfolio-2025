@@ -48,7 +48,7 @@ const Testimonials = () => {
         icon="ion:happy-sharp"
       />
 
-      <div className="testimonial-carousel mt-2 h-[250px] overflow-hidden">
+      <div className="testimonial-carousel mt-2 h-[265px] overflow-hidden">
         <div className="testimonial-carousel-inner grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {Array(3)
             .fill(null)

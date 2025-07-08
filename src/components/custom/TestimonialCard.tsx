@@ -43,7 +43,7 @@ const TestimonialCard = ({
 
         <Separator className="my-3" />
 
-        <p className="text-base leading-relaxed text-muted-foreground">
+        <p className="text-xs leading-relaxed text-muted-foreground">
           {content}
         </p>
       </CardContent>
