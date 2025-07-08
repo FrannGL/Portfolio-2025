@@ -1,4 +1,6 @@
 import Header from "@/components/custom/Header";
+import TopProjectsModal from "@/components/custom/TopProjectsModal";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 const images = [
@@ -16,6 +18,8 @@ const images = [
 ];
 
 const Projects = () => {
+  const [open, setOpen] = useState(false);
+
   const { t } = useTranslation();
 
   return (
@@ -30,12 +34,19 @@ const Projects = () => {
       />
 
       <div className="w-full relative">
-        <button
-          className="cursor-pointer absolute left-1/2 top-15 z-20 -translate-x-1/2 rounded-lg bg-indigo-500 px-5 py-2 text-sm sm:text-base text-white font-semibold shadow-lg transition-colors hover:bg-indigo-700 border-[3px] border-black"
-          type="button"
-        >
-          {t("projects.button")}
-        </button>
+        <TopProjectsModal
+          open={open}
+          setOpen={setOpen}
+          trigger={
+            <button
+              id="projects-button"
+              className="cursor-pointer absolute left-1/2 top-15 z-20 -translate-x-1/2 rounded-lg bg-indigo-500 px-5 py-2 text-sm sm:text-base text-white font-semibold shadow-lg transition-colors hover:bg-indigo-700 border-[3px] border-black"
+              type="button"
+            >
+              {t("projects.button")}
+            </button>
+          }
+        />
 
         <div className="overflow-hidden rounded-lg">
           <div className="flex w-max gap-2 projects-animate-scroll-left">
