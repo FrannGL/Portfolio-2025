@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 
 const badgesData = [
   { icon: "ion:location-sharp", label: "Argentina" },
-  { icon: "ion:code-slash-outline", label: "Full Stack" },
+  { icon: "ion:code-slash-outline", label: "Frontend" },
   { icon: "ion:ribbon-sharp", label: "Coderhouse" },
   { icon: "game-icons:graduate-cap", label: "UTN" },
   { icon: "ion:language-sharp", label: "Español" },
