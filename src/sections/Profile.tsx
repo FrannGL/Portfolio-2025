@@ -5,12 +5,14 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Icon } from "@iconify/react";
 import { useTranslation } from "react-i18next";
+import "@/i18n";
 
 const badgesData = [
   { icon: "ion:location-sharp", label: "Argentina" },
   { icon: "ion:code-slash-outline", label: "Frontend" },
+  { icon: "ion:server", label: "Backend" },
   { icon: "ion:ribbon-sharp", label: "Coderhouse" },
-  { icon: "game-icons:graduate-cap", label: "UTN" },
+  { icon: "game-icons:graduate-cap", label: "ifts" },
   { icon: "ion:language-sharp", label: "Español" },
   { icon: "ion:language-sharp", label: "Ingles" },
   // { icon: "famicons:happy-sharp", label: "Good Boy" },
@@ -40,7 +42,7 @@ const ProfileCard = () => {
                 </span>
               </div>
 
-              <div className="flex items-center gap-2 pr-2 hidden md:flex">
+              <div className="items-center gap-2 pr-2 hidden md:flex">
                 <p className="text-sm font-semibold text-[rgba(230,230,230,0.8)]">
                   {t("profile.resume")}
                 </p>
@@ -76,11 +78,6 @@ const ProfileCard = () => {
             >
               <Icon icon={icon} className="text-indigo-400 h-6 w-6 mr-2" />
               {t(`profile.badges.${label}`)}
-              {label === "Ingles" && (
-                <span className="ml-1 text-[10px] text-indigo-400">
-                  {t("profile.badges.inProcess")}
-                </span>
-              )}
             </Badge>
           ))}
         </div>

@@ -2,6 +2,7 @@ import CustomCard from "@/components/custom/CustomCard";
 import Header from "@/components/custom/Header";
 import { Icon } from "@iconify/react";
 import { useTranslation } from "react-i18next";
+import "@/i18n";
 
 const cardsData = [
   { key: "ui", icon: <Icon icon="ion:brush" className="w-5 h-5" /> },

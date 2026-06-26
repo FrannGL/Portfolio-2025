@@ -1,5 +1,6 @@
 import Header from "@/components/custom/Header";
 import { useTranslation } from "react-i18next";
+import "@/i18n";
 
 const cards = [
   {
@@ -15,6 +16,19 @@ const cards = [
     text: "JST | Seguridad en el Transporte",
   },
   { key: "seo", src: "/assets/finanex.png", alt: "Finanex", text: "Finanex" },
+  { key: "fit", src: "/assets/fit.png", alt: "Fit", text: "Fit" },
+  {
+    key: "nefra",
+    src: "/assets/nefra.png",
+    alt: "Nefra",
+    text: "Nefra",
+  },
+  {
+    key: "zerobug",
+    src: "/assets/zerobug.png",
+    alt: "Zerobug",
+    text: "Zerobug",
+  },
 ];
 
 const Clients = () => {

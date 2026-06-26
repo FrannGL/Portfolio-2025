@@ -1,6 +1,7 @@
 import AnimatedBorderButton from "@/components/custom/AnimatedBorder";
 import { Icon } from "@iconify/react";
 import { useTranslation } from "react-i18next";
+import "@/i18n";
 
 const WorkTogether = () => {
   const { t } = useTranslation();

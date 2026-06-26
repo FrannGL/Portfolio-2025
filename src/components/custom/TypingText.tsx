@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
+import "@/i18n";
 
 const TypingText = () => {
   const { t } = useTranslation();

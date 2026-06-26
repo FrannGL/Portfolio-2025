@@ -3,6 +3,7 @@ import Header from "@/components/custom/Header";
 import { useMediaScreen } from "@/hooks/useMediaScreen";
 import { Icon } from "@iconify/react";
 import { useTranslation } from "react-i18next";
+import "@/i18n";
 
 const Stacks = () => {
   const isMobile = useMediaScreen();

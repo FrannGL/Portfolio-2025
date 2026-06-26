@@ -2,6 +2,7 @@ import Header from "@/components/custom/Header";
 import TopProjectsModal from "@/components/custom/TopProjectsModal";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import "@/i18n";
 
 const images = [
   "/assets/juguetes-perdidos.png",

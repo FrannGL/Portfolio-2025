@@ -1,5 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
+---
+import "@/index.css";
+import { initI18n } from "@/i18n";
+
+const preferred = Astro.preferredLocale;
+const lang = preferred === "en" ? "en" : "es";
+initI18n(lang);
+---
+
+<!doctype html>
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/react.svg" />
@@ -30,11 +39,12 @@
       name="twitter:description"
       content="Hey! This is my personal Portoflio 🚀 ⚛"
     />
-
     <title>Franco Galluccio Portfolio 🚀 ⚛</title>
+    <script is:inline>
+      window.__LANG__ = "{lang}";
+    </script>
   </head>
   <body class="dark font-raleway">
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <slot />
   </body>
 </html>

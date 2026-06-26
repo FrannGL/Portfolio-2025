@@ -1,6 +1,7 @@
 import Header from "@/components/custom/Header";
 import TestimonialCard from "@/components/custom/TestimonialCard";
 import { useTranslation } from "react-i18next";
+import "@/i18n";
 
 const testimonials = [
   {
