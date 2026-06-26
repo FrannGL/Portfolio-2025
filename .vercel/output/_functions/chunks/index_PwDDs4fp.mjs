@@ -2,11 +2,11 @@ import { t as __exportAll } from "./compiler_D4191Tcc.mjs";
 import { S as createComponent, g as addAttribute, h as renderHead, i as renderComponent, m as maybeRenderHead, s as renderSlot, u as renderTemplate, x as createAstro } from "./server_C_GE6gR_.mjs";
 import { clsx } from "clsx";
 import { useEffect, useMemo, useRef, useState } from "react";
-import i18n from "i18next";
-import { initReactI18next, useTranslation } from "react-i18next";
 import { twMerge } from "tailwind-merge";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { Icon } from "@iconify/react";
+import { initReactI18next, useTranslation } from "react-i18next";
+import i18n from "i18next";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { ExternalLink, Github, XIcon } from "lucide-react";
 import { Slot } from "@radix-ui/react-slot";
@@ -14,6 +14,169 @@ import { cva } from "class-variance-authority";
 import { animate, motion, useInView, useMotionValue, useTransform } from "framer-motion";
 import * as AvatarPrimitive from "@radix-ui/react-avatar";
 import * as SeparatorPrimitive from "@radix-ui/react-separator";
+//#region src/layouts/Layout.astro
+createAstro("https://astro.build");
+var $$Layout = createComponent(($$result, $$props, $$slots) => {
+	const Astro = $$result.createAstro($$props, $$slots);
+	Astro.self = $$Layout;
+	return renderTemplate`<html${addAttribute(Astro.preferredLocale === "en" ? "en" : "es", "lang")}><head><meta charset="UTF-8"><link rel="icon" type="image/svg+xml" href="/react.svg"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta property="og:image" content="/assets/og-image.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:title" content="Franco Galluccio"><meta property="og:description" content="Hey! This is my personal Portoflio 🚀 ⚛"><meta property="og:type" content="website"><meta property="og:url" content="https://franngl.vercel.app/"><meta name="description" content="Hey! This is my personal Portoflio 🚀 ⚛"><meta name="keywords" content="Franco Galluccio, portfolio, developer, react"><meta name="author" content="Franco Galluccio"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="/assets/og-image.jpg"><meta name="twitter:title" content="Franco Galluccio"><meta name="twitter:description" content="Hey! This is my personal Portoflio 🚀 ⚛"><title>Franco Galluccio Portfolio 🚀 ⚛</title><script>
+      window.__LANG__ = "{lang}";
+    <\/script>${renderHead($$result)}</head><body class="dark font-raleway">${renderSlot($$result, $$slots["default"])}</body></html>`;
+}, "C:/Users/fgalluccio/Documents/Code/Personal/Personal-Portfolio-2025/src/layouts/Layout.astro", void 0);
+//#endregion
+//#region src/lib/utils.ts
+function cn(...inputs) {
+	return twMerge(clsx(inputs));
+}
+//#endregion
+//#region src/components/ui/card.tsx
+function Card({ className, ...props }) {
+	return /* @__PURE__ */ jsx("div", {
+		"data-slot": "card",
+		className: cn("bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-1 shadow-sm", className),
+		...props
+	});
+}
+function CardContent({ className, ...props }) {
+	return /* @__PURE__ */ jsx("div", {
+		"data-slot": "card-content",
+		className: cn("px-1", className),
+		...props
+	});
+}
+//#endregion
+//#region src/hooks/useMediaScreen.ts
+function useMediaScreen(breakpoint = 768) {
+	const [isMobile, setIsMobile] = useState(false);
+	useEffect(() => {
+		const mq = window.matchMedia(`(max-width: ${breakpoint}px)`);
+		const handleChange = () => setIsMobile(mq.matches);
+		handleChange();
+		mq.addEventListener("change", handleChange);
+		return () => mq.removeEventListener("change", handleChange);
+	}, [breakpoint]);
+	return isMobile;
+}
+//#endregion
+//#region src/components/custom/CustomCard.tsx
+var CustomCard = ({ icon, text, techIcons, type = "default", href, width = "60", className }) => {
+	const [isPaused, setIsPaused] = useState(false);
+	const [isClicked, setIsClicked] = useState(false);
+	const isMobile = useMediaScreen();
+	const isStack = type === "stack";
+	const isFollow = type === "follow" && href;
+	const handleCardClick = (e) => {
+		if (isMobile && isStack) {
+			e.preventDefault();
+			setIsClicked(!isClicked);
+		}
+	};
+	const handleIconMouseEnter = () => {
+		if (!isMobile) setIsPaused(true);
+	};
+	const handleIconMouseLeave = () => {
+		if (!isMobile) setIsPaused(false);
+	};
+	const handleIconClick = (e) => {
+		if (isMobile) {
+			e.stopPropagation();
+			setIsPaused(!isPaused);
+		}
+	};
+	const content = /* @__PURE__ */ jsx(Card, {
+		className: `group relative rounded-xl bg-[#191919] text-white shadow-sm border border-[#212121] transition-all duration-300 hover:bg-[#1f1f1f] hover:border-[#2a2a2a] hover:shadow-lg overflow-hidden ${width ?? "w-fit"} ${className ?? ""} ${isMobile && isStack ? "cursor-pointer" : ""}`,
+		onClick: handleCardClick,
+		children: /* @__PURE__ */ jsxs(CardContent, {
+			className: "relative flex items-center py-1 px-2 gap-2 h-full",
+			children: [
+				/* @__PURE__ */ jsxs("div", {
+					className: `flex items-center gap-2 transition-transform duration-500 ease-in-out ${isStack ? isMobile ? isClicked ? "-translate-x-[120%]" : "" : "group-hover:-translate-x-[120%]" : ""}`,
+					children: [/* @__PURE__ */ jsx("div", {
+						className: `p-2 rounded-lg bg-[#2e2e2e] flex items-center justify-center`,
+						children: /* @__PURE__ */ jsx("div", {
+							className: "w-5 h-5 text-muted-foreground",
+							children: icon
+						})
+					}), /* @__PURE__ */ jsx("div", {
+						className: "text-sm font-bold text-[rgba(230,230,230,0.8)] whitespace-nowrap",
+						children: text
+					})]
+				}),
+				type === "follow" && href && /* @__PURE__ */ jsx("div", {
+					className: "absolute right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300",
+					children: /* @__PURE__ */ jsx(Icon, {
+						icon: "hugeicons:link-square-01",
+						className: "w-5 h-5 text-muted-foreground"
+					})
+				}),
+				isStack && techIcons && techIcons.length > 0 && /* @__PURE__ */ jsx("div", {
+					className: `absolute inset-0 flex items-center justify-start px-4 overflow-hidden transform transition-all duration-500 ease-in-out
+              ${isStack ? isMobile ? isClicked ? "translate-x-0 opacity-100 pointer-events-auto" : "translate-x-full opacity-0 pointer-events-none" : "translate-x-full opacity-0 group-hover:translate-x-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto" : ""}`,
+					children: /* @__PURE__ */ jsx("div", {
+						className: "overflow-hidden w-full",
+						children: /* @__PURE__ */ jsx("div", {
+							className: "flex animate-scroll-left",
+							style: { animationPlayState: isPaused ? "paused" : "running" },
+							children: [...techIcons, ...techIcons].map((tech, index) => /* @__PURE__ */ jsx("div", {
+								className: "flex-[0_0_auto] min-w-0 mr-3",
+								children: /* @__PURE__ */ jsx("div", {
+									title: tech.name,
+									className: `flex items-center justify-center w-8 h-8 bg-[#2e2e2e] rounded-lg
+                        transition-all duration-300 hover:bg-[#3a3a3a] hover:scale-105 group/icon ${isMobile ? "cursor-pointer" : ""}`,
+									onMouseEnter: handleIconMouseEnter,
+									onMouseLeave: handleIconMouseLeave,
+									onClick: handleIconClick,
+									children: /* @__PURE__ */ jsx("div", {
+										className: "w-5 h-5\n                          filter grayscale brightness-75\n                          transition-all duration-300\n                          group-hover/icon:filter-none",
+										children: /* @__PURE__ */ jsx(Icon, {
+											icon: tech.icon,
+											className: "w-5 h-5"
+										})
+									})
+								})
+							}, `${tech.name}-${index}`))
+						})
+					})
+				}),
+				isMobile && isStack && isClicked && /* @__PURE__ */ jsx("div", { className: "absolute top-2 right-2 w-2 h-2 bg-indigo-500 rounded-full animate-pulse" })
+			]
+		})
+	});
+	return isFollow ? /* @__PURE__ */ jsx("a", {
+		href,
+		target: "_blank",
+		rel: "noopener noreferrer",
+		children: content
+	}) : content;
+};
+//#endregion
+//#region src/components/custom/Header.tsx
+var Header = ({ title, subtitle, icon }) => {
+	return /* @__PURE__ */ jsxs("div", {
+		className: "flex flex-col gap-1 items-center justify-center text-foreground",
+		children: [/* @__PURE__ */ jsxs("div", {
+			className: "flex justify-center items-center gap-2 text-muted-foreground",
+			children: [/* @__PURE__ */ jsx(Icon, {
+				icon,
+				className: "w-4.5 h-4 text-indigo-400"
+			}), /* @__PURE__ */ jsxs("span", {
+				className: "text-sm font-semibold font-raleway",
+				children: [
+					" ",
+					title,
+					" "
+				]
+			})]
+		}), /* @__PURE__ */ jsxs("h1", {
+			className: "text-lg xl:text-base font-semibold text-white",
+			children: [
+				" ",
+				subtitle,
+				" "
+			]
+		})]
+	});
+};
 var translation_default$1 = {
 	stacks: {
 		"title": "My Stacks",
@@ -180,13 +343,13 @@ var translation_default = {
 };
 //#endregion
 //#region src/i18n/index.ts
-i18n.use(initReactI18next);
+if (typeof window !== "undefined") i18n.use(initReactI18next);
 function detectLang() {
 	if (typeof window !== "undefined" && window.__LANG__ === "en") return "en";
 	return "es";
 }
 function initI18n(lng) {
-	i18n.init({
+	if (!i18n.isInitialized) i18n.init({
 		resources: {
 			en: { translation: translation_default$1 },
 			es: { translation: translation_default }
@@ -196,173 +359,7 @@ function initI18n(lng) {
 		interpolation: { escapeValue: false }
 	});
 }
-initI18n(detectLang());
-//#endregion
-//#region src/layouts/Layout.astro
-createAstro("https://astro.build");
-var $$Layout = createComponent(($$result, $$props, $$slots) => {
-	const Astro = $$result.createAstro($$props, $$slots);
-	Astro.self = $$Layout;
-	const lang = Astro.preferredLocale === "en" ? "en" : "es";
-	initI18n(lang);
-	return renderTemplate`<html${addAttribute(lang, "lang")}><head><meta charset="UTF-8"><link rel="icon" type="image/svg+xml" href="/react.svg"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta property="og:image" content="/assets/og-image.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:title" content="Franco Galluccio"><meta property="og:description" content="Hey! This is my personal Portoflio 🚀 ⚛"><meta property="og:type" content="website"><meta property="og:url" content="https://franngl.vercel.app/"><meta name="description" content="Hey! This is my personal Portoflio 🚀 ⚛"><meta name="keywords" content="Franco Galluccio, portfolio, developer, react"><meta name="author" content="Franco Galluccio"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="/assets/og-image.jpg"><meta name="twitter:title" content="Franco Galluccio"><meta name="twitter:description" content="Hey! This is my personal Portoflio 🚀 ⚛"><title>Franco Galluccio Portfolio 🚀 ⚛</title><script>
-      window.__LANG__ = "{lang}";
-    <\/script>${renderHead($$result)}</head><body class="dark font-raleway">${renderSlot($$result, $$slots["default"])}</body></html>`;
-}, "C:/Users/fgalluccio/Documents/Code/Personal/Personal-Portfolio-2025/src/layouts/Layout.astro", void 0);
-//#endregion
-//#region src/lib/utils.ts
-function cn(...inputs) {
-	return twMerge(clsx(inputs));
-}
-//#endregion
-//#region src/components/ui/card.tsx
-function Card({ className, ...props }) {
-	return /* @__PURE__ */ jsx("div", {
-		"data-slot": "card",
-		className: cn("bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-1 shadow-sm", className),
-		...props
-	});
-}
-function CardContent({ className, ...props }) {
-	return /* @__PURE__ */ jsx("div", {
-		"data-slot": "card-content",
-		className: cn("px-1", className),
-		...props
-	});
-}
-//#endregion
-//#region src/hooks/useMediaScreen.ts
-function useMediaScreen(breakpoint = 768) {
-	const [isMobile, setIsMobile] = useState(false);
-	useEffect(() => {
-		const mq = window.matchMedia(`(max-width: ${breakpoint}px)`);
-		const handleChange = () => setIsMobile(mq.matches);
-		handleChange();
-		mq.addEventListener("change", handleChange);
-		return () => mq.removeEventListener("change", handleChange);
-	}, [breakpoint]);
-	return isMobile;
-}
-//#endregion
-//#region src/components/custom/CustomCard.tsx
-var CustomCard = ({ icon, text, techIcons, type = "default", href, width = "60", className }) => {
-	const [isPaused, setIsPaused] = useState(false);
-	const [isClicked, setIsClicked] = useState(false);
-	const isMobile = useMediaScreen();
-	const isStack = type === "stack";
-	const isFollow = type === "follow" && href;
-	const handleCardClick = (e) => {
-		if (isMobile && isStack) {
-			e.preventDefault();
-			setIsClicked(!isClicked);
-		}
-	};
-	const handleIconMouseEnter = () => {
-		if (!isMobile) setIsPaused(true);
-	};
-	const handleIconMouseLeave = () => {
-		if (!isMobile) setIsPaused(false);
-	};
-	const handleIconClick = (e) => {
-		if (isMobile) {
-			e.stopPropagation();
-			setIsPaused(!isPaused);
-		}
-	};
-	const content = /* @__PURE__ */ jsx(Card, {
-		className: `group relative rounded-xl bg-[#191919] text-white shadow-sm border border-[#212121] transition-all duration-300 hover:bg-[#1f1f1f] hover:border-[#2a2a2a] hover:shadow-lg overflow-hidden ${width ?? "w-fit"} ${className ?? ""} ${isMobile && isStack ? "cursor-pointer" : ""}`,
-		onClick: handleCardClick,
-		children: /* @__PURE__ */ jsxs(CardContent, {
-			className: "relative flex items-center py-1 px-2 gap-2 h-full",
-			children: [
-				/* @__PURE__ */ jsxs("div", {
-					className: `flex items-center gap-2 transition-transform duration-500 ease-in-out ${isStack ? isMobile ? isClicked ? "-translate-x-[120%]" : "" : "group-hover:-translate-x-[120%]" : ""}`,
-					children: [/* @__PURE__ */ jsx("div", {
-						className: `p-2 rounded-lg bg-[#2e2e2e] flex items-center justify-center`,
-						children: /* @__PURE__ */ jsx("div", {
-							className: "w-5 h-5 text-muted-foreground",
-							children: icon
-						})
-					}), /* @__PURE__ */ jsx("div", {
-						className: "text-sm font-bold text-[rgba(230,230,230,0.8)] whitespace-nowrap",
-						children: text
-					})]
-				}),
-				type === "follow" && href && /* @__PURE__ */ jsx("div", {
-					className: "absolute right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300",
-					children: /* @__PURE__ */ jsx(Icon, {
-						icon: "hugeicons:link-square-01",
-						className: "w-5 h-5 text-muted-foreground"
-					})
-				}),
-				isStack && techIcons && techIcons.length > 0 && /* @__PURE__ */ jsx("div", {
-					className: `absolute inset-0 flex items-center justify-start px-4 overflow-hidden transform transition-all duration-500 ease-in-out
-              ${isStack ? isMobile ? isClicked ? "translate-x-0 opacity-100 pointer-events-auto" : "translate-x-full opacity-0 pointer-events-none" : "translate-x-full opacity-0 group-hover:translate-x-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto" : ""}`,
-					children: /* @__PURE__ */ jsx("div", {
-						className: "overflow-hidden w-full",
-						children: /* @__PURE__ */ jsx("div", {
-							className: "flex animate-scroll-left",
-							style: { animationPlayState: isPaused ? "paused" : "running" },
-							children: [...techIcons, ...techIcons].map((tech, index) => /* @__PURE__ */ jsx("div", {
-								className: "flex-[0_0_auto] min-w-0 mr-3",
-								children: /* @__PURE__ */ jsx("div", {
-									title: tech.name,
-									className: `flex items-center justify-center w-8 h-8 bg-[#2e2e2e] rounded-lg
-                        transition-all duration-300 hover:bg-[#3a3a3a] hover:scale-105 group/icon ${isMobile ? "cursor-pointer" : ""}`,
-									onMouseEnter: handleIconMouseEnter,
-									onMouseLeave: handleIconMouseLeave,
-									onClick: handleIconClick,
-									children: /* @__PURE__ */ jsx("div", {
-										className: "w-5 h-5\n                          filter grayscale brightness-75\n                          transition-all duration-300\n                          group-hover/icon:filter-none",
-										children: /* @__PURE__ */ jsx(Icon, {
-											icon: tech.icon,
-											className: "w-5 h-5"
-										})
-									})
-								})
-							}, `${tech.name}-${index}`))
-						})
-					})
-				}),
-				isMobile && isStack && isClicked && /* @__PURE__ */ jsx("div", { className: "absolute top-2 right-2 w-2 h-2 bg-indigo-500 rounded-full animate-pulse" })
-			]
-		})
-	});
-	return isFollow ? /* @__PURE__ */ jsx("a", {
-		href,
-		target: "_blank",
-		rel: "noopener noreferrer",
-		children: content
-	}) : content;
-};
-//#endregion
-//#region src/components/custom/Header.tsx
-var Header = ({ title, subtitle, icon }) => {
-	return /* @__PURE__ */ jsxs("div", {
-		className: "flex flex-col gap-1 items-center justify-center text-foreground",
-		children: [/* @__PURE__ */ jsxs("div", {
-			className: "flex justify-center items-center gap-2 text-muted-foreground",
-			children: [/* @__PURE__ */ jsx(Icon, {
-				icon,
-				className: "w-4.5 h-4 text-indigo-400"
-			}), /* @__PURE__ */ jsxs("span", {
-				className: "text-sm font-semibold font-raleway",
-				children: [
-					" ",
-					title,
-					" "
-				]
-			})]
-		}), /* @__PURE__ */ jsxs("h1", {
-			className: "text-lg xl:text-base font-semibold text-white",
-			children: [
-				" ",
-				subtitle,
-				" "
-			]
-		})]
-	});
-};
+if (typeof window !== "undefined") initI18n(detectLang());
 //#endregion
 //#region src/sections/Stacks.tsx
 var Stacks = () => {
