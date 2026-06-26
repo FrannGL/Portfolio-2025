@@ -1,4 +1,7 @@
 {
+  "framework": "astro",
   "buildCommand": "pnpm run build",
-  "outputDirectory": "dist"
+  "installCommand": "pnpm install",
+  "outputDirectory": "dist",
+  "nodeVersion": "20.x"
 }
