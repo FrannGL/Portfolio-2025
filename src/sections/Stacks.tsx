@@ -41,28 +41,28 @@ const Stacks = () => {
       icon: <Icon icon="ion:brush" className="w-5 h-5" />,
       text: "UI Design",
       techIcons: uiDesignTechs,
-      className: isMobile ? "w-33" : "w-39",
+      className: isMobile ? "w-33" : "w-39 xl:w-[135px]",
     },
     {
       type: "stack" as const,
       icon: <Icon icon="ion:pie-chart-sharp" className="w-5 h-5" />,
       text: "Frontend",
       techIcons: frontendTechs,
-      className: isMobile ? "w-33" : "w-39",
+      className: isMobile ? "w-33" : "w-39 xl:w-[135px]",
     },
     {
       type: "stack" as const,
       icon: <Icon icon="ion:server" className="w-5 h-5" />,
       text: "Backend",
       techIcons: backendTechs,
-      className: isMobile ? "w-33" : "w-39",
+      className: isMobile ? "w-33" : "w-39 xl:w-[135px]",
     },
     {
       type: "stack" as const,
       icon: <Icon icon="ion:cloud-upload" className="w-5 h-5" />,
       text: "DevOps",
       techIcons: deployTechs,
-      className: isMobile ? "w-33" : "w-39",
+      className: isMobile ? "w-33" : "w-39 xl:w-[135px]",
     },
   ];
 

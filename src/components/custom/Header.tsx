@@ -13,7 +13,7 @@ const Header = ({ title, subtitle, icon }: Props) => {
         <Icon icon={icon} className="w-4.5 h-4 text-indigo-400" />
         <span className="text-sm font-semibold font-raleway"> {title} </span>
       </div>
-      <h1 className="text-lg font-semibold text-white"> {subtitle} </h1>
+      <h1 className="text-lg xl:text-base font-semibold text-white"> {subtitle} </h1>
     </div>
   );
 };

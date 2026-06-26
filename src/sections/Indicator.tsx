@@ -10,7 +10,7 @@ interface IndicatorProps {
 const Indicator = ({ value, label, iconName }: IndicatorProps) => {
   return (
     <div className="flex flex-col items-center justify-center py-2 gap-1 bg-[#101010] border border-[rgba(33,33,33,0.8)] text-foreground border rounded-xl">
-      <div className="text-5xl md:text-6xl font-semibold bg-gradient-to-b from-white to-zinc-900 bg-clip-text text-transparent">
+      <div className="text-5xl md:text-6xl xl:text-4xl font-semibold bg-gradient-to-b from-white to-zinc-900 bg-clip-text text-transparent">
         <AnimatedCount to={Number(value)} />
         <span className="text-indigo-400 text-4xl">+</span>
       </div>

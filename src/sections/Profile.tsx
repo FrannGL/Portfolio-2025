@@ -62,7 +62,7 @@ const ProfileCard = () => {
             </div>
 
             <div>
-              <h2 className="text-xl md:text-2xl lg:text-xl font-semibold mt-1">
+              <h2 className="text-xl md:text-2xl lg:text-xl xl:text-lg font-semibold mt-1">
                 Franco Galluccio
               </h2>
               <TypingText />

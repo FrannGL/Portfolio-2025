@@ -355,7 +355,7 @@ var Header = ({ title, subtitle, icon }) => {
 				]
 			})]
 		}), /* @__PURE__ */ jsxs("h1", {
-			className: "text-lg font-semibold text-white",
+			className: "text-lg xl:text-base font-semibold text-white",
 			children: [
 				" ",
 				subtitle,
@@ -391,7 +391,7 @@ var Stacks = () => {
 					name: "Canva"
 				}
 			],
-			className: isMobile ? "w-33" : "w-39"
+			className: isMobile ? "w-33" : "w-39 xl:w-[135px]"
 		},
 		{
 			type: "stack",
@@ -422,7 +422,7 @@ var Stacks = () => {
 					name: "Material UI"
 				}
 			],
-			className: isMobile ? "w-33" : "w-39"
+			className: isMobile ? "w-33" : "w-39 xl:w-[135px]"
 		},
 		{
 			type: "stack",
@@ -445,7 +445,7 @@ var Stacks = () => {
 					name: "PostgreSQL"
 				}
 			],
-			className: isMobile ? "w-33" : "w-39"
+			className: isMobile ? "w-33" : "w-39 xl:w-[135px]"
 		},
 		{
 			type: "stack",
@@ -468,7 +468,7 @@ var Stacks = () => {
 					name: "AWS"
 				}
 			],
-			className: isMobile ? "w-33" : "w-39"
+			className: isMobile ? "w-33" : "w-39 xl:w-[135px]"
 		}
 	];
 	return /* @__PURE__ */ jsxs("div", {
@@ -1029,7 +1029,7 @@ var ProfileCard = () => {
 								})]
 							})]
 						}), /* @__PURE__ */ jsxs("div", { children: [/* @__PURE__ */ jsx("h2", {
-							className: "text-xl md:text-2xl lg:text-xl font-semibold mt-1",
+							className: "text-xl md:text-2xl lg:text-xl xl:text-lg font-semibold mt-1",
 							children: "Franco Galluccio"
 						}), /* @__PURE__ */ jsx(TypingText, {})] })]
 					})]
@@ -1127,7 +1127,7 @@ var Clients = () => {
 			children: /* @__PURE__ */ jsx("div", {
 				className: "flex w-fit gap-4 animate-[scroll-carousel-right_20s_linear_infinite]",
 				children: [...Array(2)].flatMap((_, i) => cards.map(({ key, src, alt }) => /* @__PURE__ */ jsx("div", {
-					className: "flex flex-col items-center justify-center w-48 h-[50px] bg-[#191919] text-white rounded-lg shadow-sm border border-[#212121] mx-2 p-1 flex-shrink-0",
+					className: "flex flex-col items-center justify-center w-48 xl:w-40 h-[50px] xl:h-[42px] bg-[#191919] text-white rounded-lg shadow-sm border border-[#212121] mx-2 p-1 flex-shrink-0",
 					children: /* @__PURE__ */ jsx("img", {
 						src,
 						alt,
@@ -1192,7 +1192,7 @@ var TestimonialCard = ({ name, company, date, content, avatarUrl }) => {
 								className: "object-cover"
 							}), /* @__PURE__ */ jsx(AvatarFallback, { children: name[0] })]
 						}), /* @__PURE__ */ jsxs("div", { children: [/* @__PURE__ */ jsx("p", {
-							className: "text-sm font-semibold",
+							className: "text-sm xl:text-xs font-semibold",
 							children: name
 						}), /* @__PURE__ */ jsx("p", {
 							className: "text-xs text-muted-foreground",
@@ -1371,7 +1371,7 @@ var WorkTogether = () => {
 					})
 				}),
 				/* @__PURE__ */ jsx("h1", {
-					className: "text-1xl font-semibold text-white",
+					className: "text-1xl xl:text-sm font-semibold text-white",
 					children: t("workTogether.title")
 				}),
 				/* @__PURE__ */ jsx("span", {
@@ -1447,7 +1447,7 @@ var Indicator = ({ value, label, iconName }) => {
 	return /* @__PURE__ */ jsxs("div", {
 		className: "flex flex-col items-center justify-center py-2 gap-1 bg-[#101010] border border-[rgba(33,33,33,0.8)] text-foreground border rounded-xl",
 		children: [/* @__PURE__ */ jsxs("div", {
-			className: "text-5xl md:text-6xl font-semibold bg-gradient-to-b from-white to-zinc-900 bg-clip-text text-transparent",
+			className: "text-5xl md:text-6xl xl:text-4xl font-semibold bg-gradient-to-b from-white to-zinc-900 bg-clip-text text-transparent",
 			children: [/* @__PURE__ */ jsx(AnimatedCount, { to: Number(value) }), /* @__PURE__ */ jsx("span", {
 				className: "text-indigo-400 text-4xl",
 				children: "+"
@@ -1502,7 +1502,7 @@ var $$Index = createComponent(($$result, $$props, $$slots) => {
 	const Astro = $$result.createAstro($$props, $$slots);
 	Astro.self = $$Index;
 	Astro.preferredLocale;
-	return renderTemplate`${renderComponent($$result, "Layout", $$Layout, {}, { "default": ($$result) => renderTemplate`${maybeRenderHead($$result)}<div class="min-h-screen h-screen items-center grid grid-cols-1 xl:grid-cols-[25%_32%_41%] gap-3 p-8 text-white"><div class="flex flex-col gap-3 order-2 md:order-none"><div class="bg-[#101010] rounded-3xl border border-[rgba(33,33,33,0.8)]">${renderComponent($$result, "Stacks", Stacks, {
+	return renderTemplate`${renderComponent($$result, "Layout", $$Layout, {}, { "default": ($$result) => renderTemplate`${maybeRenderHead($$result)}<div class="min-h-screen h-screen items-center grid grid-cols-1 xl:grid-cols-[24%_33%_40%] gap-3 p-8 xl:p-5 text-white"><div class="flex flex-col gap-3 order-2 md:order-none"><div class="bg-[#101010] rounded-3xl border border-[rgba(33,33,33,0.8)]">${renderComponent($$result, "Stacks", Stacks, {
 		"client:load": true,
 		"client:component-hydration": "load",
 		"client:component-path": "@/sections/Stacks",

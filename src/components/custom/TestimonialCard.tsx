@@ -31,7 +31,7 @@ const TestimonialCard = ({
               <AvatarFallback>{name[0]}</AvatarFallback>
             </Avatar>
             <div>
-              <p className="text-sm font-semibold">{name}</p>
+              <p className="text-sm xl:text-xs font-semibold">{name}</p>
               <p className="text-xs text-muted-foreground">{company}</p>
             </div>
           </div>

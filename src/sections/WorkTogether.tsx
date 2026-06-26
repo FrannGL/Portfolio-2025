@@ -15,7 +15,7 @@ const WorkTogether = () => {
             className="w-8 h-8 text-indigo-400"
           />
         </div>
-        <h1 className="text-1xl font-semibold text-white">
+        <h1 className="text-1xl xl:text-sm font-semibold text-white">
           {t("workTogether.title")}
         </h1>
         <span className="text-sm text-muted-foreground">

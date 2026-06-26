@@ -48,7 +48,7 @@ const Clients = () => {
             cards.map(({ key, src, alt }) => (
               <div
                 key={`${key}-${i}`}
-                className="flex flex-col items-center justify-center w-48 h-[50px] bg-[#191919] text-white rounded-lg shadow-sm border border-[#212121] mx-2 p-1 flex-shrink-0"
+                className="flex flex-col items-center justify-center w-48 xl:w-40 h-[50px] xl:h-[42px] bg-[#191919] text-white rounded-lg shadow-sm border border-[#212121] mx-2 p-1 flex-shrink-0"
               >
                 <img
                   src={src}
