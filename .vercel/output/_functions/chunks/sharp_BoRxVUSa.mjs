@@ -1,8 +1,7 @@
-import { o as __toESM } from "./rolldown-runtime_CE-6LUnI.mjs";
-import { $ as AstroError, N as NoImageMetadata, Z as UnsupportedImageFormat, j as MissingSharp } from "./errors-data_Sk45W7_X.mjs";
-import { v as detector } from "./path_Bwv0-iyy.mjs";
-import { i as resolveDefaultOutputFormat, r as parseQuality, t as baseService } from "./service_BIduT_B1.mjs";
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/assets/services/sharp.js
+import { $ as AstroError, N as NoImageMetadata, Z as UnsupportedImageFormat, j as MissingSharp } from "./errors-data_sKwIzwfZ.mjs";
+import { v as detector } from "./path_Cvh8ipoD.mjs";
+import { i as resolveDefaultOutputFormat, r as parseQuality, t as baseService } from "./service_CMgd0LdI.mjs";
+//#region node_modules/astro/dist/assets/services/sharp.js
 var sharp;
 var qualityTable = {
 	low: 25,
@@ -47,7 +46,7 @@ function resolveSharpEncoderOptions(transform, inputFormat, serviceConfig = {}) 
 async function loadSharp() {
 	let sharpImport;
 	try {
-		sharpImport = (await import("./lib_Be8M4eek.mjs").then((m) => /* @__PURE__ */ __toESM(m.default, 1))).default;
+		sharpImport = (await import("sharp")).default;
 	} catch {
 		throw new AstroError(MissingSharp);
 	}

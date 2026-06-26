@@ -1,6 +1,6 @@
-import { $ as AstroError, C as LocalImageUsedWrongly, X as UnsupportedImageConversion, Z as UnsupportedImageFormat, k as MissingImageDimension, s as ExpectedImage, v as IncompatibleDescriptorOptions } from "./errors-data_Sk45W7_X.mjs";
-import { S as isRemoteAllowed, b as isRemoteImage, c as isRemotePath, f as removeQueryString, g as inferRemoteSize, l as joinPaths, y as isESMImportedImage } from "./path_Bwv0-iyy.mjs";
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/assets/consts.js
+import { $ as AstroError, C as LocalImageUsedWrongly, X as UnsupportedImageConversion, Z as UnsupportedImageFormat, k as MissingImageDimension, s as ExpectedImage, v as IncompatibleDescriptorOptions } from "./errors-data_sKwIzwfZ.mjs";
+import { S as isRemoteAllowed, b as isRemoteImage, c as isRemotePath, f as removeQueryString, g as inferRemoteSize, l as joinPaths, y as isESMImportedImage } from "./path_Cvh8ipoD.mjs";
+//#region node_modules/astro/dist/assets/consts.js
 var VALID_SUPPORTED_FORMATS = [
 	"jpeg",
 	"jpg",
@@ -23,7 +23,7 @@ var DEFAULT_HASH_PROPS = [
 	"background"
 ];
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/assets/utils/inferSourceFormat.js
+//#region node_modules/astro/dist/assets/utils/inferSourceFormat.js
 var DATA_PREFIX = "data:";
 function inferSourceFormat(src) {
 	if (src.startsWith(DATA_PREFIX)) {
@@ -50,7 +50,7 @@ function resolveDefaultOutputFormat(sourceFormat) {
 	return sourceFormat === "svg" ? "svg" : DEFAULT_OUTPUT_FORMAT;
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/assets/services/service.js
+//#region node_modules/astro/dist/assets/services/service.js
 function isLocalService(service) {
 	if (!service) return false;
 	return "transform" in service;

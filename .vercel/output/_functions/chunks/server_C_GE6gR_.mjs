@@ -1,65 +1,10 @@
-import { $ as AstroError, A as MissingMediaQueryDirective, F as NoMatchingRenderer, L as OnlyResponseCanBeReturned, M as NoClientOnlyHint, P as NoMatchingImport, U as ResponseSentError, Y as UnavailableAstroGlobal, o as EndpointDidNotReturnAResponse, y as InvalidComponentArgs } from "./errors-data_Sk45W7_X.mjs";
+import { $ as AstroError, A as MissingMediaQueryDirective, F as NoMatchingRenderer, L as OnlyResponseCanBeReturned, M as NoClientOnlyHint, P as NoMatchingImport, U as ResponseSentError, Y as UnavailableAstroGlobal, o as EndpointDidNotReturnAResponse, y as InvalidComponentArgs } from "./errors-data_sKwIzwfZ.mjs";
+import colors from "piccolore";
+import { escape } from "html-escaper";
 import { clsx } from "clsx";
+import { decodeBase64, decodeHex, encodeBase64, encodeHexUpperCase } from "@oslojs/encoding";
 import * as z from "zod/v4";
-//#region node_modules/.pnpm/piccolore@0.1.3/node_modules/piccolore/dist/index.js
-var e = globalThis.process || {}, t = e.argv || [], n = e.env || {}, r = !(n.NO_COLOR || t.includes(`--no-color`)) && (!!n.FORCE_COLOR || t.includes(`--color`) || e.platform === `win32` || (e.stdout || {}).isTTY && n.TERM !== `dumb` || !!n.CI), i = (e, t, n = e) => (r) => {
-	let i = `` + r, o = i.indexOf(t, e.length);
-	return ~o ? e + a(i, t, n, o) + t : e + i + t;
-}, a = (e, t, n, r) => {
-	let i = ``, a = 0;
-	do
-		i += e.substring(a, r) + n, a = r + t.length, r = e.indexOf(t, a);
-	while (~r);
-	return i + e.substring(a);
-}, o = (e = r) => {
-	let t = e ? i : () => String;
-	return {
-		isColorSupported: e,
-		reset: t(`\x1B[0m`, `\x1B[0m`),
-		bold: t(`\x1B[1m`, `\x1B[22m`, `\x1B[22m\x1B[1m`),
-		dim: t(`\x1B[2m`, `\x1B[22m`, `\x1B[22m\x1B[2m`),
-		italic: t(`\x1B[3m`, `\x1B[23m`),
-		underline: t(`\x1B[4m`, `\x1B[24m`),
-		inverse: t(`\x1B[7m`, `\x1B[27m`),
-		hidden: t(`\x1B[8m`, `\x1B[28m`),
-		strikethrough: t(`\x1B[9m`, `\x1B[29m`),
-		black: t(`\x1B[30m`, `\x1B[39m`),
-		red: t(`\x1B[31m`, `\x1B[39m`),
-		green: t(`\x1B[32m`, `\x1B[39m`),
-		yellow: t(`\x1B[33m`, `\x1B[39m`),
-		blue: t(`\x1B[34m`, `\x1B[39m`),
-		magenta: t(`\x1B[35m`, `\x1B[39m`),
-		cyan: t(`\x1B[36m`, `\x1B[39m`),
-		white: t(`\x1B[37m`, `\x1B[39m`),
-		gray: t(`\x1B[90m`, `\x1B[39m`),
-		bgBlack: t(`\x1B[40m`, `\x1B[49m`),
-		bgRed: t(`\x1B[41m`, `\x1B[49m`),
-		bgGreen: t(`\x1B[42m`, `\x1B[49m`),
-		bgYellow: t(`\x1B[43m`, `\x1B[49m`),
-		bgBlue: t(`\x1B[44m`, `\x1B[49m`),
-		bgMagenta: t(`\x1B[45m`, `\x1B[49m`),
-		bgCyan: t(`\x1B[46m`, `\x1B[49m`),
-		bgWhite: t(`\x1B[47m`, `\x1B[49m`),
-		blackBright: t(`\x1B[90m`, `\x1B[39m`),
-		redBright: t(`\x1B[91m`, `\x1B[39m`),
-		greenBright: t(`\x1B[92m`, `\x1B[39m`),
-		yellowBright: t(`\x1B[93m`, `\x1B[39m`),
-		blueBright: t(`\x1B[94m`, `\x1B[39m`),
-		magentaBright: t(`\x1B[95m`, `\x1B[39m`),
-		cyanBright: t(`\x1B[96m`, `\x1B[39m`),
-		whiteBright: t(`\x1B[97m`, `\x1B[39m`),
-		bgBlackBright: t(`\x1B[100m`, `\x1B[49m`),
-		bgRedBright: t(`\x1B[101m`, `\x1B[49m`),
-		bgGreenBright: t(`\x1B[102m`, `\x1B[49m`),
-		bgYellowBright: t(`\x1B[103m`, `\x1B[49m`),
-		bgBlueBright: t(`\x1B[104m`, `\x1B[49m`),
-		bgMagentaBright: t(`\x1B[105m`, `\x1B[49m`),
-		bgCyanBright: t(`\x1B[106m`, `\x1B[49m`),
-		bgWhiteBright: t(`\x1B[107m`, `\x1B[49m`)
-	};
-};
-var s = o();
-var ASTRO_GENERATOR = `Astro v7.0.2`;
+var ASTRO_GENERATOR = `Astro v7.0.3`;
 var ASTRO_ERROR_HEADER = "X-Astro-Error";
 var DEFAULT_404_COMPONENT = "astro-default-404.astro";
 var REDIRECT_STATUS_CODES = [
@@ -79,48 +24,17 @@ var fetchStateSymbol = /* @__PURE__ */ Symbol.for("astro.fetchState");
 var appSymbol = /* @__PURE__ */ Symbol.for("astro.app");
 var responseSentSymbol = /* @__PURE__ */ Symbol.for("astro.responseSent");
 //#endregion
-//#region node_modules/.pnpm/html-escaper@3.0.3/node_modules/html-escaper/esm/index.js
-/**
-* Copyright (C) 2017-present by Andrea Giammarchi - @WebReflection
-*
-* Permission is hereby granted, free of charge, to any person obtaining a copy
-* of this software and associated documentation files (the "Software"), to deal
-* in the Software without restriction, including without limitation the rights
-* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-* copies of the Software, and to permit persons to whom the Software is
-* furnished to do so, subject to the following conditions:
-*
-* The above copyright notice and this permission notice shall be included in
-* all copies or substantial portions of the Software.
-*
-* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-* THE SOFTWARE.
-*/
-var { replace } = "";
-var ca = /[&<>'"]/g;
-var esca = {
-	"&": "&amp;",
-	"<": "&lt;",
-	">": "&gt;",
-	"'": "&#39;",
-	"\"": "&quot;"
-};
-var pe = (m) => esca[m];
-/**
-* Safely escape HTML entities such as `&`, `<`, `>`, `"`, and `'`.
-* @param {string} es the input to safely escape
-* @returns {string} the escaped input, and it **throws** an error if
-*  the input type is unexpected, except for boolean and numbers,
-*  converted as string.
-*/
-var escape = (es) => replace.call(es, ca, pe);
+//#region node_modules/astro/dist/core/routing/internal/route-errors.js
+var ROUTE404_RE = /^\/404\/?$/;
+var ROUTE500_RE = /^\/500\/?$/;
+function isRoute404(route) {
+	return ROUTE404_RE.test(route);
+}
+function isRoute500(route) {
+	return ROUTE500_RE.test(route);
+}
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/runtime/server/astro-component.js
+//#region node_modules/astro/dist/runtime/server/astro-component.js
 function validateArgs(args) {
 	if (args.length !== 3) return false;
 	if (!args[0] || typeof args[0] !== "object") return false;
@@ -152,7 +66,7 @@ function createComponent(arg1, moduleId, propagation) {
 	else return createComponentWithOptions(arg1);
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/runtime/server/astro-global.js
+//#region node_modules/astro/dist/runtime/server/astro-global.js
 function createError(name) {
 	return new AstroError({
 		...UnavailableAstroGlobal,
@@ -244,13 +158,13 @@ function createAstro(site) {
 	};
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/runtime/server/endpoint.js
+//#region node_modules/astro/dist/runtime/server/endpoint.js
 async function renderEndpoint(mod, context, isPrerendered, logger, state) {
 	const { request, url } = context;
 	const method = request.method.toUpperCase();
 	let handler = mod[method] ?? mod["ALL"];
 	if (!handler && method === "HEAD" && mod["GET"]) handler = mod["GET"];
-	if (isPrerendered && !["GET", "HEAD"].includes(method)) logger.warn("router", `${url.pathname} ${s.bold(method)} requests are not available in static endpoints. Mark this page as server-rendered (\`export const prerender = false;\`) or update your config to \`output: 'server'\` to make all your pages server-rendered by default.`);
+	if (isPrerendered && !["GET", "HEAD"].includes(method)) logger.warn("router", `${url.pathname} ${colors.bold(method)} requests are not available in static endpoints. Mark this page as server-rendered (\`export const prerender = false;\`) or update your config to \`output: 'server'\` to make all your pages server-rendered by default.`);
 	if (handler === void 0) {
 		logger.warn("router", `No API Route handler exists for the method "${method}" for the route "${url.pathname}".
 Found handlers: ${Object.keys(mod).map((exp) => JSON.stringify(exp)).join(", ")}
@@ -269,7 +183,7 @@ Found handlers: ${Object.keys(mod).map((exp) => JSON.stringify(exp)).join(", ")}
 	return response;
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/runtime/server/util.js
+//#region node_modules/astro/dist/runtime/server/util.js
 function isPromise(value) {
 	return !!value && typeof value === "object" && "then" in value && typeof value.then === "function";
 }
@@ -286,7 +200,7 @@ async function* streamAsyncIterator(stream) {
 	}
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/runtime/server/escape.js
+//#region node_modules/astro/dist/runtime/server/escape.js
 var escapeHTML = escape;
 function stringifyForScript(value) {
 	return JSON.stringify(value)?.replace(/</g, "\\u003c");
@@ -339,17 +253,17 @@ function isVNode(vnode) {
 	return vnode && typeof vnode === "object" && vnode["astro:jsx"];
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/head-propagation/resolver.js
+//#region node_modules/astro/dist/core/head-propagation/resolver.js
 function isPropagatingHint(hint) {
 	return hint === "self" || hint === "in-tree";
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/runtime/server/render/astro/factory.js
+//#region node_modules/astro/dist/runtime/server/render/astro/factory.js
 function isAstroComponentFactory(obj) {
 	return obj == null ? false : obj.isAstroComponentFactory === true;
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/runtime/server/serialize.js
+//#region node_modules/astro/dist/runtime/server/serialize.js
 var PROP_TYPE = {
 	Value: 0,
 	JSON: 1,
@@ -410,7 +324,7 @@ function serializeProps(props, metadata) {
 	return JSON.stringify(serializeObject(props, metadata));
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/runtime/server/hydration.js
+//#region node_modules/astro/dist/runtime/server/hydration.js
 var transitionDirectivesToCopyOnIsland = Object.freeze([
 	"data-astro-transition-scope",
 	"data-astro-transition-persist",
@@ -496,7 +410,7 @@ async function generateHydrateScript(scriptOptions, metadata) {
 	return island;
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/runtime/server/shorthash.js
+//#region node_modules/astro/dist/runtime/server/shorthash.js
 /**
 * shortdash - https://github.com/bibig/node-shorthash
 *
@@ -554,7 +468,7 @@ function shorthash(text) {
 	return sign + result;
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/runtime/server/render/astro/head-and-content.js
+//#region node_modules/astro/dist/runtime/server/render/astro/head-and-content.js
 var headAndContentSym = /* @__PURE__ */ Symbol.for("astro.headAndContent");
 function isHeadAndContent(obj) {
 	return typeof obj === "object" && obj !== null && !!obj[headAndContentSym];
@@ -563,16 +477,16 @@ function createThinHead() {
 	return { [headAndContentSym]: true };
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/runtime/server/astro-island.prebuilt.js
+//#region node_modules/astro/dist/runtime/server/astro-island.prebuilt.js
 var astro_island_prebuilt_default = `(()=>{var g=Object.defineProperty;var w=(c,s,d)=>s in c?g(c,s,{enumerable:!0,configurable:!0,writable:!0,value:d}):c[s]=d;var l=(c,s,d)=>w(c,typeof s!="symbol"?s+"":s,d);var E=new Set(["__proto__","constructor","prototype"]);{let c={0:t=>y(t),1:t=>d(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(d(t)),5:t=>new Set(d(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in c?c[p](e):void 0},d=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let n=this.querySelectorAll("astro-slot"),r={},i=this.querySelectorAll("template[data-astro-template]");for(let o of i){let a=o.closest(this.tagName);a!=null&&a.isSameNode(this)&&(r[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of n){let a=o.closest(this.tagName);a!=null&&a.isSameNode(this)&&(r[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let a=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(a+=\` (export \${v})\`),console.error(\`[hydrate] Error parsing props for component \${a}\`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,r,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),n.disconnect(),this.childrenConnectedCallback()},n=new MutationObserver(()=>{var r;((r=this.lastChild)==null?void 0:r.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});n.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let n=new URL(e,document.baseURI),r=\`astro-retry=\${Date.now()}\`,i=n.hash.replace(/^#/,"");return n.hash=i?\`\${i}&\${r}\`:r,n.toString()}async importWithRetry(e){try{return await import(e)}catch(n){return await new Promise(r=>setTimeout(r,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let n=this.getAttribute("component-url"),r=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:n}});this.dispatchEvent(r)&&console.error(\`[astro-island] Error hydrating \${n}\`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),n=this.getAttribute("client");if(Astro[n]===void 0){window.addEventListener(\`astro:\${n}\`,()=>this.start(),{once:!0});return}try{await Astro[n](async()=>{let r=this.getAttribute("renderer-url");try{let[i,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),r?this.importWithRetry(r):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=i;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(\`Invalid component export path: \${h}\`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(\`Invalid component export path: \${h}\`);this.Component=i[h]}return this.hydrator=u,this.hydrate}catch(i){return this.handleHydrationError(i),()=>{}}},e,this)}catch(r){this.handleHydrationError(r)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();`;
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/runtime/server/astro-island.prebuilt-dev.js
+//#region node_modules/astro/dist/runtime/server/astro-island.prebuilt-dev.js
 var astro_island_prebuilt_dev_default = `(()=>{var g=Object.defineProperty;var w=(d,s,h)=>s in d?g(d,s,{enumerable:!0,configurable:!0,writable:!0,value:h}):d[s]=h;var l=(d,s,h)=>w(d,typeof s!="symbol"?s+"":s,h);var E=new Set(["__proto__","constructor","prototype"]);{let d={0:t=>y(t),1:t=>h(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(h(t)),5:t=>new Set(h(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in d?d[p](e):void 0},h=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let n=this.querySelectorAll("astro-slot"),r={},i=this.querySelectorAll("template[data-astro-template]");for(let o of i){let c=o.closest(this.tagName);c!=null&&c.isSameNode(this)&&(r[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of n){let c=o.closest(this.tagName);c!=null&&c.isSameNode(this)&&(r[o.getAttribute("name")||"default"]=o.innerHTML)}let m;try{m=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let c=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(c+=\` (export \${v})\`),console.error(\`[hydrate] Error parsing props for component \${c}\`,this.getAttribute("props"),o),o}let a,u=this.hydrator(this);a=performance.now(),await u(this.Component,m,r,{client:this.getAttribute("client")}),a&&this.setAttribute("client-render-time",(performance.now()-a).toString()),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),n.disconnect(),this.childrenConnectedCallback()},n=new MutationObserver(()=>{var r;((r=this.lastChild)==null?void 0:r.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});n.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let n=new URL(e,document.baseURI),r=\`astro-retry=\${Date.now()}\`,i=n.hash.replace(/^#/,"");return n.hash=i?\`\${i}&\${r}\`:r,n.toString()}async importWithRetry(e){try{return await import(e)}catch(n){return await new Promise(r=>setTimeout(r,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let n=this.getAttribute("component-url"),r=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:n}});this.dispatchEvent(r)&&console.error(\`[astro-island] Error hydrating \${n}\`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),n=this.getAttribute("client");if(Astro[n]===void 0){window.addEventListener(\`astro:\${n}\`,()=>this.start(),{once:!0});return}try{await Astro[n](async()=>{let r=this.getAttribute("renderer-url");try{let[i,{default:m}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),r?this.importWithRetry(r):Promise.resolve({default:()=>()=>{}})]),a=this.getAttribute("component-export")||"default";if(a.includes(".")){this.Component=i;for(let u of a.split(".")){if(E.has(u)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,u))throw new Error(\`Invalid component export path: \${a}\`);this.Component=this.Component[u]}}else{if(E.has(a))throw new Error(\`Invalid component export path: \${a}\`);this.Component=i[a]}return this.hydrator=m,this.hydrate}catch(i){return this.handleHydrationError(i),()=>{}}},e,this)}catch(r){this.handleHydrationError(r)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();`;
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/runtime/server/astro-island-styles.js
+//#region node_modules/astro/dist/runtime/server/astro-island-styles.js
 var ISLAND_STYLES = "astro-island,astro-slot,astro-static-slot{display:contents}";
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/runtime/server/scripts.js
+//#region node_modules/astro/dist/runtime/server/scripts.js
 function determineIfNeedsHydrationScript(result) {
 	if (result._metadata.templateDepth > 0) return !result._metadata.hasHydrationScript;
 	if (result._metadata.hasHydrationScript) return false;
@@ -596,7 +510,7 @@ function getPrescripts(result, type, directive) {
 	}
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/head-propagation/buffer.js
+//#region node_modules/astro/dist/core/head-propagation/buffer.js
 async function collectPropagatedHeadParts(input) {
 	const collectedHeadParts = [];
 	const iterator = input.propagators.values();
@@ -609,7 +523,7 @@ async function collectPropagatedHeadParts(input) {
 	return collectedHeadParts;
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/head-propagation/policy.js
+//#region node_modules/astro/dist/core/head-propagation/policy.js
 function shouldRenderHeadInstruction(state) {
 	return !state.hasRenderedHead && !state.partial;
 }
@@ -620,7 +534,7 @@ function shouldRenderInstruction$1(type, state) {
 	return type === "head" ? shouldRenderHeadInstruction(state) : shouldRenderMaybeHeadInstruction(state);
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/runtime/server/render/head-propagation/runtime.js
+//#region node_modules/astro/dist/runtime/server/render/head-propagation/runtime.js
 function registerIfPropagating(result, factory, instance) {
 	if (factory.propagation === "self" || factory.propagation === "in-tree") {
 		result._metadata.propagators.add(instance);
@@ -650,7 +564,7 @@ function getInstructionRenderState(result) {
 	};
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/runtime/server/render/csp.js
+//#region node_modules/astro/dist/runtime/server/render/csp.js
 function renderCspContent(result) {
 	const finalScriptHashes = /* @__PURE__ */ new Set();
 	const finalStyleHashes = /* @__PURE__ */ new Set();
@@ -674,7 +588,7 @@ function renderCspContent(result) {
 	].filter(Boolean).join(" ");
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/runtime/server/render/instruction.js
+//#region node_modules/astro/dist/runtime/server/render/instruction.js
 var RenderInstructionSymbol = /* @__PURE__ */ Symbol.for("astro:render");
 function createRenderInstruction(instruction) {
 	return Object.defineProperty(instruction, RenderInstructionSymbol, { value: true });
@@ -683,7 +597,7 @@ function isRenderInstruction(chunk) {
 	return chunk && typeof chunk === "object" && chunk[RenderInstructionSymbol];
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/runtime/server/render/util.js
+//#region node_modules/astro/dist/runtime/server/render/util.js
 var voidElementNames = /^(area|base|br|col|command|embed|hr|img|input|keygen|link|meta|param|source|track|wbr)$/i;
 var htmlBooleanAttributes = /^(?:allowfullscreen|async|autofocus|autoplay|checked|controls|default|defer|disabled|disablepictureinpicture|disableremoteplayback|formnovalidate|inert|loop|muted|nomodule|novalidate|open|playsinline|readonly|required|reversed|scoped|seamless|selected|itemscope)$/i;
 var AMPERSAND_REGEX = /&/g;
@@ -806,7 +720,7 @@ function promiseWithResolvers() {
 	};
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/runtime/server/render/head.js
+//#region node_modules/astro/dist/runtime/server/render/head.js
 function stablePropsKey(props) {
 	const keys = Object.keys(props).sort();
 	let result = "{";
@@ -856,198 +770,7 @@ function maybeRenderHead() {
 	return createRenderInstruction({ type: "maybe-head" });
 }
 //#endregion
-//#region node_modules/.pnpm/@oslojs+encoding@1.1.0/node_modules/@oslojs/encoding/dist/hex.js
-function encodeHexUpperCase(data) {
-	let result = "";
-	for (let i = 0; i < data.length; i++) {
-		result += alphabetUpperCase[data[i] >> 4];
-		result += alphabetUpperCase[data[i] & 15];
-	}
-	return result;
-}
-function decodeHex(data) {
-	if (data.length % 2 !== 0) throw new Error("Invalid hex string");
-	const result = new Uint8Array(data.length / 2);
-	for (let i = 0; i < data.length; i += 2) {
-		if (!(data[i] in decodeMap)) throw new Error("Invalid character");
-		if (!(data[i + 1] in decodeMap)) throw new Error("Invalid character");
-		result[i / 2] |= decodeMap[data[i]] << 4;
-		result[i / 2] |= decodeMap[data[i + 1]];
-	}
-	return result;
-}
-var alphabetUpperCase = "0123456789ABCDEF";
-var decodeMap = {
-	"0": 0,
-	"1": 1,
-	"2": 2,
-	"3": 3,
-	"4": 4,
-	"5": 5,
-	"6": 6,
-	"7": 7,
-	"8": 8,
-	"9": 9,
-	a: 10,
-	A: 10,
-	b: 11,
-	B: 11,
-	c: 12,
-	C: 12,
-	d: 13,
-	D: 13,
-	e: 14,
-	E: 14,
-	f: 15,
-	F: 15
-};
-//#endregion
-//#region node_modules/.pnpm/@oslojs+encoding@1.1.0/node_modules/@oslojs/encoding/dist/base32.js
-var EncodingPadding$1;
-(function(EncodingPadding) {
-	EncodingPadding[EncodingPadding["Include"] = 0] = "Include";
-	EncodingPadding[EncodingPadding["None"] = 1] = "None";
-})(EncodingPadding$1 || (EncodingPadding$1 = {}));
-var DecodingPadding$1;
-(function(DecodingPadding) {
-	DecodingPadding[DecodingPadding["Required"] = 0] = "Required";
-	DecodingPadding[DecodingPadding["Ignore"] = 1] = "Ignore";
-})(DecodingPadding$1 || (DecodingPadding$1 = {}));
-//#endregion
-//#region node_modules/.pnpm/@oslojs+encoding@1.1.0/node_modules/@oslojs/encoding/dist/base64.js
-function encodeBase64(bytes) {
-	return encodeBase64_internal(bytes, base64Alphabet, EncodingPadding.Include);
-}
-function encodeBase64_internal(bytes, alphabet, padding) {
-	let result = "";
-	for (let i = 0; i < bytes.byteLength; i += 3) {
-		let buffer = 0;
-		let bufferBitSize = 0;
-		for (let j = 0; j < 3 && i + j < bytes.byteLength; j++) {
-			buffer = buffer << 8 | bytes[i + j];
-			bufferBitSize += 8;
-		}
-		for (let j = 0; j < 4; j++) if (bufferBitSize >= 6) {
-			result += alphabet[buffer >> bufferBitSize - 6 & 63];
-			bufferBitSize -= 6;
-		} else if (bufferBitSize > 0) {
-			result += alphabet[buffer << 6 - bufferBitSize & 63];
-			bufferBitSize = 0;
-		} else if (padding === EncodingPadding.Include) result += "=";
-	}
-	return result;
-}
-var base64Alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
-function decodeBase64(encoded) {
-	return decodeBase64_internal(encoded, base64DecodeMap, DecodingPadding.Required);
-}
-function decodeBase64_internal(encoded, decodeMap, padding) {
-	const result = new Uint8Array(Math.ceil(encoded.length / 4) * 3);
-	let totalBytes = 0;
-	for (let i = 0; i < encoded.length; i += 4) {
-		let chunk = 0;
-		let bitsRead = 0;
-		for (let j = 0; j < 4; j++) {
-			if (padding === DecodingPadding.Required && encoded[i + j] === "=") continue;
-			if (padding === DecodingPadding.Ignore && (i + j >= encoded.length || encoded[i + j] === "=")) continue;
-			if (j > 0 && encoded[i + j - 1] === "=") throw new Error("Invalid padding");
-			if (!(encoded[i + j] in decodeMap)) throw new Error("Invalid character");
-			chunk |= decodeMap[encoded[i + j]] << (3 - j) * 6;
-			bitsRead += 6;
-		}
-		if (bitsRead < 24) {
-			let unused;
-			if (bitsRead === 12) unused = chunk & 65535;
-			else if (bitsRead === 18) unused = chunk & 255;
-			else throw new Error("Invalid padding");
-			if (unused !== 0) throw new Error("Invalid padding");
-		}
-		const byteLength = Math.floor(bitsRead / 8);
-		for (let i = 0; i < byteLength; i++) {
-			result[totalBytes] = chunk >> 16 - i * 8 & 255;
-			totalBytes++;
-		}
-	}
-	return result.slice(0, totalBytes);
-}
-var EncodingPadding;
-(function(EncodingPadding) {
-	EncodingPadding[EncodingPadding["Include"] = 0] = "Include";
-	EncodingPadding[EncodingPadding["None"] = 1] = "None";
-})(EncodingPadding || (EncodingPadding = {}));
-var DecodingPadding;
-(function(DecodingPadding) {
-	DecodingPadding[DecodingPadding["Required"] = 0] = "Required";
-	DecodingPadding[DecodingPadding["Ignore"] = 1] = "Ignore";
-})(DecodingPadding || (DecodingPadding = {}));
-var base64DecodeMap = {
-	"0": 52,
-	"1": 53,
-	"2": 54,
-	"3": 55,
-	"4": 56,
-	"5": 57,
-	"6": 58,
-	"7": 59,
-	"8": 60,
-	"9": 61,
-	A: 0,
-	B: 1,
-	C: 2,
-	D: 3,
-	E: 4,
-	F: 5,
-	G: 6,
-	H: 7,
-	I: 8,
-	J: 9,
-	K: 10,
-	L: 11,
-	M: 12,
-	N: 13,
-	O: 14,
-	P: 15,
-	Q: 16,
-	R: 17,
-	S: 18,
-	T: 19,
-	U: 20,
-	V: 21,
-	W: 22,
-	X: 23,
-	Y: 24,
-	Z: 25,
-	a: 26,
-	b: 27,
-	c: 28,
-	d: 29,
-	e: 30,
-	f: 31,
-	g: 32,
-	h: 33,
-	i: 34,
-	j: 35,
-	k: 36,
-	l: 37,
-	m: 38,
-	n: 39,
-	o: 40,
-	p: 41,
-	q: 42,
-	r: 43,
-	s: 44,
-	t: 45,
-	u: 46,
-	v: 47,
-	w: 48,
-	x: 49,
-	y: 50,
-	z: 51,
-	"+": 62,
-	"/": 63
-};
-//#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/csp/config.js
+//#region node_modules/astro/dist/core/csp/config.js
 var ALGORITHMS = {
 	"SHA-256": "sha256-",
 	"SHA-384": "sha384-",
@@ -1099,7 +822,7 @@ z.custom((v) => typeof v === "string").superRefine((value, ctx) => {
 	});
 });
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/encryption.js
+//#region node_modules/astro/dist/core/encryption.js
 var ALGORITHM = "AES-GCM";
 async function decodeKey(encoded) {
 	const bytes = decodeBase64(encoded);
@@ -1136,7 +859,7 @@ async function generateCspDigest(data, algorithm) {
 	return `${ALGORITHMS[algorithm]}${hash}`;
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/runtime/server/render/astro/render-template.js
+//#region node_modules/astro/dist/runtime/server/render/astro/render-template.js
 var renderTemplateResultSym = /* @__PURE__ */ Symbol.for("astro.renderTemplateResult");
 var RenderTemplateResult = class {
 	[renderTemplateResultSym] = true;
@@ -1200,7 +923,7 @@ function renderTemplate(htmlParts, ...expressions) {
 	return new RenderTemplateResult(htmlParts, expressions);
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/runtime/server/render/slot.js
+//#region node_modules/astro/dist/runtime/server/render/slot.js
 var slotString = /* @__PURE__ */ Symbol.for("astro:slot-string");
 var SlotString = class extends HTMLString {
 	instructions;
@@ -1263,7 +986,7 @@ function createSlotValueFromString(content) {
 	};
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/runtime/server/render/server-islands.js
+//#region node_modules/astro/dist/runtime/server/render/server-islands.js
 var internalProps = /* @__PURE__ */ new Set([
 	"server:component-path",
 	"server:component-export",
@@ -1400,7 +1123,7 @@ var SERVER_ISLAND_REPLACER = markHTMLString(`async function replaceServerIsland(
 	s.remove();
 }`.split("\n").map((line) => line.trim()).filter((line) => line && !line.startsWith("//")).join(" "));
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/runtime/server/render/common.js
+//#region node_modules/astro/dist/runtime/server/render/common.js
 var Fragment = /* @__PURE__ */ Symbol.for("astro:fragment");
 var Renderer = /* @__PURE__ */ Symbol.for("astro:renderer");
 var encoder = new TextEncoder();
@@ -1483,7 +1206,7 @@ function isRenderInstance(obj) {
 	return !!obj && typeof obj === "object" && "render" in obj && typeof obj.render === "function";
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/runtime/server/render/any.js
+//#region node_modules/astro/dist/runtime/server/render/any.js
 function renderChild(destination, child) {
 	if (typeof child === "string") {
 		destination.write(markHTMLString(escapeHTML(child)));
@@ -1553,7 +1276,7 @@ async function renderAsyncIterable(destination, children) {
 	for await (const value of children) await renderChild(destination, value);
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/runtime/server/render/astro/instance.js
+//#region node_modules/astro/dist/runtime/server/render/astro/instance.js
 var astroComponentInstanceSym = /* @__PURE__ */ Symbol.for("astro.componentInstance");
 var AstroComponentInstance = class {
 	[astroComponentInstanceSym] = true;
@@ -1613,7 +1336,7 @@ function isAstroComponentInstance(obj) {
 	return typeof obj === "object" && obj !== null && !!obj[astroComponentInstanceSym];
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/runtime/server/render/streaming.js
+//#region node_modules/astro/dist/runtime/server/render/streaming.js
 var ClientOnlyPlaceholder$1 = "astro-client-only";
 var TemplateFrame = class {
 	/** The RenderTemplateResult this frame walks. */
@@ -1809,7 +1532,7 @@ Did you forget to import the component or is it possible there is a typo?`);
 	}
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/runtime/server/render/astro/render.js
+//#region node_modules/astro/dist/runtime/server/render/astro/render.js
 var DOCTYPE_EXP = /<!doctype html/i;
 async function renderStreamToString(result, templateResult, isPage) {
 	let str = "";
@@ -1986,7 +1709,7 @@ function toPromise(fn) {
 	}
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/runtime/server/render/dom.js
+//#region node_modules/astro/dist/runtime/server/render/dom.js
 function componentIsHTMLElement(Component) {
 	return typeof HTMLElement !== "undefined" && HTMLElement.isPrototypeOf(Component);
 }
@@ -2002,7 +1725,7 @@ function getHTMLElementName(constructor) {
 	return constructor.name.replace(/^HTML|Element$/g, "").replace(/[A-Z]/g, "-$&").toLowerCase().replace(/^-/, "html-");
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/runtime/server/render/component.js
+//#region node_modules/astro/dist/runtime/server/render/component.js
 var needsHeadRenderingSymbol = /* @__PURE__ */ Symbol.for("astro.needsHeadRendering");
 var rendererAliases = /* @__PURE__ */ new Map([["solid", "solid-js"]]);
 var clientOnlyValues = /* @__PURE__ */ new Set([
@@ -2294,7 +2017,7 @@ function nonAstroPageNeedsHeadInjection(pageComponent) {
 	return !!pageComponent?.[needsHeadRenderingSymbol];
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/runtime/server/jsx.js
+//#region node_modules/astro/dist/runtime/server/jsx.js
 var ClientOnlyPlaceholder = "astro-client-only";
 var hasTriedRenderComponentSymbol = /* @__PURE__ */ Symbol("hasTriedRenderComponent");
 async function renderJSX(result, vnode) {
@@ -2387,7 +2110,7 @@ function prerenderElementChildren(tag, children) {
 	else return children;
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/runtime/server/render/page.js
+//#region node_modules/astro/dist/runtime/server/render/page.js
 async function renderPage(result, componentFactory, props, children, streaming, route) {
 	if (!isAstroComponentFactory(componentFactory)) {
 		result._metadata.headInTree = result.componentMetadata.get(componentFactory.moduleId)?.containsHead ?? false;
@@ -2419,10 +2142,10 @@ async function renderPage(result, componentFactory, props, children, streaming, 
 	}
 	let status = init.status;
 	let statusText = init.statusText;
-	if (route?.route === "/404") {
+	if (route?.route && isRoute404(route.route)) {
 		status = 404;
 		if (statusText === "OK") statusText = "Not Found";
-	} else if (route?.route === "/500") {
+	} else if (route?.route && isRoute500(route.route)) {
 		status = 500;
 		if (statusText === "OK") statusText = "Internal Server Error";
 	}
@@ -2440,7 +2163,7 @@ async function renderPage(result, componentFactory, props, children, streaming, 
 "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_".split("").reduce((v, c) => (v[c.charCodeAt(0)] = c, v), []);
 "-0123456789_".split("").reduce((v, c) => (v[c.charCodeAt(0)] = c, v), []);
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/runtime/server/index.js
+//#region node_modules/astro/dist/runtime/server/index.js
 function spreadAttributes(values = {}, _name, { class: scopedClassName } = {}) {
 	let output = "";
 	if (scopedClassName) if (typeof values.class !== "undefined") values.class += ` ${scopedClassName}`;
@@ -2450,4 +2173,4 @@ function spreadAttributes(values = {}, _name, { class: scopedClassName } = {}) {
 	return markHTMLString(output);
 }
 //#endregion
-export { clientAddressSymbol as A, escape as C, REDIRECT_STATUS_CODES as D, DEFAULT_404_COMPONENT as E, s as F, originPathnameSymbol as M, pipelineSymbol as N, REROUTABLE_STATUS_CODES as O, responseSentSymbol as P, createComponent as S, ASTRO_GENERATOR as T, isRenderInstruction as _, chunkToString as a, renderEndpoint as b, renderSlotToString as c, decodeKey as d, decryptString as f, addAttribute as g, renderHead as h, renderComponent as i, fetchStateSymbol as j, appSymbol as k, isRenderTemplateResult as l, maybeRenderHead as m, renderPage as n, createSlotValueFromString as o, generateCspDigest as p, renderJSX as r, renderSlot as s, spreadAttributes as t, renderTemplate as u, isAstroComponentFactory as v, ASTRO_ERROR_HEADER as w, createAstro as x, unescapeHTML as y };
+export { appSymbol as A, isRoute404 as C, DEFAULT_404_COMPONENT as D, ASTRO_GENERATOR as E, responseSentSymbol as F, fetchStateSymbol as M, originPathnameSymbol as N, REDIRECT_STATUS_CODES as O, pipelineSymbol as P, createComponent as S, ASTRO_ERROR_HEADER as T, isRenderInstruction as _, chunkToString as a, renderEndpoint as b, renderSlotToString as c, decodeKey as d, decryptString as f, addAttribute as g, renderHead as h, renderComponent as i, clientAddressSymbol as j, REROUTABLE_STATUS_CODES as k, isRenderTemplateResult as l, maybeRenderHead as m, renderPage as n, createSlotValueFromString as o, generateCspDigest as p, renderJSX as r, renderSlot as s, spreadAttributes as t, renderTemplate as u, isAstroComponentFactory as v, isRoute500 as w, createAstro as x, unescapeHTML as y };

@@ -1,5 +1,5 @@
-import { $ as AstroError, N as NoImageMetadata, V as RemoteImageNotAllowed, u as FailedToFetchRemoteImageDimensions } from "./errors-data_Sk45W7_X.mjs";
-//#region node_modules/.pnpm/@astrojs+internal-helpers@0.10.0/node_modules/@astrojs/internal-helpers/dist/remote.js
+import { $ as AstroError, N as NoImageMetadata, V as RemoteImageNotAllowed, u as FailedToFetchRemoteImageDimensions } from "./errors-data_sKwIzwfZ.mjs";
+//#region node_modules/@astrojs/internal-helpers/dist/remote.js
 function matchPattern(url, remotePattern) {
 	return matchProtocol(url, remotePattern.protocol) && matchHostname(url, remotePattern.hostname, true) && matchPort(url, remotePattern.port) && matchPathname(url, remotePattern.pathname, true);
 }
@@ -47,7 +47,7 @@ function isRemoteAllowed(src, { domains, remotePatterns }) {
 	return domains.some((domain) => matchHostname(url, domain)) || remotePatterns.some((remotePattern) => matchPattern(url, remotePattern));
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/assets/utils/imageKind.js
+//#region node_modules/astro/dist/assets/utils/imageKind.js
 function isESMImportedImage(src) {
 	return typeof src === "object" || typeof src === "function" && "src" in src;
 }
@@ -62,7 +62,7 @@ async function resolveSrc(src) {
 	return src;
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/assets/utils/vendor/image-size/types/utils.js
+//#region node_modules/astro/dist/assets/utils/vendor/image-size/types/utils.js
 var decoder = new TextDecoder();
 var toUTF8String = (input, start = 0, end = input.length) => decoder.decode(input.slice(start, end));
 var toHexString = (input, start = 0, end = input.length) => input.slice(start, end).reduce((memo, i) => memo + `0${i.toString(16)}`.slice(-2), "");
@@ -106,7 +106,7 @@ function findBox(input, boxName, currentOffset) {
 	}
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/assets/utils/vendor/image-size/types/bmp.js
+//#region node_modules/astro/dist/assets/utils/vendor/image-size/types/bmp.js
 var BMP = {
 	validate: (input) => toUTF8String(input, 0, 2) === "BM",
 	calculate: (input) => ({
@@ -115,7 +115,7 @@ var BMP = {
 	})
 };
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/assets/utils/vendor/image-size/types/ico.js
+//#region node_modules/astro/dist/assets/utils/vendor/image-size/types/ico.js
 var TYPE_ICON = 1;
 var SIZE_HEADER$1 = 6;
 var SIZE_IMAGE_ENTRY = 16;
@@ -151,7 +151,7 @@ var ICO = {
 	}
 };
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/assets/utils/vendor/image-size/types/cur.js
+//#region node_modules/astro/dist/assets/utils/vendor/image-size/types/cur.js
 var TYPE_CURSOR = 2;
 var CUR = {
 	validate(input) {
@@ -163,7 +163,7 @@ var CUR = {
 	calculate: (input) => ICO.calculate(input)
 };
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/assets/utils/vendor/image-size/types/dds.js
+//#region node_modules/astro/dist/assets/utils/vendor/image-size/types/dds.js
 var DDS = {
 	validate: (input) => readUInt32LE(input, 0) === 542327876,
 	calculate: (input) => ({
@@ -172,7 +172,7 @@ var DDS = {
 	})
 };
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/assets/utils/vendor/image-size/types/gif.js
+//#region node_modules/astro/dist/assets/utils/vendor/image-size/types/gif.js
 var gifRegexp = /^GIF8[79]a/;
 var GIF = {
 	validate: (input) => gifRegexp.test(toUTF8String(input, 0, 6)),
@@ -182,7 +182,7 @@ var GIF = {
 	})
 };
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/assets/utils/vendor/image-size/types/heif.js
+//#region node_modules/astro/dist/assets/utils/vendor/image-size/types/heif.js
 var brandMap = {
 	avif: "avif",
 	avis: "avif",
@@ -247,7 +247,7 @@ var HEIF = {
 	}
 };
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/assets/utils/vendor/image-size/types/icns.js
+//#region node_modules/astro/dist/assets/utils/vendor/image-size/types/icns.js
 var SIZE_HEADER = 8;
 var FILE_LENGTH_OFFSET = 4;
 var ENTRY_LENGTH_OFFSET = 4;
@@ -318,7 +318,7 @@ var ICNS = {
 	}
 };
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/assets/utils/vendor/image-size/types/j2c.js
+//#region node_modules/astro/dist/assets/utils/vendor/image-size/types/j2c.js
 var J2C = {
 	validate: (input) => readUInt32BE(input, 0) === 4283432785,
 	calculate: (input) => ({
@@ -327,7 +327,7 @@ var J2C = {
 	})
 };
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/assets/utils/vendor/image-size/types/jp2.js
+//#region node_modules/astro/dist/assets/utils/vendor/image-size/types/jp2.js
 var JP2 = {
 	validate(input) {
 		if (toUTF8String(input, 4, 8) !== "jP  ") return false;
@@ -346,7 +346,7 @@ var JP2 = {
 	}
 };
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/assets/utils/vendor/image-size/types/jpg.js
+//#region node_modules/astro/dist/assets/utils/vendor/image-size/types/jpg.js
 var EXIF_MARKER = "45786966";
 var APP1_DATA_SIZE_BYTES = 2;
 var EXIF_HEADER_BYTES = 6;
@@ -415,7 +415,7 @@ var JPG = {
 	}
 };
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/assets/utils/vendor/image-size/utils/bit-reader.js
+//#region node_modules/astro/dist/assets/utils/vendor/image-size/utils/bit-reader.js
 var BitReader = class {
 	byteOffset = 2;
 	bitOffset = 0;
@@ -453,7 +453,7 @@ var BitReader = class {
 	}
 };
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/assets/utils/vendor/image-size/types/jxl-stream.js
+//#region node_modules/astro/dist/assets/utils/vendor/image-size/types/jxl-stream.js
 function calculateImageDimension(reader, isSmallImage) {
 	if (isSmallImage) return 8 * (1 + reader.getBits(5));
 	const extraBits = [
@@ -492,7 +492,7 @@ var JXLStream = {
 	}
 };
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/assets/utils/vendor/image-size/types/jxl.js
+//#region node_modules/astro/dist/assets/utils/vendor/image-size/types/jxl.js
 function extractCodestream(input) {
 	const jxlcBox = findBox(input, "jxlc", 0);
 	if (jxlcBox) return input.slice(jxlcBox.offset + 8, jxlcBox.offset + jxlcBox.size);
@@ -534,7 +534,7 @@ var JXL = {
 	}
 };
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/assets/utils/vendor/image-size/types/ktx.js
+//#region node_modules/astro/dist/assets/utils/vendor/image-size/types/ktx.js
 var KTX = {
 	validate: (input) => {
 		const signature = toUTF8String(input, 1, 7);
@@ -551,7 +551,7 @@ var KTX = {
 	}
 };
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/assets/utils/vendor/image-size/types/png.js
+//#region node_modules/astro/dist/assets/utils/vendor/image-size/types/png.js
 var pngSignature = "PNG\r\n\n";
 var pngImageHeaderChunkName = "IHDR";
 var pngFriedChunkName = "CgBI";
@@ -577,7 +577,7 @@ var PNG = {
 	}
 };
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/assets/utils/vendor/image-size/types/pnm.js
+//#region node_modules/astro/dist/assets/utils/vendor/image-size/types/pnm.js
 var PNMTypes = {
 	P1: "pbm/ascii",
 	P2: "pgm/ascii",
@@ -628,7 +628,7 @@ var PNM = {
 	}
 };
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/assets/utils/vendor/image-size/types/psd.js
+//#region node_modules/astro/dist/assets/utils/vendor/image-size/types/psd.js
 var PSD = {
 	validate: (input) => toUTF8String(input, 0, 4) === "8BPS",
 	calculate: (input) => ({
@@ -637,7 +637,7 @@ var PSD = {
 	})
 };
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/assets/utils/vendor/image-size/types/svg.js
+//#region node_modules/astro/dist/assets/utils/vendor/image-size/types/svg.js
 var svgReg = /<svg\s([^>"']|"[^"]*"|'[^']*')*>/;
 var extractorRegExps = {
 	height: /\sheight=(['"])([^%]+?)\1/,
@@ -714,7 +714,7 @@ var SVG = {
 	}
 };
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/assets/utils/vendor/image-size/types/tga.js
+//#region node_modules/astro/dist/assets/utils/vendor/image-size/types/tga.js
 var TGA = {
 	validate(input) {
 		return readUInt16LE(input, 0) === 0 && readUInt16LE(input, 4) === 0;
@@ -727,7 +727,7 @@ var TGA = {
 	}
 };
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/assets/utils/vendor/image-size/types/tiff.js
+//#region node_modules/astro/dist/assets/utils/vendor/image-size/types/tiff.js
 var CONSTANTS = {
 	TAG: {
 		WIDTH: 256,
@@ -821,7 +821,7 @@ var TIFF = {
 	}
 };
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/assets/utils/vendor/image-size/types/webp.js
+//#region node_modules/astro/dist/assets/utils/vendor/image-size/types/webp.js
 function calculateExtended(input) {
 	return {
 		height: 1 + readUInt24LE(input, 7),
@@ -841,7 +841,7 @@ function calculateLossy(input) {
 	};
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/assets/utils/vendor/image-size/types/index.js
+//#region node_modules/astro/dist/assets/utils/vendor/image-size/types/index.js
 var typeHandlers = /* @__PURE__ */ new Map([
 	["bmp", BMP],
 	["cur", CUR],
@@ -888,7 +888,7 @@ var typeHandlers = /* @__PURE__ */ new Map([
 ]);
 var types = Array.from(typeHandlers.keys());
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/assets/utils/vendor/image-size/detector.js
+//#region node_modules/astro/dist/assets/utils/vendor/image-size/detector.js
 var firstBytes = /* @__PURE__ */ new Map([
 	[0, "heif"],
 	[56, "psd"],
@@ -909,7 +909,7 @@ function detector(input) {
 	return types.find((imageType) => typeHandlers.get(imageType).validate(input));
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/assets/utils/vendor/image-size/lookup.js
+//#region node_modules/astro/dist/assets/utils/vendor/image-size/lookup.js
 function lookup(input) {
 	const type = detector(input);
 	if (typeof type !== "undefined") {
@@ -922,7 +922,7 @@ function lookup(input) {
 	throw new TypeError("unsupported file type: " + type);
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/assets/utils/metadata.js
+//#region node_modules/astro/dist/assets/utils/metadata.js
 async function imageMetadata(data, src) {
 	let result;
 	try {
@@ -947,7 +947,7 @@ async function imageMetadata(data, src) {
 	};
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/assets/utils/redirectValidation.js
+//#region node_modules/astro/dist/assets/utils/redirectValidation.js
 async function fetchWithRedirects(options) {
 	const { url, headers, imageConfig, fetchFn = globalThis.fetch, redirectLimit = 10, onMaxRedirectsExceeded = (_u) => /* @__PURE__ */ new Error("Maximum redirect depth exceeded"), onMissingLocationHeader = (_s, _u) => /* @__PURE__ */ new Error(`Redirect response ${_s} missing Location header`), onDisallowedRedirect = (_current, _target) => /* @__PURE__ */ new Error(`The image at ${_current} redirected to ${_target}, which is not an allowed remote location.`) } = options;
 	if (redirectLimit <= 0) throw onMaxRedirectsExceeded(typeof url === "string" ? url : url.toString());
@@ -981,7 +981,7 @@ async function fetchWithRedirects(options) {
 	return res;
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/assets/utils/remoteProbe.js
+//#region node_modules/astro/dist/assets/utils/remoteProbe.js
 async function inferRemoteSize(url, imageConfig) {
 	if (!URL.canParse(url)) throw new AstroError({
 		...FailedToFetchRemoteImageDimensions,
@@ -1061,7 +1061,7 @@ async function inferRemoteSize(url, imageConfig) {
 	});
 }
 //#endregion
-//#region node_modules/.pnpm/@astrojs+internal-helpers@0.10.0/node_modules/@astrojs/internal-helpers/dist/path.js
+//#region node_modules/@astrojs/internal-helpers/dist/path.js
 function appendForwardSlash(path) {
 	return path.endsWith("/") ? path : path + "/";
 }

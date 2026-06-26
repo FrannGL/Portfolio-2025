@@ -1,2272 +1,20 @@
-import { i as __require, n as __esmMin, r as __exportAll, t as __commonJSMin } from "./chunks/rolldown-runtime_CE-6LUnI.mjs";
-import { $ as AstroError, B as PrerenderDynamicEndpointPathCollide, D as MiddlewareNotAResponse, E as MiddlewareNoDataOrNextCalled, G as SessionStorageInitError, H as ReservedSlotName, I as NoMatchingStaticPathFound, J as UnableToLoadLogger, K as SessionStorageSaveError, Q as i18nNoLocaleFoundInPath, R as PageNumberParamNotFound, T as LocalsReassigned, U as ResponseSentError, W as RewriteWithBodyUsed, a as ClientAddressNotAvailable, b as InvalidGetStaticPathsEntry, g as GetStaticPathsRequired, h as GetStaticPathsInvalidRouteParam, i as CacheNotEnabled, m as GetStaticPathsExpectedParams, n as ActionsReturnedInvalidDataError, p as ForbiddenRewrite, q as StaticClientAddressNotAvailable, r as AstroResponseHeadersReassigned, t as ActionNotFoundError, w as LocalsNotAnObject, x as InvalidGetStaticPathsReturn, z as PrerenderClientAddressNotAvailable } from "./chunks/errors-data_Sk45W7_X.mjs";
-import { C as matchPattern, a as fileExtension, d as removeLeadingForwardSlash, h as trimSlashes, i as collapseDuplicateTrailingSlashes, l as joinPaths, m as slash, n as collapseDuplicateLeadingSlashes, o as hasFileExtension, p as removeTrailingForwardSlash, r as collapseDuplicateSlashes, s as isInternalPath, t as appendForwardSlash, u as prependForwardSlash } from "./chunks/path_Bwv0-iyy.mjs";
-import { A as clientAddressSymbol, C as escape, D as REDIRECT_STATUS_CODES, E as DEFAULT_404_COMPONENT, F as s, M as originPathnameSymbol, N as pipelineSymbol, O as REROUTABLE_STATUS_CODES, P as responseSentSymbol$1, T as ASTRO_GENERATOR, _ as isRenderInstruction, a as chunkToString, b as renderEndpoint, c as renderSlotToString, d as decodeKey, f as decryptString, i as renderComponent, j as fetchStateSymbol, k as appSymbol, l as isRenderTemplateResult, n as renderPage, o as createSlotValueFromString, p as generateCspDigest, r as renderJSX, u as renderTemplate, v as isAstroComponentFactory, w as ASTRO_ERROR_HEADER } from "./chunks/server_DSV3oLON.mjs";
+import { $ as AstroError, B as PrerenderDynamicEndpointPathCollide, D as MiddlewareNotAResponse, E as MiddlewareNoDataOrNextCalled, G as SessionStorageInitError, H as ReservedSlotName, I as NoMatchingStaticPathFound, J as UnableToLoadLogger, K as SessionStorageSaveError, Q as i18nNoLocaleFoundInPath, R as PageNumberParamNotFound, T as LocalsReassigned, U as ResponseSentError, W as RewriteWithBodyUsed, a as ClientAddressNotAvailable, b as InvalidGetStaticPathsEntry, g as GetStaticPathsRequired, h as GetStaticPathsInvalidRouteParam, i as CacheNotEnabled, m as GetStaticPathsExpectedParams, n as ActionsReturnedInvalidDataError, p as ForbiddenRewrite, q as StaticClientAddressNotAvailable, r as AstroResponseHeadersReassigned, t as ActionNotFoundError, w as LocalsNotAnObject, x as InvalidGetStaticPathsReturn, z as PrerenderClientAddressNotAvailable } from "./chunks/errors-data_sKwIzwfZ.mjs";
+import { C as matchPattern, a as fileExtension, d as removeLeadingForwardSlash, h as trimSlashes, i as collapseDuplicateTrailingSlashes, l as joinPaths, m as slash, n as collapseDuplicateLeadingSlashes, o as hasFileExtension, p as removeTrailingForwardSlash, r as collapseDuplicateSlashes, s as isInternalPath, t as appendForwardSlash, u as prependForwardSlash } from "./chunks/path_Cvh8ipoD.mjs";
+import { A as appSymbol, C as isRoute404, D as DEFAULT_404_COMPONENT, E as ASTRO_GENERATOR, F as responseSentSymbol$1, M as fetchStateSymbol, N as originPathnameSymbol, O as REDIRECT_STATUS_CODES, P as pipelineSymbol, T as ASTRO_ERROR_HEADER, _ as isRenderInstruction, a as chunkToString, b as renderEndpoint, c as renderSlotToString, d as decodeKey, f as decryptString, i as renderComponent, j as clientAddressSymbol, k as REROUTABLE_STATUS_CODES, l as isRenderTemplateResult, n as renderPage, o as createSlotValueFromString, p as generateCspDigest, r as renderJSX, u as renderTemplate, v as isAstroComponentFactory, w as isRoute500 } from "./chunks/server_C_GE6gR_.mjs";
 import nodePath from "node:path";
+import "@vercel/routing-utils";
+import colors from "piccolore";
+import { parse, stringify, unflatten } from "devalue";
 import "es-module-lexer";
+import { parse as parse$1, serialize } from "cookie";
+import { escape } from "html-escaper";
+import { createStorage } from "unstorage";
 import React, { createElement, memo } from "react";
 import ReactDOM from "react-dom/server";
 import picomatch from "picomatch";
-//#endregion
-//#region node_modules/.pnpm/path-to-regexp@6.1.0/node_modules/path-to-regexp/dist.es2015/index.js
-var dist_es2015_exports$1 = /* @__PURE__ */ __exportAll({
-	compile: () => compile$1,
-	match: () => match$1,
-	parse: () => parse$3,
-	pathToRegexp: () => pathToRegexp$1,
-	regexpToFunction: () => regexpToFunction$1,
-	tokensToFunction: () => tokensToFunction$1,
-	tokensToRegexp: () => tokensToRegexp$1
-});
-/**
-* Tokenize input string.
-*/
-function lexer$1(str) {
-	var tokens = [];
-	var i = 0;
-	while (i < str.length) {
-		var char = str[i];
-		if (char === "*" || char === "+" || char === "?") {
-			tokens.push({
-				type: "MODIFIER",
-				index: i,
-				value: str[i++]
-			});
-			continue;
-		}
-		if (char === "\\") {
-			tokens.push({
-				type: "ESCAPED_CHAR",
-				index: i++,
-				value: str[i++]
-			});
-			continue;
-		}
-		if (char === "{") {
-			tokens.push({
-				type: "OPEN",
-				index: i,
-				value: str[i++]
-			});
-			continue;
-		}
-		if (char === "}") {
-			tokens.push({
-				type: "CLOSE",
-				index: i,
-				value: str[i++]
-			});
-			continue;
-		}
-		if (char === ":") {
-			var name = "";
-			var j = i + 1;
-			while (j < str.length) {
-				var code = str.charCodeAt(j);
-				if (code >= 48 && code <= 57 || code >= 65 && code <= 90 || code >= 97 && code <= 122 || code === 95) {
-					name += str[j++];
-					continue;
-				}
-				break;
-			}
-			if (!name) throw new TypeError("Missing parameter name at " + i);
-			tokens.push({
-				type: "NAME",
-				index: i,
-				value: name
-			});
-			i = j;
-			continue;
-		}
-		if (char === "(") {
-			var count = 1;
-			var pattern = "";
-			var j = i + 1;
-			if (str[j] === "?") throw new TypeError("Pattern cannot start with \"?\" at " + j);
-			while (j < str.length) {
-				if (str[j] === "\\") {
-					pattern += str[j++] + str[j++];
-					continue;
-				}
-				if (str[j] === ")") {
-					count--;
-					if (count === 0) {
-						j++;
-						break;
-					}
-				} else if (str[j] === "(") {
-					count++;
-					if (str[j + 1] !== "?") throw new TypeError("Capturing groups are not allowed at " + j);
-				}
-				pattern += str[j++];
-			}
-			if (count) throw new TypeError("Unbalanced pattern at " + i);
-			if (!pattern) throw new TypeError("Missing pattern at " + i);
-			tokens.push({
-				type: "PATTERN",
-				index: i,
-				value: pattern
-			});
-			i = j;
-			continue;
-		}
-		tokens.push({
-			type: "CHAR",
-			index: i,
-			value: str[i++]
-		});
-	}
-	tokens.push({
-		type: "END",
-		index: i,
-		value: ""
-	});
-	return tokens;
-}
-/**
-* Parse a string for the raw tokens.
-*/
-function parse$3(str, options) {
-	if (options === void 0) options = {};
-	var tokens = lexer$1(str);
-	var _a = options.prefixes, prefixes = _a === void 0 ? "./" : _a;
-	var defaultPattern = "[^" + escapeString$1(options.delimiter || "/#?") + "]+?";
-	var result = [];
-	var key = 0;
-	var i = 0;
-	var path = "";
-	var tryConsume = function(type) {
-		if (i < tokens.length && tokens[i].type === type) return tokens[i++].value;
-	};
-	var mustConsume = function(type) {
-		var value = tryConsume(type);
-		if (value !== void 0) return value;
-		var _a = tokens[i], nextType = _a.type, index = _a.index;
-		throw new TypeError("Unexpected " + nextType + " at " + index + ", expected " + type);
-	};
-	var consumeText = function() {
-		var result = "";
-		var value;
-		while (value = tryConsume("CHAR") || tryConsume("ESCAPED_CHAR")) result += value;
-		return result;
-	};
-	while (i < tokens.length) {
-		var char = tryConsume("CHAR");
-		var name = tryConsume("NAME");
-		var pattern = tryConsume("PATTERN");
-		if (name || pattern) {
-			var prefix = char || "";
-			if (prefixes.indexOf(prefix) === -1) {
-				path += prefix;
-				prefix = "";
-			}
-			if (path) {
-				result.push(path);
-				path = "";
-			}
-			result.push({
-				name: name || key++,
-				prefix,
-				suffix: "",
-				pattern: pattern || defaultPattern,
-				modifier: tryConsume("MODIFIER") || ""
-			});
-			continue;
-		}
-		var value = char || tryConsume("ESCAPED_CHAR");
-		if (value) {
-			path += value;
-			continue;
-		}
-		if (path) {
-			result.push(path);
-			path = "";
-		}
-		if (tryConsume("OPEN")) {
-			var prefix = consumeText();
-			var name_1 = tryConsume("NAME") || "";
-			var pattern_1 = tryConsume("PATTERN") || "";
-			var suffix = consumeText();
-			mustConsume("CLOSE");
-			result.push({
-				name: name_1 || (pattern_1 ? key++ : ""),
-				pattern: name_1 && !pattern_1 ? defaultPattern : pattern_1,
-				prefix,
-				suffix,
-				modifier: tryConsume("MODIFIER") || ""
-			});
-			continue;
-		}
-		mustConsume("END");
-	}
-	return result;
-}
-/**
-* Compile a string to a template function for the path.
-*/
-function compile$1(str, options) {
-	return tokensToFunction$1(parse$3(str, options), options);
-}
-/**
-* Expose a method for transforming tokens into the path function.
-*/
-function tokensToFunction$1(tokens, options) {
-	if (options === void 0) options = {};
-	var reFlags = flags$1(options);
-	var _a = options.encode, encode = _a === void 0 ? function(x) {
-		return x;
-	} : _a, _b = options.validate, validate = _b === void 0 ? true : _b;
-	var matches = tokens.map(function(token) {
-		if (typeof token === "object") return new RegExp("^(?:" + token.pattern + ")$", reFlags);
-	});
-	return function(data) {
-		var path = "";
-		for (var i = 0; i < tokens.length; i++) {
-			var token = tokens[i];
-			if (typeof token === "string") {
-				path += token;
-				continue;
-			}
-			var value = data ? data[token.name] : void 0;
-			var optional = token.modifier === "?" || token.modifier === "*";
-			var repeat = token.modifier === "*" || token.modifier === "+";
-			if (Array.isArray(value)) {
-				if (!repeat) throw new TypeError("Expected \"" + token.name + "\" to not repeat, but got an array");
-				if (value.length === 0) {
-					if (optional) continue;
-					throw new TypeError("Expected \"" + token.name + "\" to not be empty");
-				}
-				for (var j = 0; j < value.length; j++) {
-					var segment = encode(value[j], token);
-					if (validate && !matches[i].test(segment)) throw new TypeError("Expected all \"" + token.name + "\" to match \"" + token.pattern + "\", but got \"" + segment + "\"");
-					path += token.prefix + segment + token.suffix;
-				}
-				continue;
-			}
-			if (typeof value === "string" || typeof value === "number") {
-				var segment = encode(String(value), token);
-				if (validate && !matches[i].test(segment)) throw new TypeError("Expected \"" + token.name + "\" to match \"" + token.pattern + "\", but got \"" + segment + "\"");
-				path += token.prefix + segment + token.suffix;
-				continue;
-			}
-			if (optional) continue;
-			var typeOfMessage = repeat ? "an array" : "a string";
-			throw new TypeError("Expected \"" + token.name + "\" to be " + typeOfMessage);
-		}
-		return path;
-	};
-}
-/**
-* Create path match function from `path-to-regexp` spec.
-*/
-function match$1(str, options) {
-	var keys = [];
-	return regexpToFunction$1(pathToRegexp$1(str, keys, options), keys, options);
-}
-/**
-* Create a path match function from `path-to-regexp` output.
-*/
-function regexpToFunction$1(re, keys, options) {
-	if (options === void 0) options = {};
-	var _a = options.decode, decode = _a === void 0 ? function(x) {
-		return x;
-	} : _a;
-	return function(pathname) {
-		var m = re.exec(pathname);
-		if (!m) return false;
-		var path = m[0], index = m.index;
-		var params = Object.create(null);
-		var _loop_1 = function(i) {
-			if (m[i] === void 0) return "continue";
-			var key = keys[i - 1];
-			if (key.modifier === "*" || key.modifier === "+") params[key.name] = m[i].split(key.prefix + key.suffix).map(function(value) {
-				return decode(value, key);
-			});
-			else params[key.name] = decode(m[i], key);
-		};
-		for (var i = 1; i < m.length; i++) _loop_1(i);
-		return {
-			path,
-			index,
-			params
-		};
-	};
-}
-/**
-* Escape a regular expression string.
-*/
-function escapeString$1(str) {
-	return str.replace(/([.+*?=^!:${}()[\]|/\\])/g, "\\$1");
-}
-/**
-* Get the flags for a regexp from the options.
-*/
-function flags$1(options) {
-	return options && options.sensitive ? "" : "i";
-}
-/**
-* Pull out keys from a regexp.
-*/
-function regexpToRegexp$1(path, keys) {
-	if (!keys) return path;
-	var groups = path.source.match(/\((?!\?)/g);
-	if (groups) for (var i = 0; i < groups.length; i++) keys.push({
-		name: i,
-		prefix: "",
-		suffix: "",
-		modifier: "",
-		pattern: ""
-	});
-	return path;
-}
-/**
-* Transform an array into a regexp.
-*/
-function arrayToRegexp$1(paths, keys, options) {
-	var parts = paths.map(function(path) {
-		return pathToRegexp$1(path, keys, options).source;
-	});
-	return new RegExp("(?:" + parts.join("|") + ")", flags$1(options));
-}
-/**
-* Create a path regexp from string input.
-*/
-function stringToRegexp$1(path, keys, options) {
-	return tokensToRegexp$1(parse$3(path, options), keys, options);
-}
-/**
-* Expose a function for taking tokens and returning a RegExp.
-*/
-function tokensToRegexp$1(tokens, keys, options) {
-	if (options === void 0) options = {};
-	var _a = options.strict, strict = _a === void 0 ? false : _a, _b = options.start, start = _b === void 0 ? true : _b, _c = options.end, end = _c === void 0 ? true : _c, _d = options.encode, encode = _d === void 0 ? function(x) {
-		return x;
-	} : _d;
-	var endsWith = "[" + escapeString$1(options.endsWith || "") + "]|$";
-	var delimiter = "[" + escapeString$1(options.delimiter || "/#?") + "]";
-	var route = start ? "^" : "";
-	for (var _i = 0, tokens_1 = tokens; _i < tokens_1.length; _i++) {
-		var token = tokens_1[_i];
-		if (typeof token === "string") route += escapeString$1(encode(token));
-		else {
-			var prefix = escapeString$1(encode(token.prefix));
-			var suffix = escapeString$1(encode(token.suffix));
-			if (token.pattern) {
-				if (keys) keys.push(token);
-				if (prefix || suffix) if (token.modifier === "+" || token.modifier === "*") {
-					var mod = token.modifier === "*" ? "?" : "";
-					route += "(?:" + prefix + "((?:" + token.pattern + ")(?:" + suffix + prefix + "(?:" + token.pattern + "))*)" + suffix + ")" + mod;
-				} else route += "(?:" + prefix + "(" + token.pattern + ")" + suffix + ")" + token.modifier;
-				else route += "(" + token.pattern + ")" + token.modifier;
-			} else route += "(?:" + prefix + suffix + ")" + token.modifier;
-		}
-	}
-	if (end) {
-		if (!strict) route += delimiter + "?";
-		route += !options.endsWith ? "$" : "(?=" + endsWith + ")";
-	} else {
-		var endToken = tokens[tokens.length - 1];
-		var isEndDelimited = typeof endToken === "string" ? delimiter.indexOf(endToken[endToken.length - 1]) > -1 : endToken === void 0;
-		if (!strict) route += "(?:" + delimiter + "(?=" + endsWith + "))?";
-		if (!isEndDelimited) route += "(?=" + delimiter + "|" + endsWith + ")";
-	}
-	return new RegExp(route, flags$1(options));
-}
-/**
-* Normalize the given path string, returning a regular expression.
-*
-* An empty array can be passed in for the keys, which will hold the
-* placeholder key descriptions. For example, using `/user/:id`, `keys` will
-* contain `[{ name: 'id', delimiter: '/', optional: false, repeat: false }]`.
-*/
-function pathToRegexp$1(path, keys, options) {
-	if (path instanceof RegExp) return regexpToRegexp$1(path, keys);
-	if (Array.isArray(path)) return arrayToRegexp$1(path, keys, options);
-	return stringToRegexp$1(path, keys, options);
-}
-__esmMin((() => {}));
-//#endregion
-//#region node_modules/.pnpm/path-to-regexp@6.3.0/node_modules/path-to-regexp/dist.es2015/index.js
-var dist_es2015_exports = /* @__PURE__ */ __exportAll({
-	compile: () => compile,
-	match: () => match,
-	parse: () => parse$2,
-	pathToRegexp: () => pathToRegexp,
-	regexpToFunction: () => regexpToFunction,
-	tokensToFunction: () => tokensToFunction,
-	tokensToRegexp: () => tokensToRegexp
-});
-/**
-* Tokenize input string.
-*/
-function lexer(str) {
-	var tokens = [];
-	var i = 0;
-	while (i < str.length) {
-		var char = str[i];
-		if (char === "*" || char === "+" || char === "?") {
-			tokens.push({
-				type: "MODIFIER",
-				index: i,
-				value: str[i++]
-			});
-			continue;
-		}
-		if (char === "\\") {
-			tokens.push({
-				type: "ESCAPED_CHAR",
-				index: i++,
-				value: str[i++]
-			});
-			continue;
-		}
-		if (char === "{") {
-			tokens.push({
-				type: "OPEN",
-				index: i,
-				value: str[i++]
-			});
-			continue;
-		}
-		if (char === "}") {
-			tokens.push({
-				type: "CLOSE",
-				index: i,
-				value: str[i++]
-			});
-			continue;
-		}
-		if (char === ":") {
-			var name = "";
-			var j = i + 1;
-			while (j < str.length) {
-				var code = str.charCodeAt(j);
-				if (code >= 48 && code <= 57 || code >= 65 && code <= 90 || code >= 97 && code <= 122 || code === 95) {
-					name += str[j++];
-					continue;
-				}
-				break;
-			}
-			if (!name) throw new TypeError("Missing parameter name at ".concat(i));
-			tokens.push({
-				type: "NAME",
-				index: i,
-				value: name
-			});
-			i = j;
-			continue;
-		}
-		if (char === "(") {
-			var count = 1;
-			var pattern = "";
-			var j = i + 1;
-			if (str[j] === "?") throw new TypeError("Pattern cannot start with \"?\" at ".concat(j));
-			while (j < str.length) {
-				if (str[j] === "\\") {
-					pattern += str[j++] + str[j++];
-					continue;
-				}
-				if (str[j] === ")") {
-					count--;
-					if (count === 0) {
-						j++;
-						break;
-					}
-				} else if (str[j] === "(") {
-					count++;
-					if (str[j + 1] !== "?") throw new TypeError("Capturing groups are not allowed at ".concat(j));
-				}
-				pattern += str[j++];
-			}
-			if (count) throw new TypeError("Unbalanced pattern at ".concat(i));
-			if (!pattern) throw new TypeError("Missing pattern at ".concat(i));
-			tokens.push({
-				type: "PATTERN",
-				index: i,
-				value: pattern
-			});
-			i = j;
-			continue;
-		}
-		tokens.push({
-			type: "CHAR",
-			index: i,
-			value: str[i++]
-		});
-	}
-	tokens.push({
-		type: "END",
-		index: i,
-		value: ""
-	});
-	return tokens;
-}
-/**
-* Parse a string for the raw tokens.
-*/
-function parse$2(str, options) {
-	if (options === void 0) options = {};
-	var tokens = lexer(str);
-	var _a = options.prefixes, prefixes = _a === void 0 ? "./" : _a, _b = options.delimiter, delimiter = _b === void 0 ? "/#?" : _b;
-	var result = [];
-	var key = 0;
-	var i = 0;
-	var path = "";
-	var tryConsume = function(type) {
-		if (i < tokens.length && tokens[i].type === type) return tokens[i++].value;
-	};
-	var mustConsume = function(type) {
-		var value = tryConsume(type);
-		if (value !== void 0) return value;
-		var _a = tokens[i], nextType = _a.type, index = _a.index;
-		throw new TypeError("Unexpected ".concat(nextType, " at ").concat(index, ", expected ").concat(type));
-	};
-	var consumeText = function() {
-		var result = "";
-		var value;
-		while (value = tryConsume("CHAR") || tryConsume("ESCAPED_CHAR")) result += value;
-		return result;
-	};
-	var isSafe = function(value) {
-		for (var _i = 0, delimiter_1 = delimiter; _i < delimiter_1.length; _i++) {
-			var char = delimiter_1[_i];
-			if (value.indexOf(char) > -1) return true;
-		}
-		return false;
-	};
-	var safePattern = function(prefix) {
-		var prev = result[result.length - 1];
-		var prevText = prefix || (prev && typeof prev === "string" ? prev : "");
-		if (prev && !prevText) throw new TypeError("Must have text between two parameters, missing text after \"".concat(prev.name, "\""));
-		if (!prevText || isSafe(prevText)) return "[^".concat(escapeString(delimiter), "]+?");
-		return "(?:(?!".concat(escapeString(prevText), ")[^").concat(escapeString(delimiter), "])+?");
-	};
-	while (i < tokens.length) {
-		var char = tryConsume("CHAR");
-		var name = tryConsume("NAME");
-		var pattern = tryConsume("PATTERN");
-		if (name || pattern) {
-			var prefix = char || "";
-			if (prefixes.indexOf(prefix) === -1) {
-				path += prefix;
-				prefix = "";
-			}
-			if (path) {
-				result.push(path);
-				path = "";
-			}
-			result.push({
-				name: name || key++,
-				prefix,
-				suffix: "",
-				pattern: pattern || safePattern(prefix),
-				modifier: tryConsume("MODIFIER") || ""
-			});
-			continue;
-		}
-		var value = char || tryConsume("ESCAPED_CHAR");
-		if (value) {
-			path += value;
-			continue;
-		}
-		if (path) {
-			result.push(path);
-			path = "";
-		}
-		if (tryConsume("OPEN")) {
-			var prefix = consumeText();
-			var name_1 = tryConsume("NAME") || "";
-			var pattern_1 = tryConsume("PATTERN") || "";
-			var suffix = consumeText();
-			mustConsume("CLOSE");
-			result.push({
-				name: name_1 || (pattern_1 ? key++ : ""),
-				pattern: name_1 && !pattern_1 ? safePattern(prefix) : pattern_1,
-				prefix,
-				suffix,
-				modifier: tryConsume("MODIFIER") || ""
-			});
-			continue;
-		}
-		mustConsume("END");
-	}
-	return result;
-}
-/**
-* Compile a string to a template function for the path.
-*/
-function compile(str, options) {
-	return tokensToFunction(parse$2(str, options), options);
-}
-/**
-* Expose a method for transforming tokens into the path function.
-*/
-function tokensToFunction(tokens, options) {
-	if (options === void 0) options = {};
-	var reFlags = flags(options);
-	var _a = options.encode, encode = _a === void 0 ? function(x) {
-		return x;
-	} : _a, _b = options.validate, validate = _b === void 0 ? true : _b;
-	var matches = tokens.map(function(token) {
-		if (typeof token === "object") return new RegExp("^(?:".concat(token.pattern, ")$"), reFlags);
-	});
-	return function(data) {
-		var path = "";
-		for (var i = 0; i < tokens.length; i++) {
-			var token = tokens[i];
-			if (typeof token === "string") {
-				path += token;
-				continue;
-			}
-			var value = data ? data[token.name] : void 0;
-			var optional = token.modifier === "?" || token.modifier === "*";
-			var repeat = token.modifier === "*" || token.modifier === "+";
-			if (Array.isArray(value)) {
-				if (!repeat) throw new TypeError("Expected \"".concat(token.name, "\" to not repeat, but got an array"));
-				if (value.length === 0) {
-					if (optional) continue;
-					throw new TypeError("Expected \"".concat(token.name, "\" to not be empty"));
-				}
-				for (var j = 0; j < value.length; j++) {
-					var segment = encode(value[j], token);
-					if (validate && !matches[i].test(segment)) throw new TypeError("Expected all \"".concat(token.name, "\" to match \"").concat(token.pattern, "\", but got \"").concat(segment, "\""));
-					path += token.prefix + segment + token.suffix;
-				}
-				continue;
-			}
-			if (typeof value === "string" || typeof value === "number") {
-				var segment = encode(String(value), token);
-				if (validate && !matches[i].test(segment)) throw new TypeError("Expected \"".concat(token.name, "\" to match \"").concat(token.pattern, "\", but got \"").concat(segment, "\""));
-				path += token.prefix + segment + token.suffix;
-				continue;
-			}
-			if (optional) continue;
-			var typeOfMessage = repeat ? "an array" : "a string";
-			throw new TypeError("Expected \"".concat(token.name, "\" to be ").concat(typeOfMessage));
-		}
-		return path;
-	};
-}
-/**
-* Create path match function from `path-to-regexp` spec.
-*/
-function match(str, options) {
-	var keys = [];
-	return regexpToFunction(pathToRegexp(str, keys, options), keys, options);
-}
-/**
-* Create a path match function from `path-to-regexp` output.
-*/
-function regexpToFunction(re, keys, options) {
-	if (options === void 0) options = {};
-	var _a = options.decode, decode = _a === void 0 ? function(x) {
-		return x;
-	} : _a;
-	return function(pathname) {
-		var m = re.exec(pathname);
-		if (!m) return false;
-		var path = m[0], index = m.index;
-		var params = Object.create(null);
-		var _loop_1 = function(i) {
-			if (m[i] === void 0) return "continue";
-			var key = keys[i - 1];
-			if (key.modifier === "*" || key.modifier === "+") params[key.name] = m[i].split(key.prefix + key.suffix).map(function(value) {
-				return decode(value, key);
-			});
-			else params[key.name] = decode(m[i], key);
-		};
-		for (var i = 1; i < m.length; i++) _loop_1(i);
-		return {
-			path,
-			index,
-			params
-		};
-	};
-}
-/**
-* Escape a regular expression string.
-*/
-function escapeString(str) {
-	return str.replace(/([.+*?=^!:${}()[\]|/\\])/g, "\\$1");
-}
-/**
-* Get the flags for a regexp from the options.
-*/
-function flags(options) {
-	return options && options.sensitive ? "" : "i";
-}
-/**
-* Pull out keys from a regexp.
-*/
-function regexpToRegexp(path, keys) {
-	if (!keys) return path;
-	var groupsRegex = /\((?:\?<(.*?)>)?(?!\?)/g;
-	var index = 0;
-	var execResult = groupsRegex.exec(path.source);
-	while (execResult) {
-		keys.push({
-			name: execResult[1] || index++,
-			prefix: "",
-			suffix: "",
-			modifier: "",
-			pattern: ""
-		});
-		execResult = groupsRegex.exec(path.source);
-	}
-	return path;
-}
-/**
-* Transform an array into a regexp.
-*/
-function arrayToRegexp(paths, keys, options) {
-	var parts = paths.map(function(path) {
-		return pathToRegexp(path, keys, options).source;
-	});
-	return new RegExp("(?:".concat(parts.join("|"), ")"), flags(options));
-}
-/**
-* Create a path regexp from string input.
-*/
-function stringToRegexp(path, keys, options) {
-	return tokensToRegexp(parse$2(path, options), keys, options);
-}
-/**
-* Expose a function for taking tokens and returning a RegExp.
-*/
-function tokensToRegexp(tokens, keys, options) {
-	if (options === void 0) options = {};
-	var _a = options.strict, strict = _a === void 0 ? false : _a, _b = options.start, start = _b === void 0 ? true : _b, _c = options.end, end = _c === void 0 ? true : _c, _d = options.encode, encode = _d === void 0 ? function(x) {
-		return x;
-	} : _d, _e = options.delimiter, delimiter = _e === void 0 ? "/#?" : _e, _f = options.endsWith, endsWith = _f === void 0 ? "" : _f;
-	var endsWithRe = "[".concat(escapeString(endsWith), "]|$");
-	var delimiterRe = "[".concat(escapeString(delimiter), "]");
-	var route = start ? "^" : "";
-	for (var _i = 0, tokens_1 = tokens; _i < tokens_1.length; _i++) {
-		var token = tokens_1[_i];
-		if (typeof token === "string") route += escapeString(encode(token));
-		else {
-			var prefix = escapeString(encode(token.prefix));
-			var suffix = escapeString(encode(token.suffix));
-			if (token.pattern) {
-				if (keys) keys.push(token);
-				if (prefix || suffix) if (token.modifier === "+" || token.modifier === "*") {
-					var mod = token.modifier === "*" ? "?" : "";
-					route += "(?:".concat(prefix, "((?:").concat(token.pattern, ")(?:").concat(suffix).concat(prefix, "(?:").concat(token.pattern, "))*)").concat(suffix, ")").concat(mod);
-				} else route += "(?:".concat(prefix, "(").concat(token.pattern, ")").concat(suffix, ")").concat(token.modifier);
-				else {
-					if (token.modifier === "+" || token.modifier === "*") throw new TypeError("Can not repeat \"".concat(token.name, "\" without a prefix and suffix"));
-					route += "(".concat(token.pattern, ")").concat(token.modifier);
-				}
-			} else route += "(?:".concat(prefix).concat(suffix, ")").concat(token.modifier);
-		}
-	}
-	if (end) {
-		if (!strict) route += "".concat(delimiterRe, "?");
-		route += !options.endsWith ? "$" : "(?=".concat(endsWithRe, ")");
-	} else {
-		var endToken = tokens[tokens.length - 1];
-		var isEndDelimited = typeof endToken === "string" ? delimiterRe.indexOf(endToken[endToken.length - 1]) > -1 : endToken === void 0;
-		if (!strict) route += "(?:".concat(delimiterRe, "(?=").concat(endsWithRe, "))?");
-		if (!isEndDelimited) route += "(?=".concat(delimiterRe, "|").concat(endsWithRe, ")");
-	}
-	return new RegExp(route, flags(options));
-}
-/**
-* Normalize the given path string, returning a regular expression.
-*
-* An empty array can be passed in for the keys, which will hold the
-* placeholder key descriptions. For example, using `/user/:id`, `keys` will
-* contain `[{ name: 'id', delimiter: '/', optional: false, repeat: false }]`.
-*/
-function pathToRegexp(path, keys, options) {
-	if (path instanceof RegExp) return regexpToRegexp(path, keys);
-	if (Array.isArray(path)) return arrayToRegexp(path, keys, options);
-	return stringToRegexp(path, keys, options);
-}
-__esmMin((() => {}));
-//#endregion
-//#region node_modules/.pnpm/@vercel+routing-utils@5.3.3/node_modules/@vercel/routing-utils/dist/superstatic.js
-var require_superstatic = /* @__PURE__ */ __commonJSMin(((exports, module) => {
-	var __defProp = Object.defineProperty;
-	var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-	var __getOwnPropNames = Object.getOwnPropertyNames;
-	var __hasOwnProp = Object.prototype.hasOwnProperty;
-	var __export = (target, all) => {
-		for (var name in all) __defProp(target, name, {
-			get: all[name],
-			enumerable: true
-		});
-	};
-	var __copyProps = (to, from, except, desc) => {
-		if (from && typeof from === "object" || typeof from === "function") {
-			for (let key of __getOwnPropNames(from)) if (!__hasOwnProp.call(to, key) && key !== except) __defProp(to, key, {
-				get: () => from[key],
-				enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable
-			});
-		}
-		return to;
-	};
-	var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-	var superstatic_exports = {};
-	__export(superstatic_exports, {
-		collectHasSegments: () => collectHasSegments,
-		convertCleanUrls: () => convertCleanUrls,
-		convertHeaders: () => convertHeaders,
-		convertRedirects: () => convertRedirects,
-		convertRewrites: () => convertRewrites,
-		convertTrailingSlash: () => convertTrailingSlash,
-		getCleanUrls: () => getCleanUrls,
-		pathToRegexp: () => pathToRegexp,
-		sourceToRegex: () => sourceToRegex
-	});
-	module.exports = __toCommonJS(superstatic_exports);
-	var import_url$1 = __require("url");
-	var import_path_to_regexp = __toCommonJS(dist_es2015_exports$1);
-	var import_path_to_regexp_updated = __toCommonJS(dist_es2015_exports);
-	function cloneKeys(keys) {
-		if (typeof keys === "undefined") return;
-		return keys.slice(0);
-	}
-	function compareKeys(left, right) {
-		return (typeof left === "undefined" ? "undefined" : left.toString()) === (typeof right === "undefined" ? "undefined" : right.toString());
-	}
-	function pathToRegexp(callerId, path, keys, options) {
-		const newKeys = cloneKeys(keys);
-		const currentRegExp = (0, import_path_to_regexp.pathToRegexp)(path, keys, options);
-		try {
-			const currentKeys = keys;
-			const newRegExp = (0, import_path_to_regexp_updated.pathToRegexp)(path, newKeys, options);
-			const isDiffRegExp = currentRegExp.toString() !== newRegExp.toString();
-			if (process.env.FORCE_PATH_TO_REGEXP_LOG || isDiffRegExp) {
-				const message = JSON.stringify({
-					path,
-					currentRegExp: currentRegExp.toString(),
-					newRegExp: newRegExp.toString()
-				});
-				console.error(`[vc] PATH TO REGEXP PATH DIFF @ #${callerId}: ${message}`);
-			}
-			const isDiffKeys = !compareKeys(keys, newKeys);
-			if (process.env.FORCE_PATH_TO_REGEXP_LOG || isDiffKeys) {
-				const message = JSON.stringify({
-					isDiffKeys,
-					currentKeys,
-					newKeys
-				});
-				console.error(`[vc] PATH TO REGEXP KEYS DIFF @ #${callerId}: ${message}`);
-			}
-		} catch (err) {
-			const message = JSON.stringify({
-				path,
-				error: err.message
-			});
-			console.error(`[vc] PATH TO REGEXP ERROR @ #${callerId}: ${message}`);
-		}
-		return currentRegExp;
-	}
-	var UN_NAMED_SEGMENT = "__UN_NAMED_SEGMENT__";
-	function getCleanUrls(filePaths) {
-		return filePaths.map(toRoute).filter((f) => f.endsWith(".html")).map((f) => ({
-			html: f,
-			clean: f.slice(0, -5)
-		}));
-	}
-	function convertCleanUrls(cleanUrls, trailingSlash, status = 308) {
-		const routes = [];
-		if (cleanUrls) {
-			const loc = trailingSlash ? "/$1/" : "/$1";
-			routes.push({
-				src: "^/(?:(.+)/)?index(?:\\.html)?/?$",
-				headers: { Location: loc },
-				status
-			});
-			routes.push({
-				src: "^/(.*)\\.html/?$",
-				headers: { Location: loc },
-				status
-			});
-		}
-		return routes;
-	}
-	function convertRedirects(redirects, defaultStatus = 308) {
-		return redirects.map((r) => {
-			const { src, segments } = sourceToRegex(r.source);
-			const hasSegments = collectHasSegments(r.has);
-			normalizeHasKeys(r.has);
-			normalizeHasKeys(r.missing);
-			try {
-				const loc = replaceSegments(segments, hasSegments, r.destination, true);
-				let status;
-				if (typeof r.permanent === "boolean") status = r.permanent ? 308 : 307;
-				else if (r.statusCode) status = r.statusCode;
-				else status = defaultStatus;
-				const route = {
-					src,
-					headers: { Location: loc },
-					status
-				};
-				if (typeof r.env !== "undefined") route.env = r.env;
-				if (r.has) route.has = r.has;
-				if (r.missing) route.missing = r.missing;
-				return route;
-			} catch (e) {
-				throw new Error(`Failed to parse redirect: ${JSON.stringify(r)}`);
-			}
-		});
-	}
-	function convertRewrites(rewrites, internalParamNames) {
-		return rewrites.map((r) => {
-			const { src, segments } = sourceToRegex(r.source);
-			const hasSegments = collectHasSegments(r.has);
-			normalizeHasKeys(r.has);
-			normalizeHasKeys(r.missing);
-			try {
-				const route = {
-					src,
-					dest: replaceSegments(segments, hasSegments, r.destination, false, internalParamNames),
-					check: true
-				};
-				if (typeof r.env !== "undefined") route.env = r.env;
-				if (r.has) route.has = r.has;
-				if (r.missing) route.missing = r.missing;
-				if (r.statusCode) route.status = r.statusCode;
-				return route;
-			} catch (e) {
-				throw new Error(`Failed to parse rewrite: ${JSON.stringify(r)}`);
-			}
-		});
-	}
-	function convertHeaders(headers) {
-		return headers.map((h) => {
-			const obj = {};
-			const { src, segments } = sourceToRegex(h.source);
-			const hasSegments = collectHasSegments(h.has);
-			normalizeHasKeys(h.has);
-			normalizeHasKeys(h.missing);
-			const namedSegments = segments.filter((name) => name !== UN_NAMED_SEGMENT);
-			const indexes = {};
-			segments.forEach((name, index) => {
-				indexes[name] = toSegmentDest(index);
-			});
-			hasSegments.forEach((name) => {
-				indexes[name] = "$" + name;
-			});
-			h.headers.forEach(({ key, value }) => {
-				if (namedSegments.length > 0 || hasSegments.length > 0) {
-					if (key.includes(":")) key = safelyCompile(key, indexes);
-					if (value.includes(":")) value = safelyCompile(value, indexes);
-				}
-				obj[key] = value;
-			});
-			const route = {
-				src,
-				headers: obj,
-				continue: true
-			};
-			if (h.has) route.has = h.has;
-			if (h.missing) route.missing = h.missing;
-			return route;
-		});
-	}
-	function convertTrailingSlash(enable, status = 308) {
-		const routes = [];
-		if (enable) {
-			routes.push({ src: "^/\\.well-known(?:/.*)?$" });
-			routes.push({
-				src: "^/((?:[^/]+/)*[^/\\.]+)$",
-				headers: { Location: "/$1/" },
-				status
-			});
-			routes.push({
-				src: "^/((?:[^/]+/)*[^/]+\\.\\w+)/$",
-				headers: { Location: "/$1" },
-				status
-			});
-		} else routes.push({
-			src: "^/(.*)\\/$",
-			headers: { Location: "/$1" },
-			status
-		});
-		return routes;
-	}
-	function sourceToRegex(source) {
-		const keys = [];
-		const r = pathToRegexp("632", source, keys, {
-			strict: true,
-			sensitive: true,
-			delimiter: "/"
-		});
-		const segments = keys.map((k) => k.name).map((name) => {
-			if (typeof name !== "string") return UN_NAMED_SEGMENT;
-			return name;
-		});
-		return {
-			src: r.source,
-			segments
-		};
-	}
-	var namedGroupsRegex = /\(\?<([a-zA-Z][a-zA-Z0-9_]*)>/g;
-	var normalizeHasKeys = (hasItems = []) => {
-		for (const hasItem of hasItems) if ("key" in hasItem && hasItem.type === "header") hasItem.key = hasItem.key.toLowerCase();
-		return hasItems;
-	};
-	function getStringValueForRegex(value) {
-		if (typeof value === "string") return value;
-		if (value && typeof value === "object" && value !== null) {
-			if ("re" in value && typeof value.re === "string") return value.re;
-		}
-		return null;
-	}
-	function collectHasSegments(has) {
-		const hasSegments = /* @__PURE__ */ new Set();
-		for (const hasItem of has || []) {
-			if (!hasItem.value && "key" in hasItem) hasSegments.add(hasItem.key);
-			const stringValue = getStringValueForRegex(hasItem.value);
-			if (stringValue) {
-				for (const match of stringValue.matchAll(namedGroupsRegex)) if (match[1]) hasSegments.add(match[1]);
-				if (hasItem.type === "host") hasSegments.add("host");
-			}
-		}
-		return [...hasSegments];
-	}
-	var escapeSegment = (str, segmentName) => str.replace(new RegExp(`:${segmentName}`, "g"), `__ESC_COLON_${segmentName}`);
-	var unescapeSegments = (str) => str.replace(/__ESC_COLON_/gi, ":");
-	function replaceSegments(segments, hasItemSegments, destination, isRedirect, internalParamNames) {
-		const namedSegments = segments.filter((name) => name !== UN_NAMED_SEGMENT);
-		if (!(destination.includes(":") && namedSegments.length > 0 || hasItemSegments.length > 0 || !isRedirect)) return destination;
-		let escapedDestination = destination;
-		const indexes = {};
-		segments.forEach((name, index) => {
-			indexes[name] = toSegmentDest(index);
-			escapedDestination = escapeSegment(escapedDestination, name);
-		});
-		hasItemSegments.forEach((name) => {
-			indexes[name] = "$" + name;
-			escapedDestination = escapeSegment(escapedDestination, name);
-		});
-		const parsedDestination = (0, import_url$1.parse)(escapedDestination, true);
-		delete parsedDestination.href;
-		delete parsedDestination.path;
-		delete parsedDestination.search;
-		delete parsedDestination.host;
-		let { pathname, hash, query, hostname, ...rest } = parsedDestination;
-		pathname = unescapeSegments(pathname || "");
-		hash = unescapeSegments(hash || "");
-		hostname = unescapeSegments(hostname || "");
-		let destParams = /* @__PURE__ */ new Set();
-		const pathnameKeys = [];
-		const hashKeys = [];
-		const hostnameKeys = [];
-		try {
-			pathToRegexp("528", pathname, pathnameKeys);
-			pathToRegexp("834", hash || "", hashKeys);
-			pathToRegexp("712", hostname || "", hostnameKeys);
-		} catch (_) {}
-		destParams = new Set([
-			...pathnameKeys,
-			...hashKeys,
-			...hostnameKeys
-		].map((key) => key.name).filter((val) => typeof val === "string"));
-		pathname = safelyCompile(pathname, indexes, true);
-		hash = hash ? safelyCompile(hash, indexes, true) : null;
-		hostname = hostname ? safelyCompile(hostname, indexes, true) : null;
-		for (const [key, strOrArray] of Object.entries(query)) if (Array.isArray(strOrArray)) query[key] = strOrArray.map((str) => safelyCompile(unescapeSegments(str), indexes, true));
-		else query[key] = safelyCompile(unescapeSegments(strOrArray), indexes, true);
-		const paramKeys = Object.keys(indexes);
-		if (!isRedirect && !paramKeys.some((param) => !(internalParamNames && internalParamNames.includes(param)) && destParams.has(param))) {
-			for (const param of paramKeys) if (!(param in query) && param !== UN_NAMED_SEGMENT) query[param] = indexes[param];
-		}
-		destination = (0, import_url$1.format)({
-			...rest,
-			hostname,
-			pathname,
-			query,
-			hash
-		});
-		return destination.replace(/%24/g, "$");
-	}
-	function safelyCompile(value, indexes, attemptDirectCompile) {
-		if (!value) return value;
-		if (attemptDirectCompile) try {
-			return (0, import_path_to_regexp.compile)(value, { validate: false })(indexes);
-		} catch (e) {}
-		for (const key of Object.keys(indexes)) if (value.includes(`:${key}`)) value = value.replace(new RegExp(`:${key}\\*`, "g"), `:${key}--ESCAPED_PARAM_ASTERISK`).replace(new RegExp(`:${key}\\?`, "g"), `:${key}--ESCAPED_PARAM_QUESTION`).replace(new RegExp(`:${key}\\+`, "g"), `:${key}--ESCAPED_PARAM_PLUS`).replace(new RegExp(`:${key}(?!\\w)`, "g"), `--ESCAPED_PARAM_COLON${key}`);
-		value = value.replace(/(:|\*|\?|\+|\(|\)|\{|\})/g, "\\$1").replace(/--ESCAPED_PARAM_PLUS/g, "+").replace(/--ESCAPED_PARAM_COLON/g, ":").replace(/--ESCAPED_PARAM_QUESTION/g, "?").replace(/--ESCAPED_PARAM_ASTERISK/g, "*");
-		return (0, import_path_to_regexp.compile)(`/${value}`, { validate: false })(indexes).slice(1);
-	}
-	function toSegmentDest(index) {
-		return "$" + (index + 1).toString();
-	}
-	function toRoute(filePath) {
-		return filePath.startsWith("/") ? filePath : "/" + filePath;
-	}
-	0 && (module.exports = {
-		collectHasSegments,
-		convertCleanUrls,
-		convertHeaders,
-		convertRedirects,
-		convertRewrites,
-		convertTrailingSlash,
-		getCleanUrls,
-		pathToRegexp,
-		sourceToRegex
-	});
-}));
-//#endregion
-//#region node_modules/.pnpm/@vercel+routing-utils@5.3.3/node_modules/@vercel/routing-utils/dist/append.js
-var require_append = /* @__PURE__ */ __commonJSMin(((exports, module) => {
-	var __defProp = Object.defineProperty;
-	var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-	var __getOwnPropNames = Object.getOwnPropertyNames;
-	var __hasOwnProp = Object.prototype.hasOwnProperty;
-	var __export = (target, all) => {
-		for (var name in all) __defProp(target, name, {
-			get: all[name],
-			enumerable: true
-		});
-	};
-	var __copyProps = (to, from, except, desc) => {
-		if (from && typeof from === "object" || typeof from === "function") {
-			for (let key of __getOwnPropNames(from)) if (!__hasOwnProp.call(to, key) && key !== except) __defProp(to, key, {
-				get: () => from[key],
-				enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable
-			});
-		}
-		return to;
-	};
-	var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-	var append_exports = {};
-	__export(append_exports, { appendRoutesToPhase: () => appendRoutesToPhase });
-	module.exports = __toCommonJS(append_exports);
-	var import_index = require_dist$1();
-	function appendRoutesToPhase({ routes: prevRoutes, newRoutes, phase }) {
-		const routes = prevRoutes ? [...prevRoutes] : [];
-		if (newRoutes === null || newRoutes.length === 0) return routes;
-		let isInPhase = false;
-		let insertIndex = -1;
-		routes.forEach((r, i) => {
-			if ((0, import_index.isHandler)(r)) {
-				if (r.handle === phase) isInPhase = true;
-				else if (isInPhase) {
-					insertIndex = i;
-					isInPhase = false;
-				}
-			}
-		});
-		if (isInPhase) routes.push(...newRoutes);
-		else if (phase === null) {
-			const lastPhase = routes.findIndex((r) => (0, import_index.isHandler)(r) && r.handle);
-			if (lastPhase === -1) routes.push(...newRoutes);
-			else routes.splice(lastPhase, 0, ...newRoutes);
-		} else if (insertIndex > -1) routes.splice(insertIndex, 0, ...newRoutes);
-		else {
-			routes.push({ handle: phase });
-			routes.push(...newRoutes);
-		}
-		return routes;
-	}
-	0 && (module.exports = { appendRoutesToPhase });
-}));
-//#endregion
-//#region node_modules/.pnpm/@vercel+routing-utils@5.3.3/node_modules/@vercel/routing-utils/dist/merge.js
-var require_merge = /* @__PURE__ */ __commonJSMin(((exports, module) => {
-	var __defProp = Object.defineProperty;
-	var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-	var __getOwnPropNames = Object.getOwnPropertyNames;
-	var __hasOwnProp = Object.prototype.hasOwnProperty;
-	var __export = (target, all) => {
-		for (var name in all) __defProp(target, name, {
-			get: all[name],
-			enumerable: true
-		});
-	};
-	var __copyProps = (to, from, except, desc) => {
-		if (from && typeof from === "object" || typeof from === "function") {
-			for (let key of __getOwnPropNames(from)) if (!__hasOwnProp.call(to, key) && key !== except) __defProp(to, key, {
-				get: () => from[key],
-				enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable
-			});
-		}
-		return to;
-	};
-	var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-	var merge_exports = {};
-	__export(merge_exports, { mergeRoutes: () => mergeRoutes });
-	module.exports = __toCommonJS(merge_exports);
-	var import_index = require_dist$1();
-	function getBuilderRoutesMapping(builds) {
-		const builderRoutes = {};
-		for (const { entrypoint, routes, use } of builds) if (routes) {
-			if (!builderRoutes[entrypoint]) builderRoutes[entrypoint] = {};
-			builderRoutes[entrypoint][use] = routes;
-		}
-		return builderRoutes;
-	}
-	function getCheckAndContinue(routes) {
-		const checks = [];
-		const continues = [];
-		const others = [];
-		for (const route of routes) if ((0, import_index.isHandler)(route)) throw new Error(`Unexpected route found in getCheckAndContinue(): ${JSON.stringify(route)}`);
-		else if (route.check && !route.override) checks.push(route);
-		else if (route.continue && !route.override) continues.push(route);
-		else others.push(route);
-		return {
-			checks,
-			continues,
-			others
-		};
-	}
-	function mergeRoutes({ userRoutes, builds }) {
-		const userHandleMap = /* @__PURE__ */ new Map();
-		let userPrevHandle = null;
-		(userRoutes || []).forEach((route) => {
-			if ((0, import_index.isHandler)(route)) userPrevHandle = route.handle;
-			else {
-				const routes = userHandleMap.get(userPrevHandle);
-				if (!routes) userHandleMap.set(userPrevHandle, [route]);
-				else routes.push(route);
-			}
-		});
-		const builderHandleMap = /* @__PURE__ */ new Map();
-		const builderRoutes = getBuilderRoutesMapping(builds);
-		Object.keys(builderRoutes).sort().forEach((path) => {
-			const br = builderRoutes[path];
-			Object.keys(br).sort().forEach((use) => {
-				let builderPrevHandle = null;
-				br[use].forEach((route) => {
-					if ((0, import_index.isHandler)(route)) builderPrevHandle = route.handle;
-					else {
-						const routes = builderHandleMap.get(builderPrevHandle);
-						if (!routes) builderHandleMap.set(builderPrevHandle, [route]);
-						else routes.push(route);
-					}
-				});
-			});
-		});
-		const outputRoutes = [];
-		const uniqueHandleValues = /* @__PURE__ */ new Set([
-			null,
-			...userHandleMap.keys(),
-			...builderHandleMap.keys()
-		]);
-		for (const handle of uniqueHandleValues) {
-			const userRoutes2 = userHandleMap.get(handle) || [];
-			const builderRoutes2 = builderHandleMap.get(handle) || [];
-			const builderSorted = getCheckAndContinue(builderRoutes2);
-			if (handle !== null && (userRoutes2.length > 0 || builderRoutes2.length > 0)) outputRoutes.push({ handle });
-			outputRoutes.push(...builderSorted.continues);
-			outputRoutes.push(...userRoutes2);
-			outputRoutes.push(...builderSorted.checks);
-			outputRoutes.push(...builderSorted.others);
-		}
-		return outputRoutes;
-	}
-	0 && (module.exports = { mergeRoutes });
-}));
-//#endregion
-//#region node_modules/.pnpm/@vercel+routing-utils@5.3.3/node_modules/@vercel/routing-utils/dist/service-route-ownership.js
-var require_service_route_ownership = /* @__PURE__ */ __commonJSMin(((exports, module) => {
-	var __defProp = Object.defineProperty;
-	var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-	var __getOwnPropNames = Object.getOwnPropertyNames;
-	var __hasOwnProp = Object.prototype.hasOwnProperty;
-	var __export = (target, all) => {
-		for (var name in all) __defProp(target, name, {
-			get: all[name],
-			enumerable: true
-		});
-	};
-	var __copyProps = (to, from, except, desc) => {
-		if (from && typeof from === "object" || typeof from === "function") {
-			for (let key of __getOwnPropNames(from)) if (!__hasOwnProp.call(to, key) && key !== except) __defProp(to, key, {
-				get: () => from[key],
-				enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable
-			});
-		}
-		return to;
-	};
-	var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-	var service_route_ownership_exports = {};
-	__export(service_route_ownership_exports, {
-		getOwnershipGuard: () => getOwnershipGuard,
-		normalizeRoutePrefix: () => normalizeRoutePrefix,
-		scopeRouteSourceToOwnership: () => scopeRouteSourceToOwnership
-	});
-	module.exports = __toCommonJS(service_route_ownership_exports);
-	function normalizeRoutePrefix(routePrefix) {
-		let normalized = routePrefix.startsWith("/") ? routePrefix : `/${routePrefix}`;
-		if (normalized !== "/" && normalized.endsWith("/")) normalized = normalized.slice(0, -1);
-		return normalized || "/";
-	}
-	function escapeForRegex(value) {
-		return value.replace(/[|\\{}()[\]^$+*?.]/g, "\\$&");
-	}
-	function toPrefixMatcher(routePrefix) {
-		return `${escapeForRegex(routePrefix)}(?:/|$)`;
-	}
-	function isDescendantPrefix(candidate, prefix) {
-		return candidate !== prefix && candidate.startsWith(`${prefix}/`);
-	}
-	function getOwnershipGuard(ownerPrefix, allRoutePrefixes) {
-		const owner = normalizeRoutePrefix(ownerPrefix);
-		const nonRootPrefixes = Array.from(new Set(allRoutePrefixes.map(normalizeRoutePrefix))).filter((prefix) => prefix !== "/").sort((a, b) => b.length - a.length);
-		if (owner === "/") return nonRootPrefixes.map((prefix) => `(?!${toPrefixMatcher(prefix)})`).join("");
-		const descendants = nonRootPrefixes.filter((prefix) => isDescendantPrefix(prefix, owner));
-		return `${`(?=${toPrefixMatcher(owner)})`}${descendants.map((prefix) => `(?!${toPrefixMatcher(prefix)})`).join("")}`;
-	}
-	function scopeRouteSourceToOwnership(source, ownershipGuard) {
-		if (!ownershipGuard) return source;
-		return `^${ownershipGuard}(?:${source.startsWith("^") ? source.slice(1) : source})`;
-	}
-	0 && (module.exports = {
-		getOwnershipGuard,
-		normalizeRoutePrefix,
-		scopeRouteSourceToOwnership
-	});
-}));
-//#endregion
-//#region node_modules/.pnpm/@vercel+routing-utils@5.3.3/node_modules/@vercel/routing-utils/dist/schemas.js
-var require_schemas = /* @__PURE__ */ __commonJSMin(((exports, module) => {
-	var __defProp = Object.defineProperty;
-	var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-	var __getOwnPropNames = Object.getOwnPropertyNames;
-	var __hasOwnProp = Object.prototype.hasOwnProperty;
-	var __export = (target, all) => {
-		for (var name in all) __defProp(target, name, {
-			get: all[name],
-			enumerable: true
-		});
-	};
-	var __copyProps = (to, from, except, desc) => {
-		if (from && typeof from === "object" || typeof from === "function") {
-			for (let key of __getOwnPropNames(from)) if (!__hasOwnProp.call(to, key) && key !== except) __defProp(to, key, {
-				get: () => from[key],
-				enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable
-			});
-		}
-		return to;
-	};
-	var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-	var schemas_exports = {};
-	__export(schemas_exports, {
-		bulkRedirectsSchema: () => bulkRedirectsSchema,
-		cleanUrlsSchema: () => cleanUrlsSchema,
-		hasSchema: () => hasSchema,
-		headersSchema: () => headersSchema,
-		redirectsSchema: () => redirectsSchema,
-		rewritesSchema: () => rewritesSchema,
-		routesSchema: () => routesSchema,
-		trailingSlashSchema: () => trailingSlashSchema
-	});
-	module.exports = __toCommonJS(schemas_exports);
-	var mitigateSchema = {
-		description: "Mitigation action to take on a route",
-		type: "object",
-		additionalProperties: false,
-		required: ["action"],
-		properties: { action: {
-			description: "The mitigation action to take",
-			type: "string",
-			enum: ["challenge", "deny"]
-		} }
-	};
-	var matchableValueSchema = {
-		description: "A value to match against. Can be a string (regex) or a condition operation object",
-		anyOf: [{
-			description: "A regular expression used to match thev value. Named groups can be used in the destination.",
-			type: "string",
-			maxLength: 4096
-		}, {
-			description: "A condition operation object",
-			type: "object",
-			additionalProperties: false,
-			minProperties: 1,
-			properties: {
-				eq: {
-					description: "Equal to",
-					anyOf: [{
-						type: "string",
-						maxLength: 4096
-					}, { type: "number" }]
-				},
-				neq: {
-					description: "Not equal",
-					type: "string",
-					maxLength: 4096
-				},
-				inc: {
-					description: "In array",
-					type: "array",
-					items: {
-						type: "string",
-						maxLength: 4096
-					}
-				},
-				ninc: {
-					description: "Not in array",
-					type: "array",
-					items: {
-						type: "string",
-						maxLength: 4096
-					}
-				},
-				pre: {
-					description: "Starts with",
-					type: "string",
-					maxLength: 4096
-				},
-				suf: {
-					description: "Ends with",
-					type: "string",
-					maxLength: 4096
-				},
-				re: {
-					description: "Regex",
-					type: "string",
-					maxLength: 4096
-				},
-				gt: {
-					description: "Greater than",
-					type: "number"
-				},
-				gte: {
-					description: "Greater than or equal to",
-					type: "number"
-				},
-				lt: {
-					description: "Less than",
-					type: "number"
-				},
-				lte: {
-					description: "Less than or equal to",
-					type: "number"
-				}
-			}
-		}]
-	};
-	var hasSchema = {
-		description: "An array of requirements that are needed to match",
-		type: "array",
-		maxItems: 16,
-		items: { anyOf: [{
-			type: "object",
-			additionalProperties: false,
-			required: ["type", "value"],
-			properties: {
-				type: {
-					description: "The type of request element to check",
-					type: "string",
-					enum: ["host"]
-				},
-				value: matchableValueSchema
-			}
-		}, {
-			type: "object",
-			additionalProperties: false,
-			required: ["type", "key"],
-			properties: {
-				type: {
-					description: "The type of request element to check",
-					type: "string",
-					enum: [
-						"header",
-						"cookie",
-						"query"
-					]
-				},
-				key: {
-					description: "The name of the element contained in the particular type",
-					type: "string",
-					maxLength: 4096
-				},
-				value: matchableValueSchema
-			}
-		}] }
-	};
-	var routesSchema = {
-		type: "array",
-		deprecated: true,
-		description: "A list of routes objects used to rewrite paths to point towards other internal or external paths",
-		example: [{
-			dest: "https://docs.example.com",
-			src: "/docs"
-		}],
-		items: { anyOf: [{
-			type: "object",
-			required: ["src"],
-			additionalProperties: false,
-			properties: {
-				src: {
-					type: "string",
-					maxLength: 4096
-				},
-				dest: {
-					type: "string",
-					maxLength: 4096
-				},
-				headers: {
-					type: "object",
-					additionalProperties: false,
-					minProperties: 1,
-					maxProperties: 100,
-					patternProperties: { "^.{1,256}$": {
-						type: "string",
-						maxLength: 32768
-					} }
-				},
-				methods: {
-					type: "array",
-					maxItems: 10,
-					items: {
-						type: "string",
-						maxLength: 32
-					}
-				},
-				caseSensitive: { type: "boolean" },
-				important: { type: "boolean" },
-				user: { type: "boolean" },
-				continue: { type: "boolean" },
-				override: { type: "boolean" },
-				check: { type: "boolean" },
-				isInternal: { type: "boolean" },
-				status: {
-					type: "integer",
-					minimum: 100,
-					maximum: 999
-				},
-				locale: {
-					type: "object",
-					additionalProperties: false,
-					minProperties: 1,
-					properties: {
-						redirect: {
-							type: "object",
-							additionalProperties: false,
-							minProperties: 1,
-							maxProperties: 100,
-							patternProperties: { "^.{1,256}$": {
-								type: "string",
-								maxLength: 4096
-							} }
-						},
-						value: {
-							type: "string",
-							maxLength: 4096
-						},
-						path: {
-							type: "string",
-							maxLength: 4096
-						},
-						cookie: {
-							type: "string",
-							maxLength: 4096
-						},
-						default: {
-							type: "string",
-							maxLength: 4096
-						}
-					}
-				},
-				middleware: { type: "number" },
-				middlewarePath: { type: "string" },
-				middlewareRawSrc: {
-					type: "array",
-					items: { type: "string" }
-				},
-				has: hasSchema,
-				missing: hasSchema,
-				mitigate: mitigateSchema,
-				transforms: {
-					description: "A list of transform rules to adjust the query parameters of a request or HTTP headers of request or response",
-					type: "array",
-					minItems: 1,
-					items: {
-						type: "object",
-						additionalProperties: false,
-						required: [
-							"type",
-							"op",
-							"target"
-						],
-						properties: {
-							type: {
-								description: "The scope of the transform to apply",
-								type: "string",
-								enum: [
-									"request.headers",
-									"request.query",
-									"response.headers"
-								]
-							},
-							op: {
-								description: "The operation to perform on the target",
-								type: "string",
-								enum: [
-									"append",
-									"set",
-									"delete"
-								]
-							},
-							target: {
-								description: "The target of the transform",
-								type: "object",
-								required: ["key"],
-								properties: { key: {
-									description: "A value to match against. Can be a string or a condition operation object (without regex support)",
-									anyOf: [{
-										description: "A valid header name (letters, numbers, hyphens, underscores)",
-										type: "string",
-										maxLength: 4096
-									}, {
-										description: "A condition operation object",
-										type: "object",
-										additionalProperties: false,
-										minProperties: 1,
-										properties: {
-											eq: {
-												description: "Equal to",
-												anyOf: [{
-													type: "string",
-													maxLength: 4096
-												}, { type: "number" }]
-											},
-											neq: {
-												description: "Not equal",
-												type: "string",
-												maxLength: 4096
-											},
-											inc: {
-												description: "In array",
-												type: "array",
-												items: {
-													type: "string",
-													maxLength: 4096
-												}
-											},
-											ninc: {
-												description: "Not in array",
-												type: "array",
-												items: {
-													type: "string",
-													maxLength: 4096
-												}
-											},
-											pre: {
-												description: "Starts with",
-												type: "string",
-												maxLength: 4096
-											},
-											suf: {
-												description: "Ends with",
-												type: "string",
-												maxLength: 4096
-											},
-											gt: {
-												description: "Greater than",
-												type: "number"
-											},
-											gte: {
-												description: "Greater than or equal to",
-												type: "number"
-											},
-											lt: {
-												description: "Less than",
-												type: "number"
-											},
-											lte: {
-												description: "Less than or equal to",
-												type: "number"
-											}
-										}
-									}]
-								} }
-							},
-							args: {
-								description: "The arguments to the operation",
-								anyOf: [{
-									type: "string",
-									maxLength: 4096
-								}, {
-									type: "array",
-									minItems: 1,
-									items: {
-										type: "string",
-										maxLength: 4096
-									}
-								}]
-							},
-							env: {
-								description: "An array of environment variable names that should be replaced at runtime in the args value",
-								type: "array",
-								minItems: 1,
-								maxItems: 64,
-								items: {
-									type: "string",
-									maxLength: 256
-								}
-							}
-						},
-						allOf: [{
-							if: { properties: { op: { enum: ["append", "set"] } } },
-							then: { required: ["args"] }
-						}, {
-							if: { allOf: [{ properties: { type: { enum: ["request.headers", "response.headers"] } } }, { properties: { op: { enum: ["set", "append"] } } }] },
-							then: { properties: {
-								target: { properties: { key: {
-									if: { type: "string" },
-									then: { pattern: "^[a-zA-Z0-9_-]+$" }
-								} } },
-								args: { anyOf: [{
-									type: "string",
-									pattern: "^[a-zA-Z0-9_ :;.,\"'?!(){}\\[\\]@<>=+*#$&`|~\\^%/-]+$"
-								}, {
-									type: "array",
-									items: {
-										type: "string",
-										pattern: "^[a-zA-Z0-9_ :;.,\"'?!(){}\\[\\]@<>=+*#$&`|~\\^%/-]+$"
-									}
-								}] }
-							} }
-						}]
-					}
-				},
-				env: {
-					description: "An array of environment variable names that should be replaced at runtime in the destination or headers",
-					type: "array",
-					minItems: 1,
-					maxItems: 64,
-					items: {
-						type: "string",
-						maxLength: 256
-					}
-				},
-				respectOriginCacheControl: {
-					description: "When set to true (default), external rewrites will respect the Cache-Control header from the origin. When false, caching is disabled for this rewrite.",
-					type: "boolean"
-				}
-			}
-		}, {
-			type: "object",
-			required: ["handle"],
-			additionalProperties: false,
-			properties: { handle: {
-				type: "string",
-				maxLength: 32,
-				enum: [
-					"error",
-					"filesystem",
-					"hit",
-					"miss",
-					"resource",
-					"rewrite"
-				]
-			} }
-		}] }
-	};
-	var rewritesSchema = {
-		type: "array",
-		maxItems: 2048,
-		description: "A list of rewrite definitions.",
-		items: {
-			type: "object",
-			additionalProperties: false,
-			required: ["source", "destination"],
-			properties: {
-				source: {
-					description: "A pattern that matches each incoming pathname (excluding querystring).",
-					type: "string",
-					maxLength: 4096
-				},
-				destination: {
-					description: "An absolute pathname to an existing resource or an external URL.",
-					type: "string",
-					maxLength: 4096
-				},
-				has: hasSchema,
-				missing: hasSchema,
-				statusCode: {
-					description: "An optional integer to override the status code of the response.",
-					type: "integer",
-					minimum: 100,
-					maximum: 999
-				},
-				env: {
-					description: "An array of environment variable names that should be replaced at runtime in the destination",
-					type: "array",
-					minItems: 1,
-					maxItems: 64,
-					items: {
-						type: "string",
-						maxLength: 256
-					}
-				},
-				respectOriginCacheControl: {
-					description: "When set to true (default), external rewrites will respect the Cache-Control header from the origin. When false, caching is disabled for this rewrite.",
-					type: "boolean"
-				}
-			}
-		}
-	};
-	var redirectsSchema = {
-		title: "Redirects",
-		type: "array",
-		maxItems: 2048,
-		description: "A list of redirect definitions.",
-		items: {
-			type: "object",
-			additionalProperties: false,
-			required: ["source", "destination"],
-			properties: {
-				source: {
-					description: "A pattern that matches each incoming pathname (excluding querystring).",
-					type: "string",
-					maxLength: 4096
-				},
-				destination: {
-					description: "A location destination defined as an absolute pathname or external URL.",
-					type: "string",
-					maxLength: 4096
-				},
-				permanent: {
-					description: "A boolean to toggle between permanent and temporary redirect. When `true`, the status code is `308`. When `false` the status code is `307`.",
-					type: "boolean"
-				},
-				statusCode: {
-					description: "An optional integer to define the status code of the redirect.",
-					private: true,
-					type: "integer",
-					minimum: 100,
-					maximum: 999
-				},
-				has: hasSchema,
-				missing: hasSchema,
-				env: {
-					description: "An array of environment variable names that should be replaced at runtime in the destination",
-					type: "array",
-					minItems: 1,
-					maxItems: 64,
-					items: {
-						type: "string",
-						maxLength: 256
-					}
-				}
-			}
-		}
-	};
-	var headersSchema = {
-		type: "array",
-		maxItems: 2048,
-		description: "A list of header definitions.",
-		items: {
-			type: "object",
-			additionalProperties: false,
-			required: ["source", "headers"],
-			properties: {
-				source: {
-					description: "A pattern that matches each incoming pathname (excluding querystring)",
-					type: "string",
-					maxLength: 4096
-				},
-				headers: {
-					description: "An array of key/value pairs representing each response header.",
-					type: "array",
-					maxItems: 1024,
-					items: {
-						type: "object",
-						additionalProperties: false,
-						required: ["key", "value"],
-						properties: {
-							key: {
-								type: "string",
-								maxLength: 4096
-							},
-							value: {
-								type: "string",
-								maxLength: 32768
-							}
-						}
-					}
-				},
-				has: hasSchema,
-				missing: hasSchema
-			}
-		}
-	};
-	var cleanUrlsSchema = {
-		description: "When set to `true`, all HTML files and Serverless Functions will have their extension removed. When visiting a path that ends with the extension, a 308 response will redirect the client to the extensionless path.",
-		type: "boolean"
-	};
-	var trailingSlashSchema = {
-		description: "When `false`, visiting a path that ends with a forward slash will respond with a `308` status code and redirect to the path without the trailing slash.",
-		type: "boolean"
-	};
-	var bulkRedirectsSchema = {
-		type: "array",
-		description: "A list of bulk redirect definitions.",
-		items: {
-			type: "object",
-			additionalProperties: false,
-			required: ["source", "destination"],
-			properties: {
-				source: {
-					description: "The exact URL path or pattern to match.",
-					type: "string",
-					maxLength: 2048
-				},
-				destination: {
-					description: "The target URL path where traffic should be redirected.",
-					type: "string",
-					maxLength: 2048
-				},
-				permanent: {
-					description: "A boolean to toggle between permanent and temporary redirect. When `true`, the status code is `308`. When `false` the status code is `307`.",
-					type: "boolean"
-				},
-				statusCode: {
-					description: "An optional integer to define the status code of the redirect.",
-					type: "integer",
-					enum: [
-						301,
-						302,
-						307,
-						308
-					]
-				},
-				sensitive: {
-					description: "A boolean to toggle between case-sensitive and case-insensitive redirect. When `true`, the redirect is case-sensitive. When `false` the redirect is case-insensitive.",
-					type: "boolean"
-				},
-				query: {
-					description: "Whether the query string should be preserved by the redirect. The default is `false`.",
-					type: "boolean"
-				}
-			}
-		}
-	};
-	0 && (module.exports = {
-		bulkRedirectsSchema,
-		cleanUrlsSchema,
-		hasSchema,
-		headersSchema,
-		redirectsSchema,
-		rewritesSchema,
-		routesSchema,
-		trailingSlashSchema
-	});
-}));
-//#endregion
-//#region node_modules/.pnpm/@vercel+routing-utils@5.3.3/node_modules/@vercel/routing-utils/dist/types.js
-var require_types = /* @__PURE__ */ __commonJSMin(((exports, module) => {
-	var __defProp = Object.defineProperty;
-	var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-	var __getOwnPropNames = Object.getOwnPropertyNames;
-	var __hasOwnProp = Object.prototype.hasOwnProperty;
-	var __copyProps = (to, from, except, desc) => {
-		if (from && typeof from === "object" || typeof from === "function") {
-			for (let key of __getOwnPropNames(from)) if (!__hasOwnProp.call(to, key) && key !== except) __defProp(to, key, {
-				get: () => from[key],
-				enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable
-			});
-		}
-		return to;
-	};
-	var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-	module.exports = __toCommonJS({});
-}));
-//#endregion
-//#region node_modules/.pnpm/@vercel+routing-utils@5.3.3/node_modules/@vercel/routing-utils/dist/index.js
-var require_dist$1 = /* @__PURE__ */ __commonJSMin(((exports, module) => {
-	var __defProp = Object.defineProperty;
-	var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-	var __getOwnPropNames = Object.getOwnPropertyNames;
-	var __hasOwnProp = Object.prototype.hasOwnProperty;
-	var __export = (target, all) => {
-		for (var name in all) __defProp(target, name, {
-			get: all[name],
-			enumerable: true
-		});
-	};
-	var __copyProps = (to, from, except, desc) => {
-		if (from && typeof from === "object" || typeof from === "function") {
-			for (let key of __getOwnPropNames(from)) if (!__hasOwnProp.call(to, key) && key !== except) __defProp(to, key, {
-				get: () => from[key],
-				enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable
-			});
-		}
-		return to;
-	};
-	var __reExport = (target, mod, secondTarget) => (__copyProps(target, mod, "default"), secondTarget && __copyProps(secondTarget, mod, "default"));
-	var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-	var src_exports = {};
-	__export(src_exports, {
-		appendRoutesToPhase: () => import_append.appendRoutesToPhase,
-		getCleanUrls: () => import_superstatic2.getCleanUrls,
-		getOwnershipGuard: () => import_service_route_ownership.getOwnershipGuard,
-		getTransformedRoutes: () => getTransformedRoutes,
-		isHandler: () => isHandler,
-		isValidHandleValue: () => isValidHandleValue,
-		mergeRoutes: () => import_merge.mergeRoutes,
-		normalizeRoutePrefix: () => import_service_route_ownership.normalizeRoutePrefix,
-		normalizeRoutes: () => normalizeRoutes,
-		scopeRouteSourceToOwnership: () => import_service_route_ownership.scopeRouteSourceToOwnership,
-		sourceToRegex: () => import_superstatic2.sourceToRegex
-	});
-	module.exports = __toCommonJS(src_exports);
-	var import_url = __require("url");
-	var import_superstatic = require_superstatic();
-	var import_append = require_append();
-	var import_merge = require_merge();
-	var import_service_route_ownership = require_service_route_ownership();
-	__reExport(src_exports, require_schemas(), module.exports);
-	var import_superstatic2 = require_superstatic();
-	__reExport(src_exports, require_types(), module.exports);
-	var validHandleValues = /* @__PURE__ */ new Set([
-		"filesystem",
-		"hit",
-		"miss",
-		"rewrite",
-		"error",
-		"resource"
-	]);
-	function isHandler(route) {
-		return typeof route.handle !== "undefined";
-	}
-	function isValidHandleValue(handle) {
-		return validHandleValues.has(handle);
-	}
-	function normalizeRoutes(inputRoutes) {
-		if (!inputRoutes || inputRoutes.length === 0) return {
-			routes: inputRoutes,
-			error: null
-		};
-		const routes = [];
-		const handling = [];
-		const errors = [];
-		inputRoutes.forEach((r, i) => {
-			const route = { ...r };
-			routes.push(route);
-			const keys = Object.keys(route);
-			if (isHandler(route)) {
-				const { handle } = route;
-				if (keys.length !== 1) {
-					const unknownProp = keys.find((prop) => prop !== "handle");
-					errors.push(`Route at index ${i} has unknown property \`${unknownProp}\`.`);
-				} else if (!isValidHandleValue(handle)) errors.push(`Route at index ${i} has unknown handle value \`handle: ${handle}\`.`);
-				else if (handling.includes(handle)) errors.push(`Route at index ${i} is a duplicate. Please use one \`handle: ${handle}\` at most.`);
-				else handling.push(handle);
-			} else if (route.src) {
-				if (!route.src.startsWith("^")) route.src = `^${route.src}`;
-				if (!route.src.endsWith("$")) route.src = `${route.src}$`;
-				route.src = route.src.replace(/\\\//g, "/");
-				const regError = checkRegexSyntax("Route", i, route.src);
-				if (regError) errors.push(regError);
-				const handleValue = handling[handling.length - 1];
-				if (handleValue === "hit") {
-					if (route.dest) errors.push(`Route at index ${i} cannot define \`dest\` after \`handle: hit\`.`);
-					if (route.status) errors.push(`Route at index ${i} cannot define \`status\` after \`handle: hit\`.`);
-					if (!route.continue) errors.push(`Route at index ${i} must define \`continue: true\` after \`handle: hit\`.`);
-				} else if (handleValue === "miss") {
-					if (route.dest && !route.check) errors.push(`Route at index ${i} must define \`check: true\` after \`handle: miss\`.`);
-					else if (!route.dest && !route.continue) errors.push(`Route at index ${i} must define \`continue: true\` after \`handle: miss\`.`);
-				}
-			} else errors.push(`Route at index ${i} must define either \`handle\` or \`src\` property.`);
-		});
-		return {
-			routes,
-			error: errors.length > 0 ? createError("invalid_route", errors, "https://vercel.link/routes-json", "Learn More") : null
-		};
-	}
-	function checkRegexSyntax(type, index, src) {
-		try {
-			new RegExp(src);
-		} catch (err) {
-			return `${type} at index ${index} has invalid \`${type === "Route" ? "src" : "source"}\` regular expression "${src}".`;
-		}
-		return null;
-	}
-	function checkPatternSyntax(type, index, { source, destination, has }) {
-		let sourceSegments = /* @__PURE__ */ new Set();
-		const destinationSegments = /* @__PURE__ */ new Set();
-		try {
-			sourceSegments = new Set((0, import_superstatic.sourceToRegex)(source).segments);
-		} catch (err) {
-			return {
-				message: `${type} at index ${index} has invalid \`source\` pattern "${source}".`,
-				link: "https://vercel.link/invalid-route-source-pattern"
-			};
-		}
-		if (destination) {
-			try {
-				const { hostname, pathname, query } = (0, import_url.parse)(destination, true);
-				(0, import_superstatic.sourceToRegex)(hostname || "").segments.forEach((name) => destinationSegments.add(name));
-				(0, import_superstatic.sourceToRegex)(pathname || "").segments.forEach((name) => destinationSegments.add(name));
-				for (const strOrArray of Object.values(query)) {
-					const value = Array.isArray(strOrArray) ? strOrArray[0] : strOrArray;
-					(0, import_superstatic.sourceToRegex)(value || "").segments.forEach((name) => destinationSegments.add(name));
-				}
-			} catch (err) {}
-			const hasSegments = (0, import_superstatic.collectHasSegments)(has);
-			for (const segment of destinationSegments) if (!sourceSegments.has(segment) && !hasSegments.includes(segment)) return {
-				message: `${type} at index ${index} has segment ":${segment}" in \`destination\` property but not in \`source\` or \`has\` property.`,
-				link: "https://vercel.link/invalid-route-destination-segment"
-			};
-		}
-		return null;
-	}
-	function checkRedirect(r, index) {
-		if (typeof r.permanent !== "undefined" && typeof r.statusCode !== "undefined") return `Redirect at index ${index} cannot define both \`permanent\` and \`statusCode\` properties.`;
-		return null;
-	}
-	function createError(code, allErrors, link, action) {
-		const errors = Array.isArray(allErrors) ? allErrors : [allErrors];
-		return {
-			name: "RouteApiError",
-			code,
-			message: errors[0],
-			link,
-			action,
-			errors
-		};
-	}
-	function notEmpty(value) {
-		return value !== null && value !== void 0;
-	}
-	function getTransformedRoutes(vercelConfig) {
-		const { cleanUrls, rewrites, redirects, headers, trailingSlash } = vercelConfig;
-		let { routes = null } = vercelConfig;
-		if (routes) {
-			if (typeof cleanUrls !== "undefined" || typeof trailingSlash !== "undefined" || typeof redirects !== "undefined" || typeof headers !== "undefined" || typeof rewrites !== "undefined") {
-				const error = createError("invalid_mixed_routes", "If `rewrites`, `redirects`, `headers`, `cleanUrls` or `trailingSlash` are used, then `routes` cannot be present.", "https://vercel.link/mix-routing-props", "Learn More");
-				return {
-					routes,
-					error
-				};
-			}
-			return normalizeRoutes(routes);
-		}
-		if (typeof cleanUrls !== "undefined") {
-			const normalized = normalizeRoutes((0, import_superstatic.convertCleanUrls)(cleanUrls, trailingSlash));
-			if (normalized.error) {
-				normalized.error.code = "invalid_clean_urls";
-				return {
-					routes,
-					error: normalized.error
-				};
-			}
-			routes = routes || [];
-			routes.push(...normalized.routes || []);
-		}
-		if (typeof trailingSlash !== "undefined") {
-			const normalized = normalizeRoutes((0, import_superstatic.convertTrailingSlash)(trailingSlash));
-			if (normalized.error) {
-				normalized.error.code = "invalid_trailing_slash";
-				return {
-					routes,
-					error: normalized.error
-				};
-			}
-			routes = routes || [];
-			routes.push(...normalized.routes || []);
-		}
-		if (typeof redirects !== "undefined") {
-			const code = "invalid_redirect";
-			const regexErrorMessage = redirects.map((r, i) => checkRegexSyntax("Redirect", i, r.source)).find(notEmpty);
-			if (regexErrorMessage) return {
-				routes,
-				error: createError("invalid_redirect", regexErrorMessage, "https://vercel.link/invalid-route-source-pattern", "Learn More")
-			};
-			const patternError = redirects.map((r, i) => checkPatternSyntax("Redirect", i, r)).find(notEmpty);
-			if (patternError) return {
-				routes,
-				error: createError(code, patternError.message, patternError.link, "Learn More")
-			};
-			const redirectErrorMessage = redirects.map(checkRedirect).find(notEmpty);
-			if (redirectErrorMessage) return {
-				routes,
-				error: createError(code, redirectErrorMessage, "https://vercel.link/redirects-json", "Learn More")
-			};
-			const normalized = normalizeRoutes((0, import_superstatic.convertRedirects)(redirects));
-			if (normalized.error) {
-				normalized.error.code = code;
-				return {
-					routes,
-					error: normalized.error
-				};
-			}
-			routes = routes || [];
-			routes.push(...normalized.routes || []);
-		}
-		if (typeof headers !== "undefined") {
-			const code = "invalid_header";
-			const regexErrorMessage = headers.map((r, i) => checkRegexSyntax("Header", i, r.source)).find(notEmpty);
-			if (regexErrorMessage) return {
-				routes,
-				error: createError(code, regexErrorMessage, "https://vercel.link/invalid-route-source-pattern", "Learn More")
-			};
-			const patternError = headers.map((r, i) => checkPatternSyntax("Header", i, r)).find(notEmpty);
-			if (patternError) return {
-				routes,
-				error: createError(code, patternError.message, patternError.link, "Learn More")
-			};
-			const normalized = normalizeRoutes((0, import_superstatic.convertHeaders)(headers));
-			if (normalized.error) {
-				normalized.error.code = code;
-				return {
-					routes,
-					error: normalized.error
-				};
-			}
-			routes = routes || [];
-			routes.push(...normalized.routes || []);
-		}
-		if (typeof rewrites !== "undefined") {
-			const code = "invalid_rewrite";
-			const regexErrorMessage = rewrites.map((r, i) => checkRegexSyntax("Rewrite", i, r.source)).find(notEmpty);
-			if (regexErrorMessage) return {
-				routes,
-				error: createError(code, regexErrorMessage, "https://vercel.link/invalid-route-source-pattern", "Learn More")
-			};
-			const patternError = rewrites.map((r, i) => checkPatternSyntax("Rewrite", i, r)).find(notEmpty);
-			if (patternError) return {
-				routes,
-				error: createError(code, patternError.message, patternError.link, "Learn More")
-			};
-			const normalized = normalizeRoutes((0, import_superstatic.convertRewrites)(rewrites));
-			if (normalized.error) {
-				normalized.error.code = code;
-				return {
-					routes,
-					error: normalized.error
-				};
-			}
-			routes = routes || [];
-			routes.push({ handle: "filesystem" });
-			routes.push(...normalized.routes || []);
-		}
-		return {
-			routes,
-			error: null
-		};
-	}
-	0 && (module.exports = {
-		appendRoutesToPhase,
-		getCleanUrls,
-		getOwnershipGuard,
-		getTransformedRoutes,
-		isHandler,
-		isValidHandleValue,
-		mergeRoutes,
-		normalizeRoutePrefix,
-		normalizeRoutes,
-		scopeRouteSourceToOwnership,
-		sourceToRegex,
-		...require_schemas(),
-		...require_types()
-	});
-}));
-require_dist$1();
 nodePath.posix.join;
 //#endregion
-//#region node_modules/.pnpm/@astrojs+vercel@11.0.0_astr_7156e022f1cdcb58bf754752bd51db8e/node_modules/@astrojs/vercel/dist/index.js
+//#region node_modules/@astrojs/vercel/dist/index.js
 var ASTRO_PATH_HEADER = "x-astro-path";
 var ASTRO_PATH_PARAM = "x_astro_path";
 var ASTRO_LOCALS_HEADER = "x-astro-locals";
@@ -2274,545 +22,15 @@ var ASTRO_MIDDLEWARE_SECRET_HEADER = "x-astro-middleware-secret";
 `${ASTRO_PATH_PARAM}`;
 //#endregion
 //#region \0virtual:astro-vercel:config
-var middlewareSecret = "6d9fe394-953b-4082-88f0-e6b77d655825";
+var middlewareSecret = "d7f24de6-762e-46c1-9458-01c7dac3b09a";
 //#endregion
-//#region node_modules/.pnpm/devalue@5.8.1/node_modules/devalue/src/base64.js
-/**	@type {(array_buffer: ArrayBuffer) => string} */
-function encode_native(array_buffer) {
-	return new Uint8Array(array_buffer).toBase64();
-}
-/**	@type {(base64: string) => ArrayBuffer} */
-function decode_native(base64) {
-	return Uint8Array.fromBase64(base64).buffer;
-}
-/** @type {(array_buffer: ArrayBuffer) => string} */
-function encode_buffer(array_buffer) {
-	return Buffer.from(array_buffer).toString("base64");
-}
-/**	@type {(base64: string) => ArrayBuffer} */
-function decode_buffer(base64) {
-	return Uint8Array.from(Buffer.from(base64, "base64")).buffer;
-}
-/** @type {(array_buffer: ArrayBuffer) => string} */
-function encode_legacy(array_buffer) {
-	const array = new Uint8Array(array_buffer);
-	let binary = "";
-	const chunk_size = 32768;
-	for (let i = 0; i < array.length; i += chunk_size) {
-		const chunk = array.subarray(i, i + chunk_size);
-		binary += String.fromCharCode.apply(null, chunk);
-	}
-	return btoa(binary);
-}
-/**	@type {(base64: string) => ArrayBuffer} */
-function decode_legacy(base64) {
-	const binary_string = atob(base64);
-	const len = binary_string.length;
-	const array = new Uint8Array(len);
-	for (let i = 0; i < len; i++) array[i] = binary_string.charCodeAt(i);
-	return array.buffer;
-}
-var native = typeof Uint8Array.fromBase64 === "function";
-var buffer = typeof process === "object" && process.versions?.node !== void 0;
-var encode64 = native ? encode_native : buffer ? encode_buffer : encode_legacy;
-var decode64 = native ? decode_native : buffer ? decode_buffer : decode_legacy;
-//#endregion
-//#region node_modules/.pnpm/devalue@5.8.1/node_modules/devalue/src/constants.js
-var MAX_ARRAY_LEN = 2 ** 32 - 1;
-var MAX_ARRAY_INDEX = MAX_ARRAY_LEN - 1;
-//#endregion
-//#region node_modules/.pnpm/devalue@5.8.1/node_modules/devalue/src/utils.js
-var DevalueError = class extends Error {
-	/**
-	* @param {string} message
-	* @param {string[]} keys
-	* @param {any} [value] - The value that failed to be serialized
-	* @param {any} [root] - The root value being serialized
-	*/
-	constructor(message, keys, value, root) {
-		super(message);
-		this.name = "DevalueError";
-		this.path = keys.join("");
-		this.value = value;
-		this.root = root;
-	}
-};
-/** @param {any} thing */
-function is_primitive(thing) {
-	return thing === null || typeof thing !== "object" && typeof thing !== "function";
-}
-var object_proto_names = /* @__PURE__ */ Object.getOwnPropertyNames(Object.prototype).sort().join("\0");
-/** @param {any} thing */
-function is_plain_object(thing) {
-	const proto = Object.getPrototypeOf(thing);
-	return proto === Object.prototype || proto === null || Object.getPrototypeOf(proto) === null || Object.getOwnPropertyNames(proto).sort().join("\0") === object_proto_names;
-}
-/** @param {any} thing */
-function get_type(thing) {
-	return Object.prototype.toString.call(thing).slice(8, -1);
-}
-/** @param {string} char */
-function get_escaped_char(char) {
-	switch (char) {
-		case "\"": return "\\\"";
-		case "<": return "\\u003C";
-		case "\\": return "\\\\";
-		case "\n": return "\\n";
-		case "\r": return "\\r";
-		case "	": return "\\t";
-		case "\b": return "\\b";
-		case "\f": return "\\f";
-		case "\u2028": return "\\u2028";
-		case "\u2029": return "\\u2029";
-		default: return char < " " ? `\\u${char.charCodeAt(0).toString(16).padStart(4, "0")}` : "";
-	}
-}
-/** @param {string} str */
-function stringify_string(str) {
-	let result = "";
-	let last_pos = 0;
-	const len = str.length;
-	for (let i = 0; i < len; i += 1) {
-		const char = str[i];
-		const replacement = get_escaped_char(char);
-		if (replacement) {
-			result += str.slice(last_pos, i) + replacement;
-			last_pos = i + 1;
-		}
-	}
-	return `"${last_pos === 0 ? str : result + str.slice(last_pos)}"`;
-}
-/** @param {Record<string | symbol, any>} object */
-function enumerable_symbols(object) {
-	return Object.getOwnPropertySymbols(object).filter((symbol) => Object.getOwnPropertyDescriptor(object, symbol).enumerable);
-}
-var is_identifier = /^[a-zA-Z_$][a-zA-Z_$0-9]*$/;
-/** @param {string} key */
-function stringify_key(key) {
-	return is_identifier.test(key) ? "." + key : "[" + JSON.stringify(key) + "]";
-}
-/** @param {number} n */
-function is_valid_array_index(n) {
-	if (!Number.isInteger(n)) return false;
-	if (n < 0) return false;
-	if (n > MAX_ARRAY_INDEX) return false;
-	return true;
-}
-/** @param {number} n */
-function is_valid_array_len(n) {
-	if (!Number.isInteger(n)) return false;
-	if (n < 0) return false;
-	if (n > MAX_ARRAY_LEN) return false;
-	return true;
-}
-/** @param {string} s */
-function is_valid_array_index_string(s) {
-	if (s.length === 0) return false;
-	if (s.length > 1 && s.charCodeAt(0) === 48) return false;
-	for (let i = 0; i < s.length; i++) {
-		const c = s.charCodeAt(i);
-		if (c < 48 || c > 57) return false;
-	}
-	return is_valid_array_index(+s);
-}
-/**
-* Finds the populated indices of an array.
-* @param {unknown[]} array
-*/
-function valid_array_indices(array) {
-	const keys = Object.keys(array);
-	for (var i = keys.length - 1; i >= 0; i--) if (is_valid_array_index_string(keys[i])) break;
-	keys.length = i + 1;
-	return keys;
-}
-//#endregion
-//#region node_modules/.pnpm/devalue@5.8.1/node_modules/devalue/src/parse.js
-/**
-* Revive a value serialized with `devalue.stringify`
-* @param {string} serialized
-* @param {Record<string, (value: any) => any>} [revivers]
-*/
-function parse$1(serialized, revivers) {
-	return unflatten$1(JSON.parse(serialized), revivers);
-}
-/**
-* Revive a value flattened with `devalue.stringify`
-* @param {number | any[]} parsed
-* @param {Record<string, (value: any) => any>} [revivers]
-*/
-function unflatten$1(parsed, revivers) {
-	if (typeof parsed === "number") return hydrate(parsed, true);
-	if (!Array.isArray(parsed) || parsed.length === 0) throw new Error("Invalid input");
-	const values = parsed;
-	const hydrated = Array(values.length);
-	/**
-	* A set of values currently being hydrated with custom revivers,
-	* used to detect invalid cyclical dependencies
-	* @type {Set<number> | null}
-	*/
-	let hydrating = null;
-	/**
-	* @param {number} index
-	* @returns {any}
-	*/
-	function hydrate(index, standalone = false) {
-		if (index === -1) return void 0;
-		if (index === -3) return NaN;
-		if (index === -4) return Infinity;
-		if (index === -5) return -Infinity;
-		if (index === -6) return -0;
-		if (standalone || typeof index !== "number") throw new Error(`Invalid input`);
-		if (index in hydrated) return hydrated[index];
-		const value = values[index];
-		if (!value || typeof value !== "object") hydrated[index] = value;
-		else if (Array.isArray(value)) if (typeof value[0] === "string") {
-			const type = value[0];
-			const reviver = revivers && Object.hasOwn(revivers, type) ? revivers[type] : void 0;
-			if (reviver) {
-				let i = value[1];
-				if (typeof i !== "number") i = values.push(value[1]) - 1;
-				hydrating ??= /* @__PURE__ */ new Set();
-				if (hydrating.has(i)) throw new Error("Invalid circular reference");
-				hydrating.add(i);
-				hydrated[index] = reviver(hydrate(i));
-				hydrating.delete(i);
-				return hydrated[index];
-			}
-			switch (type) {
-				case "Date":
-					hydrated[index] = new Date(value[1]);
-					break;
-				case "Set":
-					const set = /* @__PURE__ */ new Set();
-					hydrated[index] = set;
-					for (let i = 1; i < value.length; i += 1) set.add(hydrate(value[i]));
-					break;
-				case "Map":
-					const map = /* @__PURE__ */ new Map();
-					hydrated[index] = map;
-					for (let i = 1; i < value.length; i += 2) map.set(hydrate(value[i]), hydrate(value[i + 1]));
-					break;
-				case "RegExp":
-					hydrated[index] = new RegExp(value[1], value[2]);
-					break;
-				case "Object": {
-					const wrapped_index = value[1];
-					if (typeof values[wrapped_index] === "object" && values[wrapped_index][0] !== "BigInt") throw new Error("Invalid input");
-					hydrated[index] = Object(hydrate(wrapped_index));
-					break;
-				}
-				case "BigInt":
-					hydrated[index] = BigInt(value[1]);
-					break;
-				case "null":
-					const obj = Object.create(null);
-					hydrated[index] = obj;
-					for (let i = 1; i < value.length; i += 2) {
-						if (value[i] === "__proto__") throw new Error("Cannot parse an object with a `__proto__` property");
-						obj[value[i]] = hydrate(value[i + 1]);
-					}
-					break;
-				case "Int8Array":
-				case "Uint8Array":
-				case "Uint8ClampedArray":
-				case "Int16Array":
-				case "Uint16Array":
-				case "Float16Array":
-				case "Int32Array":
-				case "Uint32Array":
-				case "Float32Array":
-				case "Float64Array":
-				case "BigInt64Array":
-				case "BigUint64Array":
-				case "DataView": {
-					if (values[value[1]][0] !== "ArrayBuffer") throw new Error("Invalid data");
-					const TypedArrayConstructor = globalThis[type];
-					const buffer = hydrate(value[1]);
-					hydrated[index] = value[2] !== void 0 ? new TypedArrayConstructor(buffer, value[2], value[3]) : new TypedArrayConstructor(buffer);
-					break;
-				}
-				case "ArrayBuffer": {
-					const base64 = value[1];
-					if (typeof base64 !== "string") throw new Error("Invalid ArrayBuffer encoding");
-					hydrated[index] = decode64(base64);
-					break;
-				}
-				case "Temporal.Duration":
-				case "Temporal.Instant":
-				case "Temporal.PlainDate":
-				case "Temporal.PlainTime":
-				case "Temporal.PlainDateTime":
-				case "Temporal.PlainMonthDay":
-				case "Temporal.PlainYearMonth":
-				case "Temporal.ZonedDateTime": {
-					const temporalName = type.slice(9);
-					hydrated[index] = Temporal[temporalName].from(value[1]);
-					break;
-				}
-				case "URL":
-					hydrated[index] = new URL(value[1]);
-					break;
-				case "URLSearchParams":
-					hydrated[index] = new URLSearchParams(value[1]);
-					break;
-				default: throw new Error(`Unknown type ${type}`);
-			}
-		} else if (value[0] === -7) {
-			const len = value[1];
-			if (!is_valid_array_len(len)) throw new Error("Invalid input");
-			/** @type {any[]} */
-			const array = [];
-			hydrated[index] = array;
-			array[MAX_ARRAY_INDEX] = void 0;
-			delete array[MAX_ARRAY_INDEX];
-			for (let i = 2; i < value.length; i += 2) {
-				const idx = value[i];
-				if (!is_valid_array_index(idx) || idx >= len) throw new Error("Invalid input");
-				array[idx] = hydrate(value[i + 1]);
-			}
-			array.length = len;
-		} else {
-			const array = new Array(value.length);
-			hydrated[index] = array;
-			for (let i = 0; i < value.length; i += 1) {
-				const n = value[i];
-				if (n === -2) continue;
-				array[i] = hydrate(n);
-			}
-		}
-		else {
-			/** @type {Record<string, any>} */
-			const object = {};
-			hydrated[index] = object;
-			for (const key of Object.keys(value)) {
-				if (key === "__proto__") throw new Error("Cannot parse an object with a `__proto__` property");
-				const n = value[key];
-				object[key] = hydrate(n);
-			}
-		}
-		return hydrated[index];
-	}
-	return hydrate(0);
-}
-//#endregion
-//#region node_modules/.pnpm/devalue@5.8.1/node_modules/devalue/src/stringify.js
-/**
-* Turn a value into a JSON string that can be parsed with `devalue.parse`
-* @param {any} value
-* @param {Record<string, (value: any) => any>} [reducers]
-*/
-function stringify$2(value, reducers) {
-	const stringified = run(false, value, reducers);
-	return typeof stringified === "string" ? stringified : `[${stringified.join(",")}]`;
-}
-/**
-* @param {boolean} async
-* @param {any} value
-* @param {Record<string, (value: any) => any>} [reducers]
-*/
-function run(async, value, reducers) {
-	/** @type {any[]} */
-	const stringified = [];
-	/** @type {Map<any, number>} */
-	const indexes = /* @__PURE__ */ new Map();
-	/** @type {Array<{ key: string, fn: (value: any) => any }>} */
-	const custom = [];
-	if (reducers) for (const key of Object.getOwnPropertyNames(reducers)) custom.push({
-		key,
-		fn: reducers[key]
-	});
-	/** @type {string[]} */
-	const keys = [];
-	let p = 0;
-	/**
-	* @param {any} thing
-	* @param {number} [index]
-	*/
-	function flatten(thing, index) {
-		if (thing === void 0) return -1;
-		if (Number.isNaN(thing)) return -3;
-		if (thing === Infinity) return -4;
-		if (thing === -Infinity) return -5;
-		if (thing === 0 && 1 / thing < 0) return -6;
-		if (indexes.has(thing)) return indexes.get(thing);
-		index ??= p++;
-		indexes.set(thing, index);
-		for (const { key, fn } of custom) {
-			const value = fn(thing);
-			if (value) {
-				stringified[index] = `["${key}",${flatten(value)}]`;
-				return index;
-			}
-		}
-		if (typeof thing === "function") throw new DevalueError(`Cannot stringify a function`, keys, thing, value);
-		else if (typeof thing === "symbol") throw new DevalueError(`Cannot stringify a Symbol primitive`, keys, thing, value);
-		/** @type {string | Promise<any>} */
-		let str = "";
-		if (is_primitive(thing)) str = stringify_primitive(thing);
-		else if (typeof thing.then === "function") {
-			if (!async) throw new DevalueError(`Cannot stringify a Promise or thenable — use stringifyAsync instead`, keys, thing, value);
-			str = Promise.resolve(thing).then((value) => {
-				const i = flatten(value, index);
-				if (i < 0) stringified[index] = i;
-			});
-		} else {
-			const type = get_type(thing);
-			switch (type) {
-				case "Number":
-				case "String":
-				case "Boolean":
-				case "BigInt":
-					str = `["Object",${flatten(thing.valueOf())}]`;
-					break;
-				case "Date":
-					str = `["Date","${!isNaN(thing.getDate()) ? thing.toISOString() : ""}"]`;
-					break;
-				case "URL":
-					str = `["URL",${stringify_string(thing.toString())}]`;
-					break;
-				case "URLSearchParams":
-					str = `["URLSearchParams",${stringify_string(thing.toString())}]`;
-					break;
-				case "RegExp":
-					const { source, flags } = thing;
-					str = flags ? `["RegExp",${stringify_string(source)},"${flags}"]` : `["RegExp",${stringify_string(source)}]`;
-					break;
-				case "Array": {
-					let mostly_dense = false;
-					str = "[";
-					for (let i = 0; i < thing.length; i += 1) {
-						if (i > 0) str += ",";
-						if (Object.hasOwn(thing, i)) {
-							keys.push(`[${i}]`);
-							str += flatten(thing[i]);
-							keys.pop();
-						} else if (mostly_dense) str += -2;
-						else {
-							const populated_keys = valid_array_indices(
-								/** @type {any[]} */
-								thing
-							);
-							const population = populated_keys.length;
-							const d = String(thing.length).length;
-							if ((thing.length - population) * 3 > 4 + d + population * (d + 1)) {
-								str = "[-7," + thing.length;
-								for (let j = 0; j < populated_keys.length; j++) {
-									const key = populated_keys[j];
-									keys.push(`[${key}]`);
-									str += "," + key + "," + flatten(thing[key]);
-									keys.pop();
-								}
-								break;
-							} else {
-								mostly_dense = true;
-								str += -2;
-							}
-						}
-					}
-					str += "]";
-					break;
-				}
-				case "Set":
-					str = "[\"Set\"";
-					for (const value of thing) str += `,${flatten(value)}`;
-					str += "]";
-					break;
-				case "Map":
-					str = "[\"Map\"";
-					for (const [key, value] of thing) {
-						keys.push(`.get(${is_primitive(key) ? stringify_primitive(key) : "..."})`);
-						str += `,${flatten(key)},${flatten(value)}`;
-						keys.pop();
-					}
-					str += "]";
-					break;
-				case "Int8Array":
-				case "Uint8Array":
-				case "Uint8ClampedArray":
-				case "Int16Array":
-				case "Uint16Array":
-				case "Float16Array":
-				case "Int32Array":
-				case "Uint32Array":
-				case "Float32Array":
-				case "Float64Array":
-				case "BigInt64Array":
-				case "BigUint64Array":
-				case "DataView": {
-					/** @type {import("./types.js").TypedArray} */
-					const typedArray = thing;
-					str = "[\"" + type + "\"," + flatten(typedArray.buffer);
-					if (typedArray.byteLength !== typedArray.buffer.byteLength) str += `,${typedArray.byteOffset},${typedArray.length}`;
-					str += "]";
-					break;
-				}
-				case "ArrayBuffer":
-					str = `["ArrayBuffer","${encode64(thing)}"]`;
-					break;
-				case "Temporal.Duration":
-				case "Temporal.Instant":
-				case "Temporal.PlainDate":
-				case "Temporal.PlainTime":
-				case "Temporal.PlainDateTime":
-				case "Temporal.PlainMonthDay":
-				case "Temporal.PlainYearMonth":
-				case "Temporal.ZonedDateTime":
-					str = `["${type}",${stringify_string(thing.toString())}]`;
-					break;
-				default:
-					if (!is_plain_object(thing)) throw new DevalueError(`Cannot stringify arbitrary non-POJOs`, keys, thing, value);
-					if (enumerable_symbols(thing).length > 0) throw new DevalueError(`Cannot stringify POJOs with symbolic keys`, keys, thing, value);
-					if (Object.getPrototypeOf(thing) === null) {
-						str = "[\"null\"";
-						for (const key of Object.keys(thing)) {
-							if (key === "__proto__") throw new DevalueError(`Cannot stringify objects with __proto__ keys`, keys, thing, value);
-							keys.push(stringify_key(key));
-							str += `,${stringify_string(key)},${flatten(thing[key])}`;
-							keys.pop();
-						}
-						str += "]";
-					} else {
-						str = "{";
-						let started = false;
-						for (const key of Object.keys(thing)) {
-							if (key === "__proto__") throw new DevalueError(`Cannot stringify objects with __proto__ keys`, keys, thing, value);
-							if (started) str += ",";
-							started = true;
-							keys.push(stringify_key(key));
-							str += `${stringify_string(key)}:${flatten(thing[key])}`;
-							keys.pop();
-						}
-						str += "}";
-					}
-			}
-		}
-		stringified[index] = str;
-		return index;
-	}
-	const index = flatten(value);
-	if (index < 0) return `${index}`;
-	return stringified;
-}
-/**
-* @param {any} thing
-* @returns {string}
-*/
-function stringify_primitive(thing) {
-	const type = typeof thing;
-	if (type === "string") return stringify_string(thing);
-	if (thing === void 0) return (-1).toString();
-	if (thing === 0 && 1 / thing < 0) return (-6).toString();
-	if (type === "bigint") return `["BigInt","${thing}"]`;
-	return String(thing);
-}
-//#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/actions/consts.js
+//#region node_modules/astro/dist/actions/consts.js
 var ACTION_QUERY_PARAMS = {
 	actionName: "_action",
 	actionPayload: "_astroActionPayload"
 };
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/actions/runtime/client.js
+//#region node_modules/astro/dist/actions/runtime/client.js
 var codeToStatusMap = {
 	BAD_REQUEST: 400,
 	UNAUTHORIZED: 401,
@@ -2924,7 +142,7 @@ function deserializeActionResult(res) {
 			"SSR": true
 		}, {
 			OS: "Windows_NT",
-			Path: "C:\\Users\\fgalluccio\\Documents\\Code\\Personal\\Personal-Portfolio-2025\\node_modules\\.bin;C:\\Users\\fgalluccio\\Documents\\Code\\Personal\\node_modules\\.bin;C:\\Users\\fgalluccio\\Documents\\Code\\node_modules\\.bin;C:\\Users\\fgalluccio\\Documents\\node_modules\\.bin;C:\\Users\\fgalluccio\\node_modules\\.bin;C:\\Users\\node_modules\\.bin;C:\\node_modules\\.bin;C:\\Users\\fgalluccio\\Desarrollo\\node.js\\node-v24.16.0-win-x64\\node_modules\\npm\\node_modules\\@npmcli\\run-script\\lib\\node-gyp-bin;C:\\Users\\fgalluccio\\.dotnet\\tools;C:\\Users\\fgalluccio\\AppData\\Local\\Microsoft\\dotnet;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Windows\\System32\\OpenSSH\\;C:\\Program Files\\dotnet\\;C:\\Program Files\\cursor\\resources\\app\\bin;C:\\Program Files\\Docker\\Docker\\resources\\bin;C:\\Users\\fgalluccio\\AppData\\Local\\pnpm\\bin;C:\\Users\\fgalluccio\\.dotnet\\tools;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Windows\\System32\\OpenSSH\\;C:\\Program Files\\cursor\\resources\\app\\bin;C:\\Program Files\\Docker\\Docker\\resources\\bin;C:\\Users\\fgalluccio\\AppData\\Local\\Programs\\Python\\Launcher\\;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Windows\\System32\\OpenSSH\\;C:\\Program Files\\cursor\\resources\\app\\bin;C:\\Users\\fgalluccio\\Desarrollo\\node.js\\node-v24.16.0-win-x64;C:\\Users\\fgalluccio\\Desarrollo\\node.js\\node-v22.14.0-win-x64;C:\\Users\\fgalluccio\\Desarrollo\\node.js\\node-v20.19.6-win-x64;C:\\Users\\fgalluccio\\AppData\\Local\\Android\\Sdk\\platform-tools;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Windows\\System32\\OpenSSH\\;C:\\Program Files\\cursor\\resources\\app\\bin;C:\\Users\\fgalluccio\\AppData\\Local\\Programs\\cursor\\resources\\app\\bin;C:\\Users\\fgalluccio\\AppData\\Local\\Programs\\Microsoft VS Code\\bin;C:\\Users\\fgalluccio\\AppData\\Local\\Programs\\Git\\cmd;C:\\Users\\fgalluccio\\AppData\\Local\\Python\\bin;C:\\Users\\fgalluccio\\Downloads\\ffmpeg-2026-04-01-git-eedf8f0165-essentials_build\\bin;C:\\Users\\fgalluccio\\AppData\\Local\\Programs\\Windsurf\\bin;C:\\Users\\fgalluccio\\AppData\\Local\\Programs\\Zed\\bin;C:\\Users\\fgalluccio\\AppData\\Local\\Programs\\Antigravity IDE\\bin;C:\\Users\\fgalluccio\\AppData\\Local\\Programs\\Kiro\\bin;C:\\Users\\fgalluccio\\AppData\\Local\\Programs\\Devin\\bin;;C:\\Users\\fgalluccio\\AppData\\Local\\Programs\\Warp\\bin;;C:\\Users\\fgalluccio\\.local\\bin"
+			_: "C:/Users/fgalluccio/Desarrollo/node.js/node-v24.16.0-win-x64/node.exe"
 		})?.PROD) return {
 			error: ActionError.fromJson(json),
 			data: void 0
@@ -2943,7 +161,7 @@ function deserializeActionResult(res) {
 		error: void 0
 	};
 	return {
-		data: parse$1(res.body, { URL: (href) => new URL(href) }),
+		data: parse(res.body, { URL: (href) => new URL(href) }),
 		error: void 0
 	};
 }
@@ -2962,7 +180,7 @@ function getActionQueryString(name) {
 	return `?${new URLSearchParams({ [ACTION_QUERY_PARAMS.actionName]: name }).toString()}`;
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/build/util.js
+//#region node_modules/astro/dist/core/build/util.js
 function shouldAppendForwardSlash(trailingSlash, buildFormat) {
 	switch (trailingSlash) {
 		case "always": return true;
@@ -2975,7 +193,7 @@ function shouldAppendForwardSlash(trailingSlash, buildFormat) {
 	}
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/request-body.js
+//#region node_modules/astro/dist/core/request-body.js
 async function readBodyWithLimit(request, limit) {
 	const contentLengthHeader = request.headers.get("content-length");
 	if (contentLengthHeader) {
@@ -3012,7 +230,7 @@ var BodySizeLimitError = class extends Error {
 	}
 };
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/actions/runtime/server.js
+//#region node_modules/astro/dist/actions/runtime/server.js
 function getActionContext(context) {
 	const callerInfo = getCallerInfo(context);
 	const actionResultAlreadySet = Boolean(context.locals._actionPayload);
@@ -3139,7 +357,10 @@ function serializeActionResult(res) {
 			"PROD": true,
 			"SITE": void 0,
 			"SSR": true
-		}, { OS: "Windows_NT" })?.DEV) actionResultErrorStack.set(res.error.stack);
+		}, {
+			OS: "Windows_NT",
+			_: "C:/Users/fgalluccio/Desarrollo/node.js/node-v24.16.0-win-x64/node.exe"
+		})?.DEV) actionResultErrorStack.set(res.error.stack);
 		let body2;
 		if (res.error instanceof ActionInputError) body2 = {
 			type: res.error.type,
@@ -3163,7 +384,7 @@ function serializeActionResult(res) {
 	};
 	let body;
 	try {
-		body = stringify$2(res.data, { URL: (value) => value instanceof URL && value.href });
+		body = stringify(res.data, { URL: (value) => value instanceof URL && value.href });
 	} catch (e) {
 		let hint = ActionsReturnedInvalidDataError.hint;
 		if (res.data instanceof Response) hint = REDIRECT_STATUS_CODES.includes(res.data.status) ? "If you need to redirect when the action succeeds, trigger a redirect where the action is called. See the Actions guide for server and client redirect examples: https://docs.astro.build/en/guides/actions." : "If you need to return a Response object, try using a server endpoint instead. See https://docs.astro.build/en/guides/endpoints/#server-endpoints-api-routes";
@@ -3186,7 +407,7 @@ function toArrayBuffer(buffer) {
 	return copy.buffer;
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/actions/utils.js
+//#region node_modules/astro/dist/actions/utils.js
 function hasActionPayload(locals) {
 	return "_actionPayload" in locals;
 }
@@ -3203,212 +424,7 @@ function createCallAction(context) {
 	};
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/cookies/cookies.js
-var import_dist = (/* @__PURE__ */ __commonJSMin(((exports) => {
-	Object.defineProperty(exports, "__esModule", { value: true });
-	exports.parse = parseCookie;
-	exports.stringifySetCookie = stringifySetCookie;
-	exports.serialize = stringifySetCookie;
-	exports.stringifySetCookie = stringifySetCookie;
-	exports.serialize = stringifySetCookie;
-	/**
-	* RegExp to match cookie-name in RFC 6265 sec 4.1.1
-	* This refers out to the obsoleted definition of token in RFC 2616 sec 2.2
-	* which has been replaced by the token definition in RFC 7230 appendix B.
-	*
-	* cookie-name       = token
-	* token             = 1*tchar
-	* tchar             = "!" / "#" / "$" / "%" / "&" / "'" /
-	*                     "*" / "+" / "-" / "." / "^" / "_" /
-	*                     "`" / "|" / "~" / DIGIT / ALPHA
-	*
-	* Note: Allowing more characters - https://github.com/jshttp/cookie/issues/191
-	* Allow same range as cookie value, except `=`, which delimits end of name.
-	*/
-	var cookieNameRegExp = /^[\u0021-\u003A\u003C\u003E-\u007E]+$/;
-	/**
-	* RegExp to match cookie-value in RFC 6265 sec 4.1.1
-	*
-	* cookie-value      = *cookie-octet / ( DQUOTE *cookie-octet DQUOTE )
-	* cookie-octet      = %x21 / %x23-2B / %x2D-3A / %x3C-5B / %x5D-7E
-	*                     ; US-ASCII characters excluding CTLs,
-	*                     ; whitespace DQUOTE, comma, semicolon,
-	*                     ; and backslash
-	*
-	* Allowing more characters: https://github.com/jshttp/cookie/issues/191
-	* Comma, backslash, and DQUOTE are not part of the parsing algorithm.
-	*/
-	var cookieValueRegExp = /^[\u0021-\u003A\u003C-\u007E]*$/;
-	/**
-	* RegExp to match domain-value in RFC 6265 sec 4.1.1
-	*
-	* domain-value      = <subdomain>
-	*                     ; defined in [RFC1034], Section 3.5, as
-	*                     ; enhanced by [RFC1123], Section 2.1
-	* <subdomain>       = <label> | <subdomain> "." <label>
-	* <label>           = <let-dig> [ [ <ldh-str> ] <let-dig> ]
-	*                     Labels must be 63 characters or less.
-	*                     'let-dig' not 'letter' in the first char, per RFC1123
-	* <ldh-str>         = <let-dig-hyp> | <let-dig-hyp> <ldh-str>
-	* <let-dig-hyp>     = <let-dig> | "-"
-	* <let-dig>         = <letter> | <digit>
-	* <letter>          = any one of the 52 alphabetic characters A through Z in
-	*                     upper case and a through z in lower case
-	* <digit>           = any one of the ten digits 0 through 9
-	*
-	* Keep support for leading dot: https://github.com/jshttp/cookie/issues/173
-	*
-	* > (Note that a leading %x2E ("."), if present, is ignored even though that
-	* character is not permitted, but a trailing %x2E ("."), if present, will
-	* cause the user agent to ignore the attribute.)
-	*/
-	var domainValueRegExp = /^([.]?[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?)([.][a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?)*$/i;
-	/**
-	* RegExp to match path-value in RFC 6265 sec 4.1.1
-	*
-	* path-value        = <any CHAR except CTLs or ";">
-	* CHAR              = %x01-7F
-	*                     ; defined in RFC 5234 appendix B.1
-	*/
-	var pathValueRegExp = /^[\u0020-\u003A\u003D-\u007E]*$/;
-	var __toString = Object.prototype.toString;
-	var NullObject = /* @__PURE__ */ (() => {
-		const C = function() {};
-		C.prototype = Object.create(null);
-		return C;
-	})();
-	/**
-	* Parse a `Cookie` header.
-	*
-	* Parse the given cookie header string into an object
-	* The object has the various cookies as keys(names) => values
-	*/
-	function parseCookie(str, options) {
-		const obj = new NullObject();
-		const len = str.length;
-		if (len < 2) return obj;
-		const dec = options?.decode || decode;
-		let index = 0;
-		do {
-			const eqIdx = eqIndex(str, index, len);
-			if (eqIdx === -1) break;
-			const endIdx = endIndex(str, index, len);
-			if (eqIdx > endIdx) {
-				index = str.lastIndexOf(";", eqIdx - 1) + 1;
-				continue;
-			}
-			const key = valueSlice(str, index, eqIdx);
-			if (obj[key] === void 0) obj[key] = dec(valueSlice(str, eqIdx + 1, endIdx));
-			index = endIdx + 1;
-		} while (index < len);
-		return obj;
-	}
-	function stringifySetCookie(_name, _val, _opts) {
-		const cookie = typeof _name === "object" ? _name : {
-			..._opts,
-			name: _name,
-			value: String(_val)
-		};
-		const enc = (typeof _val === "object" ? _val : _opts)?.encode || encodeURIComponent;
-		if (!cookieNameRegExp.test(cookie.name)) throw new TypeError(`argument name is invalid: ${cookie.name}`);
-		const value = cookie.value ? enc(cookie.value) : "";
-		if (!cookieValueRegExp.test(value)) throw new TypeError(`argument val is invalid: ${cookie.value}`);
-		let str = cookie.name + "=" + value;
-		if (cookie.maxAge !== void 0) {
-			if (!Number.isInteger(cookie.maxAge)) throw new TypeError(`option maxAge is invalid: ${cookie.maxAge}`);
-			str += "; Max-Age=" + cookie.maxAge;
-		}
-		if (cookie.domain) {
-			if (!domainValueRegExp.test(cookie.domain)) throw new TypeError(`option domain is invalid: ${cookie.domain}`);
-			str += "; Domain=" + cookie.domain;
-		}
-		if (cookie.path) {
-			if (!pathValueRegExp.test(cookie.path)) throw new TypeError(`option path is invalid: ${cookie.path}`);
-			str += "; Path=" + cookie.path;
-		}
-		if (cookie.expires) {
-			if (!isDate(cookie.expires) || !Number.isFinite(cookie.expires.valueOf())) throw new TypeError(`option expires is invalid: ${cookie.expires}`);
-			str += "; Expires=" + cookie.expires.toUTCString();
-		}
-		if (cookie.httpOnly) str += "; HttpOnly";
-		if (cookie.secure) str += "; Secure";
-		if (cookie.partitioned) str += "; Partitioned";
-		if (cookie.priority) switch (typeof cookie.priority === "string" ? cookie.priority.toLowerCase() : void 0) {
-			case "low":
-				str += "; Priority=Low";
-				break;
-			case "medium":
-				str += "; Priority=Medium";
-				break;
-			case "high":
-				str += "; Priority=High";
-				break;
-			default: throw new TypeError(`option priority is invalid: ${cookie.priority}`);
-		}
-		if (cookie.sameSite) switch (typeof cookie.sameSite === "string" ? cookie.sameSite.toLowerCase() : cookie.sameSite) {
-			case true:
-			case "strict":
-				str += "; SameSite=Strict";
-				break;
-			case "lax":
-				str += "; SameSite=Lax";
-				break;
-			case "none":
-				str += "; SameSite=None";
-				break;
-			default: throw new TypeError(`option sameSite is invalid: ${cookie.sameSite}`);
-		}
-		return str;
-	}
-	/**
-	* Find the `;` character between `min` and `len` in str.
-	*/
-	function endIndex(str, min, len) {
-		const index = str.indexOf(";", min);
-		return index === -1 ? len : index;
-	}
-	/**
-	* Find the `=` character between `min` and `max` in str.
-	*/
-	function eqIndex(str, min, max) {
-		const index = str.indexOf("=", min);
-		return index < max ? index : -1;
-	}
-	/**
-	* Slice out a value between startPod to max.
-	*/
-	function valueSlice(str, min, max) {
-		let start = min;
-		let end = max;
-		do {
-			const code = str.charCodeAt(start);
-			if (code !== 32 && code !== 9) break;
-		} while (++start < end);
-		while (end > start) {
-			const code = str.charCodeAt(end - 1);
-			if (code !== 32 && code !== 9) break;
-			end--;
-		}
-		return str.slice(start, end);
-	}
-	/**
-	* URL-decode string value. Optimized to skip native call when no %.
-	*/
-	function decode(str) {
-		if (str.indexOf("%") === -1) return str;
-		try {
-			return decodeURIComponent(str);
-		} catch (e) {
-			return str;
-		}
-	}
-	/**
-	* Determine if value is a Date.
-	*/
-	function isDate(val) {
-		return __toString.call(val) === "[object Date]";
-	}
-})))();
+//#region node_modules/astro/dist/core/cookies/cookies.js
 var DELETED_EXPIRATION = /* @__PURE__ */ new Date(0);
 var DELETED_VALUE = "deleted";
 var responseSentSymbol = /* @__PURE__ */ Symbol.for("astro.responseSent");
@@ -3456,7 +472,7 @@ var AstroCookies = class {
 		};
 		this.#ensureOutgoingMap().set(key, [
 			DELETED_VALUE,
-			(0, import_dist.serialize)(key, DELETED_VALUE, serializeOptions),
+			serialize(key, DELETED_VALUE, serializeOptions),
 			false
 		]);
 	}
@@ -3528,7 +544,7 @@ var AstroCookies = class {
 		if (options) Object.assign(serializeOptions, options);
 		this.#ensureOutgoingMap().set(key, [
 			serializedValue,
-			(0, import_dist.serialize)(key, serializedValue, serializeOptions),
+			serialize(key, serializedValue, serializeOptions),
 			true
 		]);
 		if (this.#request[responseSentSymbol]) throw new AstroError({ ...ResponseSentError });
@@ -3578,11 +594,11 @@ var AstroCookies = class {
 	#parse() {
 		const raw = this.#request.headers.get("cookie");
 		if (!raw) return;
-		this.#requestValues = (0, import_dist.parse)(raw, { decode: identity });
+		this.#requestValues = parse$1(raw, { decode: identity });
 	}
 };
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/cookies/response.js
+//#region node_modules/astro/dist/core/cookies/response.js
 var astroCookiesSymbol = /* @__PURE__ */ Symbol.for("astro.cookies");
 function attachCookiesToResponse(response, cookies) {
 	Reflect.set(response, astroCookiesSymbol, cookies);
@@ -3599,15 +615,15 @@ function* getSetCookiesFromResponse(response) {
 	return [];
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/actions/noop-actions.js
+//#region node_modules/astro/dist/actions/noop-actions.js
 var NOOP_ACTIONS_MOD = { server: {} };
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/middleware/defineMiddleware.js
+//#region node_modules/astro/dist/core/middleware/defineMiddleware.js
 function defineMiddleware(fn) {
 	return fn;
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/app/middlewares.js
+//#region node_modules/astro/dist/core/app/middlewares.js
 var FORM_CONTENT_TYPES = [
 	"application/x-www-form-urlencoded",
 	"multipart/form-data",
@@ -3637,12 +653,12 @@ function hasFormLikeHeader(contentType) {
 	return false;
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/middleware/noop-middleware.js
+//#region node_modules/astro/dist/core/middleware/noop-middleware.js
 var NOOP_MIDDLEWARE_FN = async (_ctx, next) => {
 	return await next();
 };
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/request.js
+//#region node_modules/astro/dist/core/request.js
 function createRequest({ url, headers, method = "GET", body = void 0, logger, isPrerendered = false, routePattern, init }) {
 	const headersObj = isPrerendered ? void 0 : headers instanceof Headers ? headers : new Headers(Object.entries(headers).filter(([name]) => !name.startsWith(":")));
 	if (typeof url === "string") url = new URL(url);
@@ -3670,7 +686,7 @@ function createRequest({ url, headers, method = "GET", body = void 0, logger, is
 	return request;
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/util/pathname.js
+//#region node_modules/astro/dist/core/util/pathname.js
 var MultiLevelEncodingError = class extends Error {
 	constructor() {
 		super("URL encoding depth exceeded the maximum number of decode iterations");
@@ -3699,7 +715,7 @@ function validateAndDecodePathname(pathname) {
 	return decoded;
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/template/4xx.js
+//#region node_modules/astro/dist/template/4xx.js
 function template({ title, pathname, statusCode = 404, tabTitle, body }) {
 	return `<!doctype html>
 <html lang="en">
@@ -3793,7 +809,7 @@ function template({ title, pathname, statusCode = 404, tabTitle, body }) {
 </html>`;
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/routing/internal/astro-designed-error-pages.js
+//#region node_modules/astro/dist/core/routing/internal/astro-designed-error-pages.js
 var DEFAULT_404_ROUTE = {
 	component: DEFAULT_404_COMPONENT,
 	params: [],
@@ -3826,17 +842,7 @@ async function default404Page({ pathname }) {
 default404Page.isAstroComponentFactory = true;
 var default404Instance = { default: default404Page };
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/routing/internal/route-errors.js
-var ROUTE404_RE = /^\/404\/?$/;
-var ROUTE500_RE = /^\/500\/?$/;
-function isRoute404(route) {
-	return ROUTE404_RE.test(route);
-}
-function isRoute500(route) {
-	return ROUTE500_RE.test(route);
-}
-//#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/routing/rewrite.js
+//#region node_modules/astro/dist/core/routing/rewrite.js
 function findRouteToRewrite({ payload, routes, request, trailingSlash, buildFormat, base, outDir }) {
 	let newUrl = void 0;
 	if (payload instanceof URL) newUrl = payload;
@@ -3947,7 +953,7 @@ function normalizeRewritePathname(urlPathname, base, trailingSlash, buildFormat)
 	};
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/middleware/sequence.js
+//#region node_modules/astro/dist/core/middleware/sequence.js
 function sequence(...handlers) {
 	const filtered = handlers.filter((h) => !!h);
 	const length = filtered.length;
@@ -3988,7 +994,7 @@ function sequence(...handlers) {
 	});
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/redirects/component.js
+//#region node_modules/astro/dist/core/redirects/component.js
 var RedirectComponentInstance = { default() {
 	return new Response(null, { status: 301 });
 } };
@@ -3997,7 +1003,7 @@ var RedirectSinglePageBuiltModule = {
 	onRequest: (_, next) => next()
 };
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/routing/generator.js
+//#region node_modules/astro/dist/core/routing/generator.js
 function sanitizeParams(params) {
 	return Object.fromEntries(Object.entries(params).map(([key, value]) => {
 		if (typeof value === "string") return [key, value.normalize().replace(/#/g, "%23").replace(/\?/g, "%3F")];
@@ -4025,7 +1031,7 @@ function getRouteGenerator(segments, addTrailingSlash) {
 	};
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/routing/internal/validation.js
+//#region node_modules/astro/dist/core/routing/internal/validation.js
 var VALID_PARAM_TYPES = ["string", "undefined"];
 function validateGetStaticPathsParameter([key, value], route) {
 	if (!VALID_PARAM_TYPES.includes(typeof value)) throw new AstroError({
@@ -4035,7 +1041,7 @@ function validateGetStaticPathsParameter([key, value], route) {
 	});
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/routing/params.js
+//#region node_modules/astro/dist/core/routing/params.js
 function stringifyParams(params, route, trailingSlash) {
 	const validatedParams = {};
 	for (const [key, value] of Object.entries(params)) {
@@ -4045,7 +1051,7 @@ function stringifyParams(params, route, trailingSlash) {
 	return getRouteGenerator(route.segments, trailingSlash)(validatedParams);
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/routing/validation.js
+//#region node_modules/astro/dist/core/routing/validation.js
 function validateDynamicRouteModule(mod, { ssr, route }) {
 	if ((!ssr || route.prerender) && route.origin !== "internal" && !mod.getStaticPaths) throw new AstroError({
 		...GetStaticPathsRequired,
@@ -4070,7 +1076,7 @@ function validateGetStaticPathsResult(result, route) {
 	});
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/render/paginate.js
+//#region node_modules/astro/dist/core/render/paginate.js
 function generatePaginateFunction(routeMatch, base, trailingSlash) {
 	return function paginateUtility(data, args = {}) {
 		const generate = getRouteGenerator(routeMatch.segments, trailingSlash);
@@ -4143,7 +1149,7 @@ function addRouteBase(route, base) {
 	return routeWithBase;
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/render/route-cache.js
+//#region node_modules/astro/dist/core/render/route-cache.js
 async function callGetStaticPaths({ mod, route, routeCache, ssr, base, trailingSlash }) {
 	const cached = routeCache.get(route);
 	if (!mod) throw new Error("This is an error caused by Astro and not your code. Please file an issue.");
@@ -4212,7 +1218,7 @@ function findPathItemByKey(staticPaths, params, route, logger, trailingSlash) {
 	logger.debug("router", `findPathItemByKey() - Unexpected cache miss looking for ${paramsKey}`);
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/routing/pattern.js
+//#region node_modules/astro/dist/core/routing/pattern.js
 function getPattern(segments, base, addTrailingSlash) {
 	const pathname = segments.map((segment) => {
 		if (segment.length === 1 && segment[0].spread) return "(?:\\/(.*?))?";
@@ -4233,7 +1239,7 @@ function getTrailingSlashPattern(addTrailingSlash) {
 	return "\\/?$";
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/server-islands/endpoint.js
+//#region node_modules/astro/dist/core/server-islands/endpoint.js
 var SERVER_ISLAND_ROUTE = "/_server-islands/[name]";
 var SERVER_ISLAND_COMPONENT = "_server-islands.astro";
 function badRequest(reason) {
@@ -4332,7 +1338,7 @@ function createEndpoint(manifest) {
 	};
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/routing/default.js
+//#region node_modules/astro/dist/core/routing/default.js
 function createDefaultRoutes(manifest) {
 	const root = new URL(manifest.rootDir);
 	return [{
@@ -4348,13 +1354,13 @@ function createDefaultRoutes(manifest) {
 	}];
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/routing/astro-designed-error-pages.js
+//#region node_modules/astro/dist/core/routing/astro-designed-error-pages.js
 function ensure404Route(manifest) {
 	if (!manifest.routes.some((route) => route.route === "/404")) manifest.routes.push(DEFAULT_404_ROUTE);
 	return manifest;
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/routing/helpers.js
+//#region node_modules/astro/dist/core/routing/helpers.js
 function routeIsRedirect(route) {
 	return route?.type === "redirect";
 }
@@ -4378,7 +1384,7 @@ function routeHasHtmlExtension(route) {
 	return route.segments.some((segment) => segment.some((part) => !part.dynamic && part.content.includes(".html")));
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/render/params-and-props.js
+//#region node_modules/astro/dist/core/render/params-and-props.js
 async function getProps(opts) {
 	const { logger, mod, routeData: route, routeCache, pathname, serverLike, base, trailingSlash } = opts;
 	if (!route || route.pathname) return {};
@@ -4427,7 +1433,7 @@ function validatePrerenderEndpointCollision(route, mod, params) {
 	}
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/routing/priority.js
+//#region node_modules/astro/dist/core/routing/priority.js
 function routeComparator(a, b) {
 	const commonLength = Math.min(a.segments.length, b.segments.length);
 	for (let index = 0; index < commonLength; index++) {
@@ -4461,7 +1467,7 @@ function routeComparator(a, b) {
 	return a.route.localeCompare(b.route);
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/routing/router.js
+//#region node_modules/astro/dist/core/routing/router.js
 var Router = class {
 	#routes;
 	#base;
@@ -4574,14 +1580,14 @@ function normalizeFileFormatPathname(pathname) {
 	return pathname;
 }
 //#endregion
-//#region node_modules/.pnpm/@astrojs+internal-helpers@0.10.0/node_modules/@astrojs/internal-helpers/dist/object.js
+//#region node_modules/@astrojs/internal-helpers/dist/object.js
 var FORBIDDEN_PATH_KEYS = /* @__PURE__ */ new Set([
 	"__proto__",
 	"constructor",
 	"prototype"
 ]);
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/logger/core.js
+//#region node_modules/astro/dist/core/logger/core.js
 var dateTimeFormat = new Intl.DateTimeFormat([], {
 	hour: "2-digit",
 	minute: "2-digit",
@@ -4626,14 +1632,14 @@ function getEventPrefix({ level, label }) {
 	const timestamp = `${dateTimeFormat.format(/* @__PURE__ */ new Date())}`;
 	const prefix = [];
 	if (level === "error" || level === "warn") {
-		prefix.push(s.bold(timestamp));
+		prefix.push(colors.bold(timestamp));
 		prefix.push(`[${level.toUpperCase()}]`);
 	} else prefix.push(timestamp);
 	if (label) prefix.push(`[${label}]`);
-	if (level === "error") return s.red(prefix.join(" "));
-	if (level === "warn") return s.yellow(prefix.join(" "));
-	if (prefix.length === 1) return s.dim(prefix[0]);
-	return s.dim(prefix[0]) + " " + s.blue(prefix.splice(1).join(" "));
+	if (level === "error") return colors.red(prefix.join(" "));
+	if (level === "warn") return colors.yellow(prefix.join(" "));
+	if (prefix.length === 1) return colors.dim(prefix[0]);
+	return colors.dim(prefix[0]) + " " + colors.blue(prefix.splice(1).join(" "));
 }
 var AstroLogger = class {
 	options;
@@ -4713,12 +1719,12 @@ var AstroIntegrationLogger = class AstroIntegrationLogger {
 	}
 };
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/logger/public.js
+//#region node_modules/astro/dist/core/logger/public.js
 function matchesLevel(messageLevel, configuredLevel) {
 	return levels[messageLevel] >= levels[configuredLevel];
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/logger/impls/node.js
+//#region node_modules/astro/dist/core/logger/impls/node.js
 function nodeLogDestination(config = {}) {
 	const { level = "info" } = config;
 	return { write(event) {
@@ -4734,7 +1740,7 @@ function node_default(options) {
 	return nodeLogDestination(options);
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/logger/impls/console.js
+//#region node_modules/astro/dist/core/logger/impls/console.js
 function consoleLogDestination(config = {}) {
 	const { level = "info" } = config;
 	return { write(event) {
@@ -4755,7 +1761,7 @@ function console_default(options) {
 	return consoleLogDestination(options);
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/logger/impls/json.js
+//#region node_modules/astro/dist/core/logger/impls/json.js
 var SGR_REGEX = new RegExp(`${String.fromCharCode(27)}\\[[0-9;]*m`, "g");
 function jsonLoggerDestination(config = {}) {
 	const { pretty = false, level = "info" } = config;
@@ -4778,7 +1784,7 @@ function jsonLoggerDestination(config = {}) {
 	} };
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/logger/impls/compose.js
+//#region node_modules/astro/dist/core/logger/impls/compose.js
 function compose(destinations) {
 	return {
 		write(chunk) {
@@ -4793,7 +1799,7 @@ function compose(destinations) {
 	};
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/logger/load.js
+//#region node_modules/astro/dist/core/logger/load.js
 async function loadLogger(config, level = "info") {
 	let cause = void 0;
 	try {
@@ -4845,7 +1851,7 @@ async function loadLogger(config, level = "info") {
 	throw error;
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/base-pipeline.js
+//#region node_modules/astro/dist/core/base-pipeline.js
 var PipelineFeatures = {
 	redirects: 1,
 	sessions: 2,
@@ -5067,7 +2073,7 @@ var Pipeline = class {
 	}
 };
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/render/slots.js
+//#region node_modules/astro/dist/core/render/slots.js
 function getFunctionExpression(slot) {
 	if (!slot) return;
 	const expressions = slot?.expressions?.filter((e) => isRenderInstruction(e) === false || isRenderTemplateResult(e));
@@ -5121,7 +2127,7 @@ var Slots = class {
 	}
 };
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/csp/runtime.js
+//#region node_modules/astro/dist/core/csp/runtime.js
 function deduplicateDirectiveValues(existingDirective, newDirective) {
 	const [directiveName, ...existingValues] = existingDirective.split(/\s+/).filter(Boolean);
 	const [newDirectiveName, ...newValues] = newDirective.split(/\s+/).filter(Boolean);
@@ -5147,7 +2153,7 @@ function pushDirective(directives, newDirective) {
 	return finalDirectives;
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/i18n/fallback.js
+//#region node_modules/astro/dist/i18n/fallback.js
 function computeFallbackRoute(options) {
 	const { pathname, responseStatus, fallback, fallbackType, locales, defaultLocale, strategy, base } = options;
 	if (responseStatus !== 404) return { type: "none" };
@@ -5172,7 +2178,22 @@ function computeFallbackRoute(options) {
 	};
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/i18n/router.js
+//#region node_modules/astro/dist/i18n/path.js
+function pathHasLocale(path, locales) {
+	const segments = path.split("/").map(normalizeThePath);
+	for (const segment of segments) for (const locale of locales) if (typeof locale === "string") {
+		if (normalizeTheLocale(segment) === normalizeTheLocale(locale)) return true;
+	} else if (segment === locale.path) return true;
+	return false;
+}
+function normalizeTheLocale(locale) {
+	return locale.replaceAll("_", "-").toLowerCase();
+}
+function normalizeThePath(path) {
+	return path.endsWith(".html") ? path.slice(0, -5) : path;
+}
+//#endregion
+//#region node_modules/astro/dist/i18n/router.js
 var I18nRouter = class {
 	#strategy;
 	#defaultLocale;
@@ -5269,7 +2290,7 @@ var I18nRouter = class {
 	}
 };
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/i18n/handler.js
+//#region node_modules/astro/dist/core/i18n/handler.js
 var I18n = class {
 	#i18n;
 	#base;
@@ -5363,25 +2384,12 @@ var I18n = class {
 	}
 };
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/i18n/index.js
-function pathHasLocale(path, locales) {
-	const segments = path.split("/").map(normalizeThePath);
-	for (const segment of segments) for (const locale of locales) if (typeof locale === "string") {
-		if (normalizeTheLocale(segment) === normalizeTheLocale(locale)) return true;
-	} else if (segment === locale.path) return true;
-	return false;
-}
+//#region node_modules/astro/dist/i18n/index.js
 function getPathByLocale(locale, locales) {
 	for (const loopLocale of locales) if (typeof loopLocale === "string") {
 		if (loopLocale === locale) return loopLocale;
 	} else for (const code of loopLocale.codes) if (code === locale) return loopLocale.path;
 	throw new AstroError(i18nNoLocaleFoundInPath);
-}
-function normalizeTheLocale(locale) {
-	return locale.replaceAll("_", "-").toLowerCase();
-}
-function normalizeThePath(path) {
-	return path.endsWith(".html") ? path.slice(0, -5) : path;
 }
 function getAllCodes(locales) {
 	const result = [];
@@ -5390,7 +2398,7 @@ function getAllCodes(locales) {
 	return result;
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/i18n/utils.js
+//#region node_modules/astro/dist/i18n/utils.js
 function parseLocale(header) {
 	if (header === "*") return [{
 		locale: header,
@@ -5490,7 +2498,7 @@ function computeCurrentLocaleFromParams(params, locales) {
 	}
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/middleware/callMiddleware.js
+//#region node_modules/astro/dist/core/middleware/callMiddleware.js
 async function callMiddleware(onRequest, apiContext, responseFunction) {
 	let nextCalled = false;
 	let responseFunctionPromise = void 0;
@@ -5512,7 +2520,7 @@ async function callMiddleware(onRequest, apiContext, responseFunction) {
 	});
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/cache/runtime/noop.js
+//#region node_modules/astro/dist/core/cache/runtime/noop.js
 var EMPTY_OPTIONS = Object.freeze({ tags: [] });
 var NoopAstroCache = class {
 	enabled = false;
@@ -5552,7 +2560,7 @@ var DisabledAstroCache = class {
 	}
 };
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/middleware/astro-middleware.js
+//#region node_modules/astro/dist/core/middleware/astro-middleware.js
 var AstroMiddleware = class {
 	#pipeline;
 	constructor(pipeline) {
@@ -5634,7 +2642,7 @@ var AstroMiddleware = class {
 	}
 };
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/pages/handler.js
+//#region node_modules/astro/dist/core/pages/handler.js
 var EMPTY_SLOTS = Object.freeze({});
 var PagesHandler = class {
 	#pipeline;
@@ -5707,7 +2715,7 @@ var PagesHandler = class {
 	}
 };
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/util/normalized-url.js
+//#region node_modules/astro/dist/core/util/normalized-url.js
 function createNormalizedUrl(requestUrl) {
 	return normalizeUrl(new URL(requestUrl));
 }
@@ -5723,7 +2731,7 @@ function normalizeUrl(url) {
 	return url;
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/rewrites/handler.js
+//#region node_modules/astro/dist/core/rewrites/handler.js
 function applyRewriteToState(state, payload, { routeData, componentInstance, newUrl, pathname }, { mergeCookies = false } = {}) {
 	const pipeline = state.pipeline;
 	const oldPathname = state.pathname;
@@ -5761,7 +2769,7 @@ var Rewrites = class {
 	}
 };
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/routing/match.js
+//#region node_modules/astro/dist/core/routing/match.js
 function matchRoute(pathname, manifest) {
 	if (isRoute404(pathname)) {
 		const errorRoute = manifest.routes.find((route) => isRoute404(route.route));
@@ -5782,7 +2790,7 @@ function isRouteServerIsland(route) {
 	return route.component === SERVER_ISLAND_COMPONENT;
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/i18n/domain.js
+//#region node_modules/astro/dist/core/i18n/domain.js
 function computePathnameFromDomain(request, url, i18n, base, trailingSlash, logger) {
 	let pathname = void 0;
 	if (i18n && (i18n.strategy === "domains-prefix-always" || i18n.strategy === "domains-prefix-other-locales" || i18n.strategy === "domains-prefix-always-no-redirect")) {
@@ -5823,7 +2831,7 @@ function removeBase(pathname, base) {
 	return pathname;
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/app/render-options.js
+//#region node_modules/astro/dist/core/app/render-options.js
 var renderOptionsSymbol = /* @__PURE__ */ Symbol.for("astro.renderOptions");
 function getRenderOptions(request) {
 	return Reflect.get(request, renderOptionsSymbol);
@@ -5832,7 +2840,7 @@ function setRenderOptions(request, options) {
 	Reflect.set(request, renderOptionsSymbol, options);
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/app/validate-headers.js
+//#region node_modules/astro/dist/core/app/validate-headers.js
 function getFirstForwardedValue$1(multiValueHeader) {
 	return multiValueHeader?.toString().split(",").map((e) => e.trim())[0];
 }
@@ -5889,7 +2897,7 @@ function validateForwardedHeaders(forwardedProtocol, forwardedHost, forwardedPor
 	return result;
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/fetch/fetch-state.js
+//#region node_modules/astro/dist/core/fetch/fetch-state.js
 var FetchState = class {
 	pipeline;
 	/**
@@ -6243,7 +3251,7 @@ var FetchState = class {
 		const state = this;
 		const { pipeline } = this;
 		if (!pipeline.manifest.csp) {
-			if (pipeline.runtimeMode === "production") pipeline.logger.warn("csp", `context.csp was used when rendering the route ${s.green(state.routeData.route)}, but CSP was not configured. For more information, see https://docs.astro.build/en/reference/configuration-reference/#securitycsp`);
+			if (pipeline.runtimeMode === "production") pipeline.logger.warn("csp", `context.csp was used when rendering the route ${colors.green(state.routeData.route)}, but CSP was not configured. For more information, see https://docs.astro.build/en/reference/configuration-reference/#securitycsp`);
 			return;
 		}
 		return {
@@ -6634,7 +3642,7 @@ var FetchState = class {
 	}
 };
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/actions/handler.js
+//#region node_modules/astro/dist/actions/handler.js
 var ActionHandler = class {
 	/**
 	* Run action handling for the current request. Expects the APIContext
@@ -6664,13 +3672,13 @@ var ActionHandler = class {
 	}
 };
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/app/prepare-response.js
+//#region node_modules/astro/dist/core/app/prepare-response.js
 function prepareResponse(response, { addCookieHeader }) {
 	if (addCookieHeader) for (const setCookieHeaderValue of getSetCookiesFromResponse(response)) response.headers.append("set-cookie", setCookieHeaderValue);
 	Reflect.set(response, responseSentSymbol$1, true);
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/routing/3xx.js
+//#region node_modules/astro/dist/core/routing/3xx.js
 function redirectTemplate({ status, absoluteLocation, relativeLocation, from }) {
 	const delay = status === 302 ? 2 : 0;
 	const rel = escape(String(relativeLocation));
@@ -6684,7 +3692,7 @@ function redirectTemplate({ status, absoluteLocation, relativeLocation, from }) 
 </body>`;
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/routing/trailing-slash-handler.js
+//#region node_modules/astro/dist/core/routing/trailing-slash-handler.js
 var TrailingSlashHandler = class {
 	#app;
 	constructor(app) {
@@ -6724,7 +3732,7 @@ var TrailingSlashHandler = class {
 	}
 };
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/cache/runtime/utils.js
+//#region node_modules/astro/dist/core/cache/runtime/utils.js
 function defaultSetHeaders(options) {
 	const headers = new Headers();
 	const directives = [];
@@ -6740,7 +3748,7 @@ function isLiveDataEntry(value) {
 	return value != null && typeof value === "object" && "id" in value && "data" in value && "cacheHint" in value;
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/cache/runtime/cache.js
+//#region node_modules/astro/dist/core/cache/runtime/cache.js
 var APPLY_HEADERS = /* @__PURE__ */ Symbol.for("astro:cache:apply");
 var IS_ACTIVE = /* @__PURE__ */ Symbol.for("astro:cache:active");
 var AstroCache = class {
@@ -6813,7 +3821,7 @@ function applyCacheHeaders(cache, response, request) {
 	if (APPLY_HEADERS in cache) cache[APPLY_HEADERS](response, request);
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/routing/parts.js
+//#region node_modules/astro/dist/core/routing/parts.js
 var ROUTE_DYNAMIC_SPLIT = /\[(.+?\(.+?\)|.+?)\]/;
 var ROUTE_SPREAD = /^\.{3}.+$/;
 function getParts(part, file) {
@@ -6832,7 +3840,7 @@ function getParts(part, file) {
 	return result;
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/cache/runtime/route-matching.js
+//#region node_modules/astro/dist/core/cache/runtime/route-matching.js
 function compileCacheRoutes(routes, base, trailingSlash) {
 	const compiled = Object.entries(routes).map(([path, options]) => {
 		const segments = removeLeadingForwardSlash(path).split("/").filter(Boolean).map((s) => getParts(s, path));
@@ -6859,7 +3867,7 @@ function matchCacheRoute(pathname, compiledRoutes) {
 	return null;
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/cache/handler.js
+//#region node_modules/astro/dist/core/cache/handler.js
 var CACHE_KEY = "cache";
 function provideCache(state) {
 	const pipeline = state.pipeline;
@@ -6915,7 +3923,7 @@ var CacheHandler = class {
 	}
 };
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/redirects/render.js
+//#region node_modules/astro/dist/core/redirects/render.js
 function isExternalURL(url) {
 	return url.startsWith("http://") || url.startsWith("https://") || url.startsWith("//");
 }
@@ -6953,435 +3961,15 @@ async function renderRedirect(state) {
 	});
 }
 //#endregion
-//#region node_modules/.pnpm/destr@2.0.5/node_modules/destr/dist/index.mjs
-var suspectProtoRx = /"(?:_|\\u0{2}5[Ff]){2}(?:p|\\u0{2}70)(?:r|\\u0{2}72)(?:o|\\u0{2}6[Ff])(?:t|\\u0{2}74)(?:o|\\u0{2}6[Ff])(?:_|\\u0{2}5[Ff]){2}"\s*:/;
-var suspectConstructorRx = /"(?:c|\\u0063)(?:o|\\u006[Ff])(?:n|\\u006[Ee])(?:s|\\u0073)(?:t|\\u0074)(?:r|\\u0072)(?:u|\\u0075)(?:c|\\u0063)(?:t|\\u0074)(?:o|\\u006[Ff])(?:r|\\u0072)"\s*:/;
-var JsonSigRx = /^\s*["[{]|^\s*-?\d{1,16}(\.\d{1,17})?([Ee][+-]?\d+)?\s*$/;
-function jsonParseTransform(key, value) {
-	if (key === "__proto__" || key === "constructor" && value && typeof value === "object" && "prototype" in value) {
-		warnKeyDropped(key);
-		return;
-	}
-	return value;
-}
-function warnKeyDropped(key) {
-	console.warn(`[destr] Dropping "${key}" key to prevent prototype pollution.`);
-}
-function destr(value, options = {}) {
-	if (typeof value !== "string") return value;
-	if (value[0] === "\"" && value[value.length - 1] === "\"" && value.indexOf("\\") === -1) return value.slice(1, -1);
-	const _value = value.trim();
-	if (_value.length <= 9) switch (_value.toLowerCase()) {
-		case "true": return true;
-		case "false": return false;
-		case "undefined": return;
-		case "null": return null;
-		case "nan": return NaN;
-		case "infinity": return Number.POSITIVE_INFINITY;
-		case "-infinity": return Number.NEGATIVE_INFINITY;
-	}
-	if (!JsonSigRx.test(value)) {
-		if (options.strict) throw new SyntaxError("[destr] Invalid JSON");
-		return value;
-	}
-	try {
-		if (suspectProtoRx.test(value) || suspectConstructorRx.test(value)) {
-			if (options.strict) throw new Error("[destr] Possible prototype pollution");
-			return JSON.parse(value, jsonParseTransform);
-		}
-		return JSON.parse(value);
-	} catch (error) {
-		if (options.strict) throw error;
-		return value;
-	}
-}
-//#endregion
-//#region node_modules/.pnpm/unstorage@1.17.5_@vercel+functions@3.7.3/node_modules/unstorage/dist/shared/unstorage.zVDD2mZo.mjs
-function wrapToPromise(value) {
-	if (!value || typeof value.then !== "function") return Promise.resolve(value);
-	return value;
-}
-function asyncCall(function_, ...arguments_) {
-	try {
-		return wrapToPromise(function_(...arguments_));
-	} catch (error) {
-		return Promise.reject(error);
-	}
-}
-function isPrimitive(value) {
-	const type = typeof value;
-	return value === null || type !== "object" && type !== "function";
-}
-function isPureObject(value) {
-	const proto = Object.getPrototypeOf(value);
-	return !proto || proto.isPrototypeOf(Object);
-}
-function stringify$1(value) {
-	if (isPrimitive(value)) return String(value);
-	if (isPureObject(value) || Array.isArray(value)) return JSON.stringify(value);
-	if (typeof value.toJSON === "function") return stringify$1(value.toJSON());
-	throw new Error("[unstorage] Cannot stringify value!");
-}
-var BASE64_PREFIX = "base64:";
-function serializeRaw(value) {
-	if (typeof value === "string") return value;
-	return BASE64_PREFIX + base64Encode(value);
-}
-function deserializeRaw(value) {
-	if (typeof value !== "string") return value;
-	if (!value.startsWith(BASE64_PREFIX)) return value;
-	return base64Decode(value.slice(7));
-}
-function base64Decode(input) {
-	if (globalThis.Buffer) return Buffer.from(input, "base64");
-	return Uint8Array.from(globalThis.atob(input), (c) => c.codePointAt(0));
-}
-function base64Encode(input) {
-	if (globalThis.Buffer) return Buffer.from(input).toString("base64");
-	return globalThis.btoa(String.fromCodePoint(...input));
-}
-function normalizeKey(key) {
-	if (!key) return "";
-	return key.split("?")[0]?.replace(/[/\\]/g, ":").replace(/:+/g, ":").replace(/^:|:$/g, "") || "";
-}
-function joinKeys(...keys) {
-	return normalizeKey(keys.join(":"));
-}
-function normalizeBaseKey(base) {
-	base = normalizeKey(base);
-	return base ? base + ":" : "";
-}
-function filterKeyByDepth(key, depth) {
-	if (depth === void 0) return true;
-	let substrCount = 0;
-	let index = key.indexOf(":");
-	while (index > -1) {
-		substrCount++;
-		index = key.indexOf(":", index + 1);
-	}
-	return substrCount <= depth;
-}
-function filterKeyByBase(key, base) {
-	if (base) return key.startsWith(base) && key[key.length - 1] !== "$";
-	return key[key.length - 1] !== "$";
-}
-//#endregion
-//#region node_modules/.pnpm/unstorage@1.17.5_@vercel+functions@3.7.3/node_modules/unstorage/dist/index.mjs
-function defineDriver(factory) {
-	return factory;
-}
-var DRIVER_NAME = "memory";
-var memory = defineDriver(() => {
-	const data = /* @__PURE__ */ new Map();
-	return {
-		name: DRIVER_NAME,
-		getInstance: () => data,
-		hasItem(key) {
-			return data.has(key);
-		},
-		getItem(key) {
-			return data.get(key) ?? null;
-		},
-		getItemRaw(key) {
-			return data.get(key) ?? null;
-		},
-		setItem(key, value) {
-			data.set(key, value);
-		},
-		setItemRaw(key, value) {
-			data.set(key, value);
-		},
-		removeItem(key) {
-			data.delete(key);
-		},
-		getKeys() {
-			return [...data.keys()];
-		},
-		clear() {
-			data.clear();
-		},
-		dispose() {
-			data.clear();
-		}
-	};
-});
-function createStorage(options = {}) {
-	const context = {
-		mounts: { "": options.driver || memory() },
-		mountpoints: [""],
-		watching: false,
-		watchListeners: [],
-		unwatch: {}
-	};
-	const getMount = (key) => {
-		for (const base of context.mountpoints) if (key.startsWith(base)) return {
-			base,
-			relativeKey: key.slice(base.length),
-			driver: context.mounts[base]
-		};
-		return {
-			base: "",
-			relativeKey: key,
-			driver: context.mounts[""]
-		};
-	};
-	const getMounts = (base, includeParent) => {
-		return context.mountpoints.filter((mountpoint) => mountpoint.startsWith(base) || includeParent && base.startsWith(mountpoint)).map((mountpoint) => ({
-			relativeBase: base.length > mountpoint.length ? base.slice(mountpoint.length) : void 0,
-			mountpoint,
-			driver: context.mounts[mountpoint]
-		}));
-	};
-	const onChange = (event, key) => {
-		if (!context.watching) return;
-		key = normalizeKey(key);
-		for (const listener of context.watchListeners) listener(event, key);
-	};
-	const startWatch = async () => {
-		if (context.watching) return;
-		context.watching = true;
-		for (const mountpoint in context.mounts) context.unwatch[mountpoint] = await watch(context.mounts[mountpoint], onChange, mountpoint);
-	};
-	const stopWatch = async () => {
-		if (!context.watching) return;
-		for (const mountpoint in context.unwatch) await context.unwatch[mountpoint]();
-		context.unwatch = {};
-		context.watching = false;
-	};
-	const runBatch = (items, commonOptions, cb) => {
-		const batches = /* @__PURE__ */ new Map();
-		const getBatch = (mount) => {
-			let batch = batches.get(mount.base);
-			if (!batch) {
-				batch = {
-					driver: mount.driver,
-					base: mount.base,
-					items: []
-				};
-				batches.set(mount.base, batch);
-			}
-			return batch;
-		};
-		for (const item of items) {
-			const isStringItem = typeof item === "string";
-			const key = normalizeKey(isStringItem ? item : item.key);
-			const value = isStringItem ? void 0 : item.value;
-			const options2 = isStringItem || !item.options ? commonOptions : {
-				...commonOptions,
-				...item.options
-			};
-			const mount = getMount(key);
-			getBatch(mount).items.push({
-				key,
-				value,
-				relativeKey: mount.relativeKey,
-				options: options2
-			});
-		}
-		return Promise.all([...batches.values()].map((batch) => cb(batch))).then((r) => r.flat());
-	};
-	const storage = {
-		hasItem(key, opts = {}) {
-			key = normalizeKey(key);
-			const { relativeKey, driver } = getMount(key);
-			return asyncCall(driver.hasItem, relativeKey, opts);
-		},
-		getItem(key, opts = {}) {
-			key = normalizeKey(key);
-			const { relativeKey, driver } = getMount(key);
-			return asyncCall(driver.getItem, relativeKey, opts).then((value) => destr(value));
-		},
-		getItems(items, commonOptions = {}) {
-			return runBatch(items, commonOptions, (batch) => {
-				if (batch.driver.getItems) return asyncCall(batch.driver.getItems, batch.items.map((item) => ({
-					key: item.relativeKey,
-					options: item.options
-				})), commonOptions).then((r) => r.map((item) => ({
-					key: joinKeys(batch.base, item.key),
-					value: destr(item.value)
-				})));
-				return Promise.all(batch.items.map((item) => {
-					return asyncCall(batch.driver.getItem, item.relativeKey, item.options).then((value) => ({
-						key: item.key,
-						value: destr(value)
-					}));
-				}));
-			});
-		},
-		getItemRaw(key, opts = {}) {
-			key = normalizeKey(key);
-			const { relativeKey, driver } = getMount(key);
-			if (driver.getItemRaw) return asyncCall(driver.getItemRaw, relativeKey, opts);
-			return asyncCall(driver.getItem, relativeKey, opts).then((value) => deserializeRaw(value));
-		},
-		async setItem(key, value, opts = {}) {
-			if (value === void 0) return storage.removeItem(key);
-			key = normalizeKey(key);
-			const { relativeKey, driver } = getMount(key);
-			if (!driver.setItem) return;
-			await asyncCall(driver.setItem, relativeKey, stringify$1(value), opts);
-			if (!driver.watch) onChange("update", key);
-		},
-		async setItems(items, commonOptions) {
-			await runBatch(items, commonOptions, async (batch) => {
-				if (batch.driver.setItems) return asyncCall(batch.driver.setItems, batch.items.map((item) => ({
-					key: item.relativeKey,
-					value: stringify$1(item.value),
-					options: item.options
-				})), commonOptions);
-				if (!batch.driver.setItem) return;
-				await Promise.all(batch.items.map((item) => {
-					return asyncCall(batch.driver.setItem, item.relativeKey, stringify$1(item.value), item.options);
-				}));
-			});
-		},
-		async setItemRaw(key, value, opts = {}) {
-			if (value === void 0) return storage.removeItem(key, opts);
-			key = normalizeKey(key);
-			const { relativeKey, driver } = getMount(key);
-			if (driver.setItemRaw) await asyncCall(driver.setItemRaw, relativeKey, value, opts);
-			else if (driver.setItem) await asyncCall(driver.setItem, relativeKey, serializeRaw(value), opts);
-			else return;
-			if (!driver.watch) onChange("update", key);
-		},
-		async removeItem(key, opts = {}) {
-			if (typeof opts === "boolean") opts = { removeMeta: opts };
-			key = normalizeKey(key);
-			const { relativeKey, driver } = getMount(key);
-			if (!driver.removeItem) return;
-			await asyncCall(driver.removeItem, relativeKey, opts);
-			if (opts.removeMeta || opts.removeMata) await asyncCall(driver.removeItem, relativeKey + "$", opts);
-			if (!driver.watch) onChange("remove", key);
-		},
-		async getMeta(key, opts = {}) {
-			if (typeof opts === "boolean") opts = { nativeOnly: opts };
-			key = normalizeKey(key);
-			const { relativeKey, driver } = getMount(key);
-			const meta = /* @__PURE__ */ Object.create(null);
-			if (driver.getMeta) Object.assign(meta, await asyncCall(driver.getMeta, relativeKey, opts));
-			if (!opts.nativeOnly) {
-				const value = await asyncCall(driver.getItem, relativeKey + "$", opts).then((value_) => destr(value_));
-				if (value && typeof value === "object") {
-					if (typeof value.atime === "string") value.atime = new Date(value.atime);
-					if (typeof value.mtime === "string") value.mtime = new Date(value.mtime);
-					Object.assign(meta, value);
-				}
-			}
-			return meta;
-		},
-		setMeta(key, value, opts = {}) {
-			return this.setItem(key + "$", value, opts);
-		},
-		removeMeta(key, opts = {}) {
-			return this.removeItem(key + "$", opts);
-		},
-		async getKeys(base, opts = {}) {
-			base = normalizeBaseKey(base);
-			const mounts = getMounts(base, true);
-			let maskedMounts = [];
-			const allKeys = [];
-			let allMountsSupportMaxDepth = true;
-			for (const mount of mounts) {
-				if (!mount.driver.flags?.maxDepth) allMountsSupportMaxDepth = false;
-				const rawKeys = await asyncCall(mount.driver.getKeys, mount.relativeBase, opts);
-				for (const key of rawKeys) {
-					const fullKey = mount.mountpoint + normalizeKey(key);
-					if (!maskedMounts.some((p) => fullKey.startsWith(p))) allKeys.push(fullKey);
-				}
-				maskedMounts = [mount.mountpoint, ...maskedMounts.filter((p) => !p.startsWith(mount.mountpoint))];
-			}
-			const shouldFilterByDepth = opts.maxDepth !== void 0 && !allMountsSupportMaxDepth;
-			return allKeys.filter((key) => (!shouldFilterByDepth || filterKeyByDepth(key, opts.maxDepth)) && filterKeyByBase(key, base));
-		},
-		async clear(base, opts = {}) {
-			base = normalizeBaseKey(base);
-			await Promise.all(getMounts(base, false).map(async (m) => {
-				if (m.driver.clear) return asyncCall(m.driver.clear, m.relativeBase, opts);
-				if (m.driver.removeItem) {
-					const keys = await m.driver.getKeys(m.relativeBase || "", opts);
-					return Promise.all(keys.map((key) => m.driver.removeItem(key, opts)));
-				}
-			}));
-		},
-		async dispose() {
-			await Promise.all(Object.values(context.mounts).map((driver) => dispose(driver)));
-		},
-		async watch(callback) {
-			await startWatch();
-			context.watchListeners.push(callback);
-			return async () => {
-				context.watchListeners = context.watchListeners.filter((listener) => listener !== callback);
-				if (context.watchListeners.length === 0) await stopWatch();
-			};
-		},
-		async unwatch() {
-			context.watchListeners = [];
-			await stopWatch();
-		},
-		mount(base, driver) {
-			base = normalizeBaseKey(base);
-			if (base && context.mounts[base]) throw new Error(`already mounted at ${base}`);
-			if (base) {
-				context.mountpoints.push(base);
-				context.mountpoints.sort((a, b) => b.length - a.length);
-			}
-			context.mounts[base] = driver;
-			if (context.watching) Promise.resolve(watch(driver, onChange, base)).then((unwatcher) => {
-				context.unwatch[base] = unwatcher;
-			}).catch(console.error);
-			return storage;
-		},
-		async unmount(base, _dispose = true) {
-			base = normalizeBaseKey(base);
-			if (!base || !context.mounts[base]) return;
-			if (context.watching && base in context.unwatch) {
-				context.unwatch[base]?.();
-				delete context.unwatch[base];
-			}
-			if (_dispose) await dispose(context.mounts[base]);
-			context.mountpoints = context.mountpoints.filter((key) => key !== base);
-			delete context.mounts[base];
-		},
-		getMount(key = "") {
-			key = normalizeKey(key) + ":";
-			const m = getMount(key);
-			return {
-				driver: m.driver,
-				base: m.base
-			};
-		},
-		getMounts(base = "", opts = {}) {
-			base = normalizeKey(base);
-			return getMounts(base, opts.parents).map((m) => ({
-				driver: m.driver,
-				base: m.mountpoint
-			}));
-		},
-		keys: (base, opts = {}) => storage.getKeys(base, opts),
-		get: (key, opts = {}) => storage.getItem(key, opts),
-		set: (key, value, opts = {}) => storage.setItem(key, value, opts),
-		has: (key, opts = {}) => storage.hasItem(key, opts),
-		del: (key, opts = {}) => storage.removeItem(key, opts),
-		remove: (key, opts = {}) => storage.removeItem(key, opts)
-	};
-	return storage;
-}
-function watch(driver, onChange, base) {
-	return driver.watch ? driver.watch((event, key) => onChange(event, base + key)) : () => {};
-}
-async function dispose(driver) {
-	if (typeof driver.dispose === "function") await asyncCall(driver.dispose);
-}
-//#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/session/runtime.js
+//#region node_modules/astro/dist/core/session/runtime.js
 var PERSIST_SYMBOL = /* @__PURE__ */ Symbol();
 var DEFAULT_COOKIE_NAME = "astro-session";
 var VALID_COOKIE_REGEX = /^[\w-]+$/;
-var unflatten = (parsed, _) => {
-	return unflatten$1(parsed, { URL: (href) => new URL(href) });
+var unflatten$1 = (parsed, _) => {
+	return unflatten(parsed, { URL: (href) => new URL(href) });
 };
-var stringify = (data, _) => {
-	return stringify$2(data, { URL: (val) => val instanceof URL && val.href });
+var stringify$1 = (data, _) => {
+	return stringify(data, { URL: (val) => val instanceof URL && val.href });
 };
 var AstroSession = class AstroSession {
 	#cookies;
@@ -7472,7 +4060,7 @@ var AstroSession = class AstroSession {
 		});
 		let cloned;
 		try {
-			cloned = unflatten(JSON.parse(stringify(value)));
+			cloned = unflatten$1(JSON.parse(stringify$1(value)));
 		} catch (err) {
 			throw new AstroError({
 				...SessionStorageSaveError,
@@ -7533,7 +4121,7 @@ var AstroSession = class AstroSession {
 			const key = this.#ensureSessionID();
 			let serialized;
 			try {
-				serialized = stringify(data);
+				serialized = stringify$1(data);
 			} catch (err) {
 				throw new AstroError({
 					...SessionStorageSaveError,
@@ -7599,7 +4187,7 @@ var AstroSession = class AstroSession {
 			return this.#data;
 		}
 		try {
-			const storedMap = unflatten(raw);
+			const storedMap = unflatten$1(raw);
 			if (!(storedMap instanceof Map)) {
 				await this.destroy();
 				throw new AstroError({
@@ -7672,7 +4260,7 @@ var AstroSession = class AstroSession {
 	}
 };
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/session/handler.js
+//#region node_modules/astro/dist/core/session/handler.js
 var SESSION_KEY = "session";
 function provideSession(state) {
 	state.pipeline.usedFeatures |= PipelineFeatures.sessions;
@@ -7701,7 +4289,7 @@ async function provideSessionAsync(state, config) {
 	});
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/routing/handler.js
+//#region node_modules/astro/dist/core/routing/handler.js
 var AstroHandler = class {
 	#app;
 	#trailingSlashHandler;
@@ -7835,7 +4423,7 @@ var AstroHandler = class {
 	}
 };
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/fetch/default-handler.js
+//#region node_modules/astro/dist/core/fetch/default-handler.js
 var DefaultFetchHandler = class {
 	#app;
 	#handler;
@@ -7873,7 +4461,38 @@ var DefaultFetchHandler = class {
 //#region \0virtual:astro:fetchable
 var _virtual_astro_fetchable_default = new DefaultFetchHandler();
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/errors/default-handler.js
+//#region node_modules/astro/dist/i18n/error-routes.js
+function isLocalizedErrorRoute(route, status, locales) {
+	if (!locales) return false;
+	const suffix = `/${status}`;
+	if (!route.endsWith(suffix)) return false;
+	const localeSegment = route.slice(0, -suffix.length);
+	if (!localeSegment || localeSegment.includes("/", 1)) return false;
+	return pathHasLocale(localeSegment, locales);
+}
+function getErrorRoutePath(pathname, status, routes, locales, appendTrailingSlash = false) {
+	const suffix = appendTrailingSlash ? "/" : "";
+	if (locales) {
+		const firstSegment = pathname.split("/").find(Boolean);
+		if (firstSegment && pathHasLocale(`/${firstSegment}`, locales)) {
+			const localized = `/${firstSegment}/${status}`;
+			if (routes.some((route) => route.route === localized)) return `${localized}${suffix}`;
+		}
+	}
+	return `/${status}${suffix}`;
+}
+//#endregion
+//#region node_modules/astro/dist/core/output-filename.js
+var STATUS_CODE_PAGES = /* @__PURE__ */ new Set(["/404", "/500"]);
+function getOutputFilename(buildFormat, name, routeData) {
+	if (routeData.type === "endpoint") return name;
+	if (name === "/" || name === "") return name === "" ? "index.html" : "/index.html";
+	if (buildFormat === "file" || STATUS_CODE_PAGES.has(name)) return `${removeTrailingForwardSlash(name || "index")}.html`;
+	if (buildFormat === "preserve" && !routeData.isIndex) return `${removeTrailingForwardSlash(name || "index")}.html`;
+	return `${removeTrailingForwardSlash(name)}/index.html`;
+}
+//#endregion
+//#region node_modules/astro/dist/core/errors/default-handler.js
 var DefaultErrorHandler = class {
 	#app;
 	#astroMiddleware;
@@ -7886,14 +4505,13 @@ var DefaultErrorHandler = class {
 	async renderError(request, { status, response: originalResponse, skipMiddleware = false, error, pathname, ...resolvedRenderOptions }) {
 		const app = this.#app;
 		const resolvedPathname = pathname ?? new FetchState(app.pipeline, request).pathname;
-		const errorRouteData = matchRoute(`/${status}${app.manifest.trailingSlash === "always" ? "/" : ""}`, app.manifestData);
+		const errorRouteData = matchRoute(getErrorRoutePath(resolvedPathname, status, app.manifestData.routes, app.manifest.i18n?.locales, app.manifest.trailingSlash === "always"), app.manifestData);
 		const url = new URL(request.url);
 		if (errorRouteData) {
 			if (errorRouteData.prerender) {
-				const maybeDotHtml = errorRouteData.route.endsWith(`/${status}`) ? ".html" : "";
 				const allowedDomains = app.manifest.allowedDomains;
 				const safeOrigin = validateHost(url.host, url.protocol.replace(":", ""), allowedDomains) ? url.origin : `${url.protocol}//localhost`;
-				const statusURL = new URL(`${app.baseWithoutTrailingSlash}/${status}${maybeDotHtml}`, safeOrigin);
+				const statusURL = new URL(`${app.baseWithoutTrailingSlash}${getOutputFilename(app.manifest.buildFormat, errorRouteData.route, errorRouteData)}`, safeOrigin);
 				if (statusURL.toString() !== request.url && resolvedRenderOptions.prerenderedErrorPageFetch) try {
 					const newResponse = mergeResponses(await resolvedRenderOptions.prerenderedErrorPageFetch(statusURL.toString()), originalResponse, {
 						status,
@@ -7982,7 +4600,7 @@ function mergeResponses(newResponse, originalResponse, override) {
 	return mergedResponse;
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/app/base.js
+//#region node_modules/astro/dist/core/app/base.js
 var BaseApp = class BaseApp {
 	manifest;
 	manifestData;
@@ -8242,8 +4860,9 @@ var BaseApp = class BaseApp {
 			for (const fallbackRoute of routeData.fallbackRoutes) if (fallbackRoute.pattern.test(pathname)) return 302;
 		}
 		const route = removeTrailingForwardSlash(routeData.route);
-		if (route.endsWith("/404")) return 404;
-		if (route.endsWith("/500")) return 500;
+		const locales = this.manifest.i18n?.locales;
+		if (isRoute404(route) || isLocalizedErrorRoute(route, 404, locales)) return 404;
+		if (isRoute500(route) || isLocalizedErrorRoute(route, 500, locales)) return 500;
 		return 200;
 	}
 	getManifest() {
@@ -8261,7 +4880,7 @@ var BaseApp = class BaseApp {
 	}
 };
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/assets/utils/getAssetsPrefix.js
+//#region node_modules/astro/dist/assets/utils/getAssetsPrefix.js
 function getAssetsPrefix(fileExtension, assetsPrefix) {
 	let prefix = "";
 	if (!assetsPrefix) prefix = "";
@@ -8270,7 +4889,7 @@ function getAssetsPrefix(fileExtension, assetsPrefix) {
 	return prefix;
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/render/ssr-element.js
+//#region node_modules/astro/dist/core/render/ssr-element.js
 var URL_PARSE_BASE = "https://astro.build";
 function splitAssetPath(path) {
 	const parsed = new URL(path, URL_PARSE_BASE);
@@ -8329,7 +4948,7 @@ function createModuleScriptElementWithSrc(src, base, assetsPrefix, queryParams) 
 	};
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/app/pipeline.js
+//#region node_modules/astro/dist/core/app/pipeline.js
 var AppPipeline = class AppPipeline extends Pipeline {
 	getName() {
 		return "AppPipeline";
@@ -8396,7 +5015,7 @@ var AppPipeline = class AppPipeline extends Pipeline {
 	}
 };
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/app/app.js
+//#region node_modules/astro/dist/core/app/app.js
 var App = class extends BaseApp {
 	createPipeline(streaming) {
 		return AppPipeline.create({
@@ -8410,7 +5029,7 @@ var App = class extends BaseApp {
 	logRequest(_options) {}
 };
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/app/manifest.js
+//#region node_modules/astro/dist/core/app/manifest.js
 function deserializeManifest(serializedManifest, routesList) {
 	const routes = [];
 	if (serializedManifest.routes) for (const serializedRoute of serializedManifest.routes) {
@@ -8491,7 +5110,7 @@ var _astro_react_opts_default = {
 	experimentalDisableStreaming: false
 };
 //#endregion
-//#region node_modules/.pnpm/@astrojs+react@6.0.0_@types_17767aec3439d0c048f2c5252ce456ff/node_modules/@astrojs/react/dist/context.js
+//#region node_modules/@astrojs/react/dist/context.js
 var contexts = /* @__PURE__ */ new WeakMap();
 var ID_PREFIX = "r";
 function getContext(rendererContextResult) {
@@ -8512,7 +5131,7 @@ function incrementId(rendererContextResult) {
 	return id;
 }
 //#endregion
-//#region node_modules/.pnpm/@astrojs+react@6.0.0_@types_17767aec3439d0c048f2c5252ce456ff/node_modules/@astrojs/react/dist/static-html.js
+//#region node_modules/@astrojs/react/dist/static-html.js
 var StaticHtml = ({ value, name, hydrate = true }) => {
 	if (value == null || value.trim() === "") return null;
 	return createElement(hydrate ? "astro-slot" : "astro-static-slot", {
@@ -8523,7 +5142,7 @@ var StaticHtml = ({ value, name, hydrate = true }) => {
 };
 var static_html_default = memo(StaticHtml, () => true);
 //#endregion
-//#region node_modules/.pnpm/@astrojs+internal-helpers@0.10.0/node_modules/@astrojs/internal-helpers/dist/create-filter.js
+//#region node_modules/@astrojs/internal-helpers/dist/create-filter.js
 function ensureArray(thing) {
 	if (Array.isArray(thing)) return thing;
 	if (thing == null) return [];
@@ -8554,7 +5173,7 @@ function createFilter(include, exclude) {
 	};
 }
 //#endregion
-//#region node_modules/.pnpm/@astrojs+react@6.0.0_@types_17767aec3439d0c048f2c5252ce456ff/node_modules/@astrojs/react/dist/server.js
+//#region node_modules/@astrojs/react/dist/server.js
 var slotName = (str) => str.trim().replace(/[-_]([a-z])/g, (_, w) => w.toUpperCase());
 var reactTypeof = /* @__PURE__ */ Symbol.for("react.element");
 var reactTransitionalTypeof = /* @__PURE__ */ Symbol.for("react.transitional.element");
@@ -8608,7 +5227,7 @@ async function renderToStaticMarkup(Component, props, { default: children, ...sl
 	const newChildren = children ?? props.children;
 	if (children && _astro_react_opts_default.experimentalReactChildren) {
 		attrs["data-react-children"] = true;
-		newProps.children = (await import("./chunks/vnode-children_B5h3QQxW.mjs").then((mod) => mod.default))(children);
+		newProps.children = (await import("./chunks/vnode-children_B6vVcKTz.mjs").then((mod) => mod.default))(children);
 	} else if (newChildren != null) newProps.children = React.createElement(static_html_default, {
 		hydrate: needsHydration(metadata),
 		value: newChildren
@@ -8743,7 +5362,7 @@ var renderers = [Object.assign({
 		"styles": [],
 		"routeData": {
 			"route": "/_image",
-			"component": "node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/assets/endpoint/generic.js",
+			"component": "node_modules/astro/dist/assets/endpoint/generic.js",
 			"params": [],
 			"pathname": "/_image",
 			"pattern": "^\\/_image\\/?$",
@@ -8785,12 +5404,12 @@ var renderers = [Object.assign({
 ].map(deserializeRouteInfo);
 //#endregion
 //#region \0virtual:astro:pages
-var _page0 = () => import("./chunks/generic_C8RpW-IR.mjs");
-var _page1 = () => import("./chunks/index_BbZorzpx.mjs");
-var pageMap = /* @__PURE__ */ new Map([["node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/assets/endpoint/generic.js", _page0], ["src/pages/index.astro", _page1]]);
+var _page0 = () => import("./chunks/generic_Ibh_FcZm.mjs");
+var _page1 = () => import("./chunks/index_bvPb0Shb.mjs");
+var pageMap = /* @__PURE__ */ new Map([["node_modules/astro/dist/assets/endpoint/generic.js", _page0], ["src/pages/index.astro", _page1]]);
 //#endregion
 //#region \0virtual:astro:manifest
-var _manifest = deserializeManifest({"rootDir":"file:///C:/Users/fgalluccio/Documents/Code/Personal/Personal-Portfolio-2025/","cacheDir":"file:///C:/Users/fgalluccio/Documents/Code/Personal/Personal-Portfolio-2025/node_modules/.astro/","outDir":"file:///C:/Users/fgalluccio/Documents/Code/Personal/Personal-Portfolio-2025/dist/","srcDir":"file:///C:/Users/fgalluccio/Documents/Code/Personal/Personal-Portfolio-2025/src/","publicDir":"file:///C:/Users/fgalluccio/Documents/Code/Personal/Personal-Portfolio-2025/public/","buildClientDir":"file:///C:/Users/fgalluccio/Documents/Code/Personal/Personal-Portfolio-2025/dist/client/","buildServerDir":"file:///C:/Users/fgalluccio/Documents/Code/Personal/Personal-Portfolio-2025/dist/server/","adapterName":"@astrojs/vercel","assetsDir":"_astro","routes":[{"file":"","links":[],"scripts":[],"styles":[],"routeData":{"type":"page","component":"_server-islands.astro","params":["name"],"segments":[[{"content":"_server-islands","dynamic":false,"spread":false}],[{"content":"name","dynamic":true,"spread":false}]],"pattern":"^\\/_server-islands\\/([^/]+?)\\/?$","prerender":false,"isIndex":false,"fallbackRoutes":[],"route":"/_server-islands/[name]","origin":"internal","distURL":[],"_meta":{"trailingSlash":"ignore"}}},{"file":"","links":[],"scripts":[],"styles":[],"routeData":{"route":"/_image","component":"node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/assets/endpoint/generic.js","params":[],"pathname":"/_image","pattern":"^\\/_image\\/?$","segments":[[{"content":"_image","dynamic":false,"spread":false}]],"type":"endpoint","prerender":false,"fallbackRoutes":[],"distURL":[],"isIndex":false,"origin":"internal","_meta":{"trailingSlash":"ignore"}}},{"file":"","links":[],"scripts":[],"styles":[{"type":"external","src":"_astro/index.Dwm6LrL_.css"}],"routeData":{"route":"/","isIndex":true,"type":"page","pattern":"^\\/$","segments":[],"params":[],"component":"src/pages/index.astro","pathname":"/","prerender":false,"fallbackRoutes":[],"distURL":[],"origin":"project","_meta":{"trailingSlash":"ignore"}}}],"serverLike":true,"middlewareMode":"classic","base":"/","trailingSlash":"ignore","compressHTML":"jsx","componentMetadata":[["C:/Users/fgalluccio/Documents/Code/Personal/Personal-Portfolio-2025/src/pages/index.astro",{"propagation":"none","containsHead":true}]],"renderers":[],"clientDirectives":[["idle","(()=>{var l=(n,t)=>{let i=async()=>{await(await n())()},e=typeof t.value==\"object\"?t.value:void 0,s={timeout:e==null?void 0:e.timeout};\"requestIdleCallback\"in window?window.requestIdleCallback(i,s):setTimeout(i,s.timeout||200)};(self.Astro||(self.Astro={})).idle=l;window.dispatchEvent(new Event(\"astro:idle\"));})();"],["load","(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event(\"astro:load\"));})();"],["media","(()=>{var n=(a,t)=>{let i=async()=>{await(await a())()};if(t.value){let e=matchMedia(t.value);e.matches?i():e.addEventListener(\"change\",i,{once:!0})}};(self.Astro||(self.Astro={})).media=n;window.dispatchEvent(new Event(\"astro:media\"));})();"],["only","(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).only=e;window.dispatchEvent(new Event(\"astro:only\"));})();"],["visible","(()=>{var a=(s,i,o)=>{let r=async()=>{await(await s())()},t=typeof i.value==\"object\"?i.value:void 0,c={rootMargin:t==null?void 0:t.rootMargin},n=new IntersectionObserver(e=>{for(let l of e)if(l.isIntersecting){n.disconnect(),r();break}},c);for(let e of o.children)n.observe(e)};(self.Astro||(self.Astro={})).visible=a;window.dispatchEvent(new Event(\"astro:visible\"));})();"]],"entryModules":{"astro/entrypoints/prerender":"prerender-entry.3RZbfDXv.mjs","\u0000noop-middleware":"virtual_astro_middleware.mjs","\u0000virtual:astro:server-island-manifest":"chunks/_virtual_astro_server-island-manifest_C1Q2srgE.mjs","\u0000virtual:astro:session-driver":"chunks/_virtual_astro_session-driver_C-PI1Pas.mjs","\u0000virtual:astro:actions/noop-entrypoint":"chunks/noop-entrypoint_Z3zFhrGC.mjs","C:/Users/fgalluccio/Documents/Code/Personal/Personal-Portfolio-2025/node_modules/.pnpm/@astrojs+react@6.0.0_@types_17767aec3439d0c048f2c5252ce456ff/node_modules/@astrojs/react/dist/vnode-children.js":"chunks/vnode-children_B5h3QQxW.mjs","@astrojs/vercel/entrypoint":"entry.mjs","\u0000virtual:astro:page:node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/assets/endpoint/generic@_@js":"chunks/generic_C8RpW-IR.mjs","\u0000virtual:astro:page:src/pages/index@_@astro":"chunks/index_BbZorzpx.mjs","C:/Users/fgalluccio/Documents/Code/Personal/Personal-Portfolio-2025/node_modules/.pnpm/sharp@0.34.5/node_modules/sharp/lib/index.js":"chunks/lib_Be8M4eek.mjs","C:/Users/fgalluccio/Documents/Code/Personal/Personal-Portfolio-2025/node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/assets/services/sharp.js":"chunks/sharp_Bzg3oRzu.mjs","@/sections/Clients":"_astro/Clients.D5aHHC-e.js","@/sections/Follow":"_astro/Follow.q7Nt-Spr.js","@/components/custom/IndicatorsGrid":"_astro/IndicatorsGrid.CG0RxsLo.js","@/sections/Profile":"_astro/Profile.DiSIbBUp.js","@/sections/Projects":"_astro/Projects.CgT_k1Of.js","@/sections/Services":"_astro/Services.jHI37kzo.js","@/sections/Stacks":"_astro/Stacks.DyS-fC-S.js","@/sections/Testimonials":"_astro/Testimonials.brQyVtbY.js","@/sections/WorkProcess":"_astro/WorkProcess.B3vCFeLm.js","@/sections/WorkTogether":"_astro/WorkTogether.CKVbZxWE.js","@astrojs/react/client.js":"_astro/client.pvjRR-YP.js","astro:scripts/before-hydration.js":""},"inlinedScripts":[],"assets":["/react.svg","/assets/avatar.jpg","/assets/avatar.png","/assets/backoffice-2.png","/assets/backoffice.png","/assets/containeriq-2.png","/assets/containeriq.png","/assets/CV.pdf","/assets/finanex.png","/assets/fit.png","/assets/Fuego-burgers.png","/assets/helpdesk.png","/assets/job-mapper-2.png","/assets/job-mapper.png","/assets/jst.png","/assets/juguetes-perdidos.png","/assets/logo_notimation.png","/assets/Maular.png","/assets/mnj.png","/assets/nefra.png","/assets/Notimation.png","/assets/og-image.jpg","/assets/testimonials-01.jfif","/assets/testimonials-02.jfif","/assets/testimonials-03.jfif","/assets/testimonials-04.jfif","/assets/zerobug.png","/_astro/AnimatedBorder.B0z_5uqv.js","/_astro/button.M8IyZFz4.js","/_astro/card.CT3_oIdJ.js","/_astro/client.pvjRR-YP.js","/_astro/Clients.D5aHHC-e.js","/_astro/CustomCard.B3K863xa.js","/_astro/dist.Bpipw4eH.js","/_astro/dist.CtIPdOB8.js","/_astro/Follow.q7Nt-Spr.js","/_astro/Header.Cl1OZlQI.js","/_astro/i18n.DhfvINjp.js","/_astro/iconify.Da73HzSd.js","/_astro/IndicatorsGrid.CG0RxsLo.js","/_astro/Profile.DiSIbBUp.js","/_astro/Projects.CgT_k1Of.js","/_astro/proxy.DzK5lhY5.js","/_astro/react-dom.DpZRM9tb.js","/_astro/react.BL2IQT_q.js","/_astro/Services.jHI37kzo.js","/_astro/Stacks.DyS-fC-S.js","/_astro/Testimonials.brQyVtbY.js","/_astro/utils.B8i8Ng5n.js","/_astro/WorkProcess.B3vCFeLm.js","/_astro/WorkTogether.CKVbZxWE.js","/_astro/index.Dwm6LrL_.css"],"i18n":{"fallbackType":"redirect","strategy":"pathname-prefix-other-locales","locales":["en","es"],"defaultLocale":"es","domainLookupTable":{}},"buildFormat":"directory","checkOrigin":true,"actionBodySizeLimit":1048576,"serverIslandBodySizeLimit":1048576,"allowedDomains":[],"key":"yAJiO51L5faa+tRGOIyI/fLvWcB08OZTNW/s92X4LPQ=","image":{},"devToolbar":{"enabled":false,"debugInfoOutput":""},"logLevel":"info","shouldInjectCspMetaTags":false});
+var _manifest = deserializeManifest({"rootDir":"file:///C:/Users/fgalluccio/Documents/Code/Personal/Personal-Portfolio-2025/","cacheDir":"file:///C:/Users/fgalluccio/Documents/Code/Personal/Personal-Portfolio-2025/node_modules/.astro/","outDir":"file:///C:/Users/fgalluccio/Documents/Code/Personal/Personal-Portfolio-2025/dist/","srcDir":"file:///C:/Users/fgalluccio/Documents/Code/Personal/Personal-Portfolio-2025/src/","publicDir":"file:///C:/Users/fgalluccio/Documents/Code/Personal/Personal-Portfolio-2025/public/","buildClientDir":"file:///C:/Users/fgalluccio/Documents/Code/Personal/Personal-Portfolio-2025/dist/client/","buildServerDir":"file:///C:/Users/fgalluccio/Documents/Code/Personal/Personal-Portfolio-2025/dist/server/","adapterName":"@astrojs/vercel","assetsDir":"_astro","routes":[{"file":"","links":[],"scripts":[],"styles":[],"routeData":{"type":"page","component":"_server-islands.astro","params":["name"],"segments":[[{"content":"_server-islands","dynamic":false,"spread":false}],[{"content":"name","dynamic":true,"spread":false}]],"pattern":"^\\/_server-islands\\/([^/]+?)\\/?$","prerender":false,"isIndex":false,"fallbackRoutes":[],"route":"/_server-islands/[name]","origin":"internal","distURL":[],"_meta":{"trailingSlash":"ignore"}}},{"file":"","links":[],"scripts":[],"styles":[],"routeData":{"route":"/_image","component":"node_modules/astro/dist/assets/endpoint/generic.js","params":[],"pathname":"/_image","pattern":"^\\/_image\\/?$","segments":[[{"content":"_image","dynamic":false,"spread":false}]],"type":"endpoint","prerender":false,"fallbackRoutes":[],"distURL":[],"isIndex":false,"origin":"internal","_meta":{"trailingSlash":"ignore"}}},{"file":"","links":[],"scripts":[],"styles":[{"type":"external","src":"_astro/index.BuuZac5h.css"}],"routeData":{"route":"/","isIndex":true,"type":"page","pattern":"^\\/$","segments":[],"params":[],"component":"src/pages/index.astro","pathname":"/","prerender":false,"fallbackRoutes":[],"distURL":[],"origin":"project","_meta":{"trailingSlash":"ignore"}}}],"serverLike":true,"middlewareMode":"classic","base":"/","trailingSlash":"ignore","compressHTML":"jsx","componentMetadata":[["C:/Users/fgalluccio/Documents/Code/Personal/Personal-Portfolio-2025/src/pages/index.astro",{"propagation":"none","containsHead":true}]],"renderers":[],"clientDirectives":[["idle","(()=>{var l=(n,t)=>{let i=async()=>{await(await n())()},e=typeof t.value==\"object\"?t.value:void 0,s={timeout:e==null?void 0:e.timeout};\"requestIdleCallback\"in window?window.requestIdleCallback(i,s):setTimeout(i,s.timeout||200)};(self.Astro||(self.Astro={})).idle=l;window.dispatchEvent(new Event(\"astro:idle\"));})();"],["load","(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event(\"astro:load\"));})();"],["media","(()=>{var n=(a,t)=>{let i=async()=>{await(await a())()};if(t.value){let e=matchMedia(t.value);e.matches?i():e.addEventListener(\"change\",i,{once:!0})}};(self.Astro||(self.Astro={})).media=n;window.dispatchEvent(new Event(\"astro:media\"));})();"],["only","(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).only=e;window.dispatchEvent(new Event(\"astro:only\"));})();"],["visible","(()=>{var a=(s,i,o)=>{let r=async()=>{await(await s())()},t=typeof i.value==\"object\"?i.value:void 0,c={rootMargin:t==null?void 0:t.rootMargin},n=new IntersectionObserver(e=>{for(let l of e)if(l.isIntersecting){n.disconnect(),r();break}},c);for(let e of o.children)n.observe(e)};(self.Astro||(self.Astro={})).visible=a;window.dispatchEvent(new Event(\"astro:visible\"));})();"]],"entryModules":{"astro/entrypoints/prerender":"prerender-entry.D2Ay4hgH.mjs","\u0000noop-middleware":"virtual_astro_middleware.mjs","\u0000virtual:astro:server-island-manifest":"chunks/_virtual_astro_server-island-manifest_C1Q2srgE.mjs","\u0000virtual:astro:session-driver":"chunks/_virtual_astro_session-driver_C-PI1Pas.mjs","\u0000virtual:astro:actions/noop-entrypoint":"chunks/noop-entrypoint_Z3zFhrGC.mjs","C:/Users/fgalluccio/Documents/Code/Personal/Personal-Portfolio-2025/node_modules/@astrojs/react/dist/vnode-children.js":"chunks/vnode-children_B6vVcKTz.mjs","@astrojs/vercel/entrypoint":"entry.mjs","\u0000virtual:astro:page:node_modules/astro/dist/assets/endpoint/generic@_@js":"chunks/generic_Ibh_FcZm.mjs","\u0000virtual:astro:page:src/pages/index@_@astro":"chunks/index_bvPb0Shb.mjs","C:/Users/fgalluccio/Documents/Code/Personal/Personal-Portfolio-2025/node_modules/astro/dist/assets/services/sharp.js":"chunks/sharp_BoRxVUSa.mjs","@/sections/Clients":"_astro/Clients.CuyM8OIi.js","@/sections/Follow":"_astro/Follow.B9KcSODu.js","@/components/custom/IndicatorsGrid":"_astro/IndicatorsGrid.CeqZKF8D.js","@/sections/Profile":"_astro/Profile.Cw34EiWM.js","@/sections/Projects":"_astro/Projects.Z3MQcWW2.js","@/sections/Services":"_astro/Services.lPun78Z1.js","@/sections/Stacks":"_astro/Stacks.D8NkBM9f.js","@/sections/Testimonials":"_astro/Testimonials.Kk4__ISl.js","@/sections/WorkProcess":"_astro/WorkProcess.h2bWW8gi.js","@/sections/WorkTogether":"_astro/WorkTogether.CM1yMe7P.js","@astrojs/react/client.js":"_astro/client.DpdUz5kO.js","astro:scripts/before-hydration.js":""},"inlinedScripts":[],"assets":["/react.svg","/assets/avatar.jpg","/assets/avatar.png","/assets/backoffice-2.png","/assets/backoffice.png","/assets/containeriq-2.png","/assets/containeriq.png","/assets/CV.pdf","/assets/finanex.png","/assets/fit.png","/assets/Fuego-burgers.png","/assets/helpdesk.png","/assets/job-mapper-2.png","/assets/job-mapper.png","/assets/jst.png","/assets/juguetes-perdidos.png","/assets/logo_notimation.png","/assets/Maular.png","/assets/mnj.png","/assets/nefra.png","/assets/Notimation.png","/assets/og-image.jpg","/assets/testimonials-01.jfif","/assets/testimonials-02.jfif","/assets/testimonials-03.jfif","/assets/testimonials-04.jfif","/assets/zerobug.png","/_astro/AnimatedBorder.CIYcd6IQ.js","/_astro/button.BENIkmas.js","/_astro/card.zDOHRmVx.js","/_astro/client.DpdUz5kO.js","/_astro/Clients.CuyM8OIi.js","/_astro/CustomCard.CcXPgvJd.js","/_astro/dist.C8Vn7d8N.js","/_astro/dist.DXx0jAnS.js","/_astro/Follow.B9KcSODu.js","/_astro/Header.UtPOmJaD.js","/_astro/i18n.W1735rct.js","/_astro/iconify.gdtocZGQ.js","/_astro/IndicatorsGrid.CeqZKF8D.js","/_astro/Profile.Cw34EiWM.js","/_astro/Projects.Z3MQcWW2.js","/_astro/proxy.B0z3C04-.js","/_astro/react-dom.IST8K7lq.js","/_astro/react.Ca03aNmg.js","/_astro/Services.lPun78Z1.js","/_astro/Stacks.D8NkBM9f.js","/_astro/Testimonials.Kk4__ISl.js","/_astro/utils.B6KiDbIe.js","/_astro/WorkProcess.h2bWW8gi.js","/_astro/WorkTogether.CM1yMe7P.js","/_astro/index.BuuZac5h.css"],"i18n":{"fallbackType":"redirect","strategy":"pathname-prefix-other-locales","locales":["en","es"],"defaultLocale":"es","domainLookupTable":{}},"buildFormat":"directory","checkOrigin":true,"actionBodySizeLimit":1048576,"serverIslandBodySizeLimit":1048576,"allowedDomains":[],"key":"HvEiHWRFnbUH5veX1WzTs7c+AS3Y/EFJwzaozqaHZ9U=","image":{},"devToolbar":{"enabled":false,"debugInfoOutput":""},"logLevel":"info","shouldInjectCspMetaTags":false});
 var manifestRoutes = _manifest.routes;
 var manifest = Object.assign(_manifest, {
 	renderers,
@@ -8802,17 +5421,17 @@ var manifest = Object.assign(_manifest, {
 	pageMap
 });
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/app/entrypoints/virtual/prod.js
+//#region node_modules/astro/dist/core/app/entrypoints/virtual/prod.js
 var createApp$1 = ({ streaming } = {}) => {
 	const app = new App(manifest, streaming);
 	app.setFetchHandler(_virtual_astro_fetchable_default);
 	return app;
 };
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/app/entrypoints/virtual/index.js
+//#region node_modules/astro/dist/core/app/entrypoints/virtual/index.js
 var createApp = createApp$1;
 //#endregion
-//#region node_modules/.pnpm/@astrojs+internal-helpers@0.10.0/node_modules/@astrojs/internal-helpers/dist/request.js
+//#region node_modules/@astrojs/internal-helpers/dist/request.js
 function getFirstForwardedValue(multiValueHeader) {
 	return multiValueHeader?.toString()?.split(",").map((e) => e.trim())?.[0];
 }

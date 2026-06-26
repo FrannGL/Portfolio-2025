@@ -1,9 +1,9 @@
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/errors/utils.js
+//#region node_modules/astro/dist/core/errors/utils.js
 function normalizeLF(code) {
 	return code.replace(/\r\n|\r(?!\n)|\n/g, "\n");
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/errors/printer.js
+//#region node_modules/astro/dist/core/errors/printer.js
 function codeFrame(src, loc) {
 	if (!loc || loc.line === void 0 || loc.column === void 0) return "";
 	const lines = normalizeLF(src).split("\n").map((ln) => ln.replace(/\t/g, "  "));
@@ -26,7 +26,7 @@ function codeFrame(src, loc) {
 	return output;
 }
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/errors/errors.js
+//#region node_modules/astro/dist/core/errors/errors.js
 var AstroError = class extends Error {
 	loc;
 	title;
@@ -64,7 +64,7 @@ var AstroError = class extends Error {
 	}
 };
 //#endregion
-//#region node_modules/.pnpm/astro@7.0.2_@emnapi+core@1._62d379b50f411897100db32f790e7cdd/node_modules/astro/dist/core/errors/errors-data.js
+//#region node_modules/astro/dist/core/errors/errors-data.js
 var ClientAddressNotAvailable = {
 	name: "ClientAddressNotAvailable",
 	title: "`Astro.clientAddress` is not available in current adapter.",
