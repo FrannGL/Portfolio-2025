@@ -8,10 +8,6 @@ export default defineConfig({
   output: "server",
   adapter: vercel(),
   integrations: [react()],
-  i18n: {
-    locales: ["en", "es"],
-    defaultLocale: "es",
-  },
   vite: {
     plugins: [tailwindcss()],
     resolve: {

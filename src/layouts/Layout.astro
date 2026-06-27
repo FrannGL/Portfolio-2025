@@ -1,8 +1,8 @@
 ---
 import "@/index.css";
 
-const preferred = Astro.preferredLocale;
-const lang = preferred === "en" ? "en" : "es";
+const acceptLang = Astro.request.headers.get("accept-language") ?? "";
+const lang = acceptLang.startsWith("en") ? "en" : "es";
 ---
 
 <!doctype html>
