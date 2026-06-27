@@ -57,25 +57,25 @@ const ProfileCard = ({ lang = "es" }: Props) => {
               </div>
             </div>
 
-            <div>
-              <div className="flex items-start justify-between gap-2">
+            <div className="flex items-start justify-between gap-2">
+              <div className="flex flex-col">
                 <h2 className="text-xl md:text-2xl lg:text-xl xl:text-lg font-semibold mt-1">
                   Franco Galluccio
                 </h2>
-                <div className="md:hidden pr-2">
-                  <a
-                    href="/assets/CV.pdf"
-                    download
-                    className="flex flex-col items-center gap-1.5 cursor-pointer select-none text-sm font-semibold text-[rgba(230,230,230,0.8)] group"
-                  >
-                    <div className="p-2 rounded-lg bg-[#1f1f1f] group-hover:bg-[#2a2a2a] transition-colors duration-300 flex items-center justify-center">
-                      <Icon icon="entypo:download" className="w-4 h-4 text-muted-foreground" />
-                    </div>
-                    <span className="text-[10px] leading-none text-muted-foreground">CV</span>
-                  </a>
-                </div>
+                <TypingText lang={lang} />
               </div>
-              <TypingText lang={lang} />
+              <div className="md:hidden pr-2">
+                <a
+                  href="/assets/CV.pdf"
+                  download
+                  className="flex flex-col items-center gap-1.5 cursor-pointer select-none text-sm font-semibold text-[rgba(230,230,230,0.8)] group"
+                >
+                  <div className="p-2 rounded-lg bg-[#1f1f1f] group-hover:bg-[#2a2a2a] transition-colors duration-300 flex items-center justify-center">
+                    <Icon icon="entypo:download" className="w-4 h-4 text-muted-foreground" />
+                  </div>
+                  <span className="text-[10px] leading-none text-muted-foreground">CV</span>
+                </a>
+              </div>
             </div>
           </div>
         </div>

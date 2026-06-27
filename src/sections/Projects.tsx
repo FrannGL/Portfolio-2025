@@ -1,6 +1,6 @@
-import Header from "@/components/custom/Header";
 import TopProjectsModal from "@/components/custom/TopProjectsModal";
 import { useState } from "react";
+import { Icon } from "@iconify/react";
 import { t } from "@/i18n";
 
 interface Props {
@@ -29,11 +29,13 @@ const Projects = ({ lang = "es" }: Props) => {
       className="flex flex-col items-center justify-center gap-6 py-5 pb-10 text-foreground"
       style={{ maxWidth: "100%", boxSizing: "border-box" }}
     >
-      <Header
-        title={t(lang, "projects.title")}
-        subtitle={t(lang, "projects.subtitle")}
-        icon="ion:briefcase"
-      />
+      <div className="flex flex-col gap-1 items-center justify-center text-foreground">
+        <div className="flex justify-center items-center gap-2 text-muted-foreground">
+          <Icon icon="ion:briefcase" className="w-4.5 h-4 text-indigo-400" />
+          <span className="text-sm font-semibold font-raleway">{t(lang, "projects.title")}</span>
+        </div>
+        <h1 className="text-lg xl:text-base font-semibold text-white">{t(lang, "projects.subtitle")}</h1>
+      </div>
 
       <div className="w-full relative">
         <TopProjectsModal
@@ -55,8 +57,7 @@ const Projects = ({ lang = "es" }: Props) => {
             {[...images, ...images].map((src, index) => (
               <div
                 key={index}
-                className="w-[180px] h-[80px] flex-shrink-0"
-                style={{ flexShrink: 0 }}
+                className="w-45 h-20 shrink-0"
               >
                 <img
                   src={src}

@@ -1,0 +1,21 @@
+---
+import CustomCard from "@/components/custom/CustomCard";
+import Header from "@/components/custom/Header.astro";
+import { t } from "@/i18n";
+
+export interface Props {
+  lang?: string;
+}
+
+const { lang = "es" } = Astro.props;
+---
+
+<div class="flex flex-col pt-5 items-center justify-center text-foreground">
+  <Header title={t(lang, "follow.title")} subtitle={t(lang, "follow.subtitle")} icon="mdi:heart" />
+
+  <div class="flex flex-col gap-2 mt-3 pb-2.5 w-full max-w-md px-2">
+    <CustomCard client:idle icon="mdi:linkedin" text="Linkedin" type="follow" href="https://www.linkedin.com/in/franngl/" />
+    <CustomCard client:idle icon="mdi:github" text="Github" type="follow" href="https://github.com/FrannGL" />
+    <CustomCard client:idle icon="mdi:email-outline" text="Email" type="follow" href="mailto:francoivangalluccio.com" />
+  </div>
+</div>

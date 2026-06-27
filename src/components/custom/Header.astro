@@ -1,0 +1,19 @@
+---
+import { Icon } from "astro-icon/components";
+
+export interface Props {
+  title: string;
+  subtitle: string;
+  icon: string;
+}
+
+const { title, subtitle, icon } = Astro.props;
+---
+
+<div class="flex flex-col gap-1 items-center justify-center text-foreground">
+  <div class="flex justify-center items-center gap-2 text-muted-foreground">
+    <Icon name={icon} class="w-4.5 h-4 text-indigo-400" />
+    <span class="text-sm font-semibold font-raleway">{title}</span>
+  </div>
+  <h1 class="text-lg xl:text-base font-semibold text-white">{subtitle}</h1>
+</div>

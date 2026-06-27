@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/dialog";
 import { Github, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import Header from "./Header";
+import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
 
 interface TopProjectsModalProps {
@@ -67,11 +67,13 @@ const TopProjectsModal = ({
       <DialogContent className="max-w-5xl max-h-[80vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold">
-            <Header
-              title="My Works"
-              subtitle="My top 6 Projects"
-              icon="tabler:briefcase-filled"
-            />
+            <div className="flex flex-col gap-1 items-center justify-center text-foreground">
+              <div className="flex justify-center items-center gap-2 text-muted-foreground">
+                <Icon icon="tabler:briefcase-filled" className="w-4.5 h-4 text-indigo-400" />
+                <span className="text-sm font-semibold font-raleway">My Works</span>
+              </div>
+              <h1 className="text-lg xl:text-base font-semibold text-white">My top 6 Projects</h1>
+            </div>
           </DialogTitle>
         </DialogHeader>
 

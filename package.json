@@ -7,7 +7,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "ts": "tsc --noEmit --incremental"
   },
   "dependencies": {
     "@astrojs/react": "^6.0.0",
@@ -22,6 +23,7 @@
     "@radix-ui/react-slot": "^1.2.3",
     "@tailwindcss/vite": "^4.3.1",
     "astro": "^7.0.2",
+    "astro-icon": "^1.1.5",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.19.2",
@@ -33,6 +35,10 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.29.0",
+    "@iconify-json/fluent": "^1.2.51",
+    "@iconify-json/ion": "^1.2.7",
+    "@iconify-json/mdi": "^1.2.3",
+    "@iconify-json/solar": "^1.2.5",
     "@types/node": "^24.0.5",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",

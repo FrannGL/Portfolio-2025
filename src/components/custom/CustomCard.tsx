@@ -1,7 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { useMediaScreen } from "@/hooks/useMediaScreen";
 import { Icon } from "@iconify/react";
-import { useState, type ReactNode } from "react";
+import { useState } from "react";
 
 type TechIcon = {
   icon: string;
@@ -10,7 +10,7 @@ type TechIcon = {
 };
 
 type IconCardProps = {
-  icon: ReactNode;
+  icon: string;
   text: string;
   techIcons?: TechIcon[];
   type?: "stack" | "services" | "follow" | "process" | "default";
@@ -84,7 +84,7 @@ const CustomCard = ({
           <div
             className={`p-2 rounded-lg bg-[#2e2e2e] flex items-center justify-center`}
           >
-            <div className="w-5 h-5 text-muted-foreground">{icon}</div>
+            <Icon icon={icon} className="w-5 h-5 text-muted-foreground" />
           </div>
           <div className="text-sm font-bold text-[rgba(230,230,230,0.8)] whitespace-nowrap">
             {text}

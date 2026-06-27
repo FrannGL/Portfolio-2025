@@ -1,14 +1,14 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import Stacks from "@/sections/Stacks";
+import Stacks from "@/sections/Stacks.astro";
 import Projects from "@/sections/Projects";
-import Services from "@/sections/Services";
+import Services from "@/sections/Services.astro";
 import ProfileCard from "@/sections/Profile";
-import Clients from "@/sections/Clients";
-import Testimonials from "@/sections/Testimonials";
-import WorkProcess from "@/sections/WorkProcess";
-import Follow from "@/sections/Follow";
-import WorkTogether from "@/sections/WorkTogether";
+import Clients from "@/sections/Clients.astro";
+import Testimonials from "@/sections/Testimonials.astro";
+import WorkProcess from "@/sections/WorkProcess.astro";
+import Follow from "@/sections/Follow.astro";
+import WorkTogether from "@/sections/WorkTogether.astro";
 import IndicatorsGrid from "@/components/custom/IndicatorsGrid";
 import LanguageSwitcher from "@/components/custom/LanguageSwitcher";
 
@@ -21,48 +21,48 @@ const lang = langParam ?? (acceptLang.startsWith("en") ? "en" : "es");
   <LanguageSwitcher lang={lang} client:load />
 
   <div class="min-h-screen h-screen items-center grid grid-cols-1 xl:grid-cols-[24%_33%_40%] gap-3 p-8 xl:p-5 text-white">
-    <div class="flex flex-col gap-3 order-2 md:order-none">
+    <div class="flex flex-col gap-3 order-2 md:order-0">
       <div class="bg-[#101010] rounded-3xl border border-[rgba(33,33,33,0.8)]">
-        <Stacks lang={lang} client:idle />
+        <Stacks lang={lang} />
       </div>
       <div class="bg-[#101010] rounded-xl border border-[rgba(33,33,33,0.8)]">
         <Projects lang={lang} client:idle />
       </div>
       <div class="bg-[#101010] rounded-xl border border-[rgba(33,33,33,0.8)]">
-        <Services lang={lang} client:idle />
+        <Services lang={lang} />
       </div>
     </div>
 
-    <div class="flex flex-col gap-3.5 order-1 md:order-none">
-      <div class="order-2 md:order-none rounded-xl">
+    <div class="flex flex-col gap-3.5 order-1 md:order-0">
+      <div class="order-2 md:order-0 rounded-xl">
         <IndicatorsGrid lang={lang} client:idle />
       </div>
 
-      <div class="order-1 md:order-none">
+      <div class="order-1 md:order-0">
         <ProfileCard lang={lang} client:idle />
       </div>
 
-      <div class="bg-[#101010] rounded-xl border border-[rgba(33,33,33,0.8)] order-3 md:order-none">
-        <Clients lang={lang} client:idle />
+      <div class="bg-[#101010] rounded-xl border border-[rgba(33,33,33,0.8)] order-3 md:order-0">
+        <Clients lang={lang} />
       </div>
     </div>
 
-    <div class="flex flex-col gap-3 order-3 md:order-none">
+    <div class="flex flex-col gap-3 order-3 md:order-0">
       <div class="flex flex-col md:flex-row gap-2">
         <div class="bg-[#101010] rounded-xl border border-[rgba(33,33,33,0.8)] md:w-[56%]">
-          <Testimonials lang={lang} client:idle />
+          <Testimonials lang={lang} />
         </div>
         <div class="bg-[#101010] rounded-xl border border-[rgba(33,33,33,0.8)] md:w-[44%]">
-          <WorkProcess lang={lang} client:idle />
+          <WorkProcess lang={lang} />
         </div>
       </div>
 
-      <div class="flex flex-col md:flex-row order-4 md:order-none gap-2">
+      <div class="flex flex-col md:flex-row order-4 md:order-0 gap-2">
         <div class="bg-[#101010] rounded-xl border border-[rgba(33,33,33,0.8)] md:w-[40%]">
-          <Follow lang={lang} client:idle />
+          <Follow lang={lang} />
         </div>
         <div class="bg-[#101010] rounded-xl border border-[rgba(33,33,33,0.8)] mb-10 sm:mb-0 md:w-[60%]">
-          <WorkTogether lang={lang} client:idle />
+          <WorkTogether lang={lang} />
         </div>
       </div>
     </div>

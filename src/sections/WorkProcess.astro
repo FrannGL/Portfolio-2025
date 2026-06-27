@@ -1,0 +1,22 @@
+---
+import CustomCard from "@/components/custom/CustomCard";
+import Header from "@/components/custom/Header.astro";
+import { t } from "@/i18n";
+
+export interface Props {
+  lang?: string;
+}
+
+const { lang = "es" } = Astro.props;
+---
+
+<div class="flex flex-col items-center justify-center gap-1 pt-5 pb-3 text-foreground">
+  <Header title={t(lang, "workProcess.title")} subtitle={t(lang, "workProcess.subtitle")} icon="fluent:star-emphasis-16-filled" />
+
+  <div class="flex flex-col gap-3 mt-6">
+    <CustomCard client:idle icon="mdi:calendar-check" text={t(lang, "workProcess.planning")} type="follow" />
+    <CustomCard client:idle icon="material-symbols:problem" text={t(lang, "workProcess.problemSolving")} type="follow" />
+    <CustomCard client:idle icon="mdi:message-text-outline" text={t(lang, "workProcess.communication")} type="follow" />
+    <CustomCard client:idle icon="iconoir:learning" text={t(lang, "workProcess.continuousLearning")} type="follow" />
+  </div>
+</div>
