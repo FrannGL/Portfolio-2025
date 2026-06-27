@@ -1,44 +1,25 @@
 import Header from "@/components/custom/Header";
-import { useTranslation } from "react-i18next";
-import "@/i18n";
+import { t } from "@/i18n";
+
+interface Props {
+  lang?: string;
+}
 
 const cards = [
-  {
-    key: "ui",
-    src: "/assets/logo_notimation.png",
-    alt: "Notimation",
-    text: "Notimation",
-  },
-  {
-    key: "web",
-    src: "/assets/jst.png",
-    alt: "JST Seguridad en el Transporte",
-    text: "JST | Seguridad en el Transporte",
-  },
+  { key: "ui", src: "/assets/logo_notimation.png", alt: "Notimation", text: "Notimation" },
+  { key: "web", src: "/assets/jst.png", alt: "JST Seguridad en el Transporte", text: "JST | Seguridad en el Transporte" },
   { key: "seo", src: "/assets/finanex.png", alt: "Finanex", text: "Finanex" },
   { key: "fit", src: "/assets/fit.png", alt: "Fit", text: "Fit" },
-  {
-    key: "nefra",
-    src: "/assets/nefra.png",
-    alt: "Nefra",
-    text: "Nefra",
-  },
-  {
-    key: "zerobug",
-    src: "/assets/zerobug.png",
-    alt: "Zerobug",
-    text: "Zerobug",
-  },
+  { key: "nefra", src: "/assets/nefra.png", alt: "Nefra", text: "Nefra" },
+  { key: "zerobug", src: "/assets/zerobug.png", alt: "Zerobug", text: "Zerobug" },
 ];
 
-const Clients = () => {
-  const { t } = useTranslation();
-
+const Clients = ({ lang = "es" }: Props) => {
   return (
     <div className="flex flex-col items-center justify-center pb-6.5 pt-5 gap-1 text-foreground">
       <Header
-        title={t("clients.title")}
-        subtitle={t("clients.subtitle")}
+        title={t(lang, "clients.title")}
+        subtitle={t(lang, "clients.subtitle")}
         icon="ion:rocket-sharp"
       />
 
@@ -50,11 +31,7 @@ const Clients = () => {
                 key={`${key}-${i}`}
                 className="flex flex-col items-center justify-center w-48 xl:w-40 h-[50px] xl:h-[42px] bg-[#191919] text-white rounded-lg shadow-sm border border-[#212121] mx-2 p-1 flex-shrink-0"
               >
-                <img
-                  src={src}
-                  alt={alt}
-                  className="max-h-full object-contain"
-                />
+                <img src={src} alt={alt} className="max-h-full object-contain" />
               </div>
             ))
           )}

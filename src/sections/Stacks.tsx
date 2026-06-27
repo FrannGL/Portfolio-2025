@@ -1,14 +1,13 @@
 import CustomCard from "@/components/custom/CustomCard";
 import Header from "@/components/custom/Header";
-import { useMediaScreen } from "@/hooks/useMediaScreen";
 import { Icon } from "@iconify/react";
-import { useTranslation } from "react-i18next";
-import "@/i18n";
+import { t } from "@/i18n";
 
-const Stacks = () => {
-  const isMobile = useMediaScreen();
-  const { t } = useTranslation();
+interface Props {
+  lang?: string;
+}
 
+const Stacks = ({ lang = "es" }: Props) => {
   const backendTechs = [
     { icon: "devicon:nodejs", name: "Node.js" },
     { icon: "vscode-icons:file-type-nestjs", name: "Nest.js" },
@@ -41,40 +40,40 @@ const Stacks = () => {
       icon: <Icon icon="ion:brush" className="w-5 h-5" />,
       text: "UI Design",
       techIcons: uiDesignTechs,
-      className: isMobile ? "w-33" : "w-39 xl:w-[135px]",
+      className: "w-33 w-39 xl:w-[135px]",
     },
     {
       type: "stack" as const,
       icon: <Icon icon="ion:pie-chart-sharp" className="w-5 h-5" />,
       text: "Frontend",
       techIcons: frontendTechs,
-      className: isMobile ? "w-33" : "w-39 xl:w-[135px]",
+      className: "w-33 w-39 xl:w-[135px]",
     },
     {
       type: "stack" as const,
       icon: <Icon icon="ion:server" className="w-5 h-5" />,
       text: "Backend",
       techIcons: backendTechs,
-      className: isMobile ? "w-33" : "w-39 xl:w-[135px]",
+      className: "w-33 w-39 xl:w-[135px]",
     },
     {
       type: "stack" as const,
       icon: <Icon icon="ion:cloud-upload" className="w-5 h-5" />,
       text: "DevOps",
       techIcons: deployTechs,
-      className: isMobile ? "w-33" : "w-39 xl:w-[135px]",
+      className: "w-33 w-39 xl:w-[135px]",
     },
   ];
 
   return (
     <div className="flex flex-col items-center justify-center text-foreground pt-5 pb-4">
       <Header
-        title={t("stacks.title")}
-        subtitle={t("stacks.subtitle")}
+        title={t(lang, "stacks.title")}
+        subtitle={t(lang, "stacks.subtitle")}
         icon="ion:logo-buffer"
       />
 
-      <div className={`mt-6 px-5 ${"grid grid-cols-2 gap-3 w-full max-w-sm"}`}>
+      <div className="mt-6 px-5 grid grid-cols-2 gap-3 w-full max-w-sm">
         {cards.map((card, index) => (
           <div key={index} className="w-full">
             <CustomCard

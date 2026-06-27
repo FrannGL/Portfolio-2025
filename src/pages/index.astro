@@ -10,52 +10,59 @@ import WorkProcess from "@/sections/WorkProcess";
 import Follow from "@/sections/Follow";
 import WorkTogether from "@/sections/WorkTogether";
 import IndicatorsGrid from "@/components/custom/IndicatorsGrid";
+import LanguageSwitcher from "@/components/custom/LanguageSwitcher";
+
+const langParam = Astro.url.searchParams.get("lang");
+const acceptLang = Astro.request.headers.get("accept-language") ?? "";
+const lang = langParam ?? (acceptLang.startsWith("en") ? "en" : "es");
 ---
 
 <Layout>
+  <LanguageSwitcher lang={lang} client:load />
+
   <div class="min-h-screen h-screen items-center grid grid-cols-1 xl:grid-cols-[24%_33%_40%] gap-3 p-8 xl:p-5 text-white">
     <div class="flex flex-col gap-3 order-2 md:order-none">
       <div class="bg-[#101010] rounded-3xl border border-[rgba(33,33,33,0.8)]">
-        <Stacks client:load />
+        <Stacks lang={lang} client:idle />
       </div>
       <div class="bg-[#101010] rounded-xl border border-[rgba(33,33,33,0.8)]">
-        <Projects client:load />
+        <Projects lang={lang} client:idle />
       </div>
       <div class="bg-[#101010] rounded-xl border border-[rgba(33,33,33,0.8)]">
-        <Services client:load />
+        <Services lang={lang} client:idle />
       </div>
     </div>
 
     <div class="flex flex-col gap-3.5 order-1 md:order-none">
       <div class="order-2 md:order-none rounded-xl">
-        <IndicatorsGrid client:load />
+        <IndicatorsGrid lang={lang} client:idle />
       </div>
 
       <div class="order-1 md:order-none">
-        <ProfileCard client:load />
+        <ProfileCard lang={lang} client:idle />
       </div>
 
       <div class="bg-[#101010] rounded-xl border border-[rgba(33,33,33,0.8)] order-3 md:order-none">
-        <Clients client:load />
+        <Clients lang={lang} client:idle />
       </div>
     </div>
 
     <div class="flex flex-col gap-3 order-3 md:order-none">
       <div class="flex flex-col md:flex-row gap-2">
         <div class="bg-[#101010] rounded-xl border border-[rgba(33,33,33,0.8)] md:w-[56%]">
-          <Testimonials client:load />
+          <Testimonials lang={lang} client:idle />
         </div>
         <div class="bg-[#101010] rounded-xl border border-[rgba(33,33,33,0.8)] md:w-[44%]">
-          <WorkProcess client:load />
+          <WorkProcess lang={lang} client:idle />
         </div>
       </div>
 
       <div class="flex flex-col md:flex-row order-4 md:order-none gap-2">
         <div class="bg-[#101010] rounded-xl border border-[rgba(33,33,33,0.8)] md:w-[40%]">
-          <Follow client:load />
+          <Follow lang={lang} client:idle />
         </div>
         <div class="bg-[#101010] rounded-xl border border-[rgba(33,33,33,0.8)] mb-10 sm:mb-0 md:w-[60%]">
-          <WorkTogether client:load />
+          <WorkTogether lang={lang} client:idle />
         </div>
       </div>
     </div>

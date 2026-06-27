@@ -12,6 +12,7 @@ dist
 dist-ssr
 *.local
 .vercel
+.astro
 test_astro.mjs
 
 # Editor directories and files

@@ -1,20 +1,18 @@
 import CustomCard from "@/components/custom/CustomCard";
 import Header from "@/components/custom/Header";
 import { Icon } from "@iconify/react";
-import { useTranslation } from "react-i18next";
-import "@/i18n";
+import { t } from "@/i18n";
+
+interface Props {
+  lang?: string;
+}
 
 const cardsData = [
   { key: "ui", icon: <Icon icon="ion:brush" className="w-5 h-5" /> },
   { key: "web", icon: <Icon icon="mdi:web" className="w-5 h-5" /> },
   {
     key: "seo",
-    icon: (
-      <Icon
-        icon="streamline-ultimate:seo-search-graph-bold"
-        className="w-5 h-5"
-      />
-    ),
+    icon: <Icon icon="streamline-ultimate:seo-search-graph-bold" className="w-5 h-5" />,
   },
   { key: "auth", icon: <Icon icon="simple-icons:auth0" className="w-5 h-5" /> },
   { key: "api", icon: <Icon icon="mdi:api" className="w-5 h-5" /> },
@@ -30,14 +28,12 @@ const cardsData = [
   { key: "testing", icon: <Icon icon="mdi:bug-outline" className="w-5 h-5" /> },
 ];
 
-const Services = () => {
-  const { t } = useTranslation();
-
+const Services = ({ lang = "es" }: Props) => {
   return (
     <div className="flex flex-col items-center justify-center py-5 w-full h-full text-foreground overflow-hidden">
       <Header
-        title={t("services.title")}
-        subtitle={t("services.subtitle")}
+        title={t(lang, "services.title")}
+        subtitle={t(lang, "services.subtitle")}
         icon="ion:grid"
       />
 
@@ -49,7 +45,7 @@ const Services = () => {
                 key={`${card.key}-${i}`}
                 type="services"
                 icon={card.icon}
-                text={t(`services.${card.key}`)}
+                text={t(lang, `services.${card.key}`)}
                 className="flex-shrink-0"
               />
             ))

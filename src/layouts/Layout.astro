@@ -1,8 +1,9 @@
 ---
 import "@/index.css";
 
+const langParam = Astro.url.searchParams.get("lang");
 const acceptLang = Astro.request.headers.get("accept-language") ?? "";
-const lang = acceptLang.startsWith("en") ? "en" : "es";
+const lang = langParam ?? (acceptLang.startsWith("en") ? "en" : "es");
 ---
 
 <!doctype html>
@@ -15,32 +16,17 @@ const lang = acceptLang.startsWith("en") ? "en" : "es";
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:title" content="Franco Galluccio" />
-    <meta
-      property="og:description"
-      content="Hey! This is my personal Portoflio 🚀 ⚛"
-    />
+    <meta property="og:description" content="Hey! This is my personal Portoflio 🚀 ⚛" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://franngl.vercel.app/" />
-    <meta
-      name="description"
-      content="Hey! This is my personal Portoflio 🚀 ⚛"
-    />
-    <meta
-      name="keywords"
-      content="Franco Galluccio, portfolio, developer, react"
-    />
+    <meta name="description" content="Hey! This is my personal Portoflio 🚀 ⚛" />
+    <meta name="keywords" content="Franco Galluccio, portfolio, developer, react" />
     <meta name="author" content="Franco Galluccio" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content="/assets/og-image.jpg" />
     <meta name="twitter:title" content="Franco Galluccio" />
-    <meta
-      name="twitter:description"
-      content="Hey! This is my personal Portoflio 🚀 ⚛"
-    />
+    <meta name="twitter:description" content="Hey! This is my personal Portoflio 🚀 ⚛" />
     <title>Franco Galluccio Portfolio 🚀 ⚛</title>
-    <script is:inline>
-      window.__LANG__ = "{lang}";
-    </script>
   </head>
   <body class="dark font-raleway">
     <slot />

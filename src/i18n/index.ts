@@ -1,30 +1,25 @@
-import i18n from "i18next";
-import { initReactI18next } from "react-i18next";
-
 import en from "./locales/en/translation.json";
 import es from "./locales/es/translation.json";
 
-i18n.use(initReactI18next);
+type Nested = { [key: string]: string | string[] | Nested };
+const resources: Record<string, Nested> = { en, es };
 
-function detectLang(): string {
-  if (typeof window !== "undefined" && (window as any).__LANG__ === "en") {
-    return "en";
+function lookup(lang: string, key: string): unknown {
+  const keys = key.split(".");
+  let value: any = resources[lang] ?? resources["es"];
+  for (const k of keys) {
+    if (!value || typeof value !== "object") return key;
+    value = value[k];
   }
-  return "es";
+  return value;
 }
 
-if (!i18n.isInitialized) {
-  i18n.init({
-    resources: {
-      en: { translation: en },
-      es: { translation: es },
-    },
-    lng: detectLang(),
-    fallbackLng: "es",
-    interpolation: {
-      escapeValue: false,
-    },
-  });
+export function t(lang: string, key: string): string {
+  const value = lookup(lang, key);
+  return typeof value === "string" ? value : key;
 }
 
-export default i18n;
+export function tArr(lang: string, key: string): string[] {
+  const value = lookup(lang, key);
+  return Array.isArray(value) ? value : [];
+}

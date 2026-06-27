@@ -1,8 +1,11 @@
 import Header from "@/components/custom/Header";
 import TopProjectsModal from "@/components/custom/TopProjectsModal";
 import { useState } from "react";
-import { useTranslation } from "react-i18next";
-import "@/i18n";
+import { t } from "@/i18n";
+
+interface Props {
+  lang?: string;
+}
 
 const images = [
   "/assets/juguetes-perdidos.png",
@@ -18,10 +21,8 @@ const images = [
   "/assets/job-mapper.png",
 ];
 
-const Projects = () => {
+const Projects = ({ lang = "es" }: Props) => {
   const [open, setOpen] = useState(false);
-
-  const { t } = useTranslation();
 
   return (
     <div
@@ -29,8 +30,8 @@ const Projects = () => {
       style={{ maxWidth: "100%", boxSizing: "border-box" }}
     >
       <Header
-        title={t("projects.title")}
-        subtitle={t("projects.subtitle")}
+        title={t(lang, "projects.title")}
+        subtitle={t(lang, "projects.subtitle")}
         icon="ion:briefcase"
       />
 
@@ -44,7 +45,7 @@ const Projects = () => {
               className="cursor-pointer absolute left-1/2 top-15 z-20 -translate-x-1/2 rounded-lg bg-indigo-500 px-5 py-2 text-sm sm:text-base text-white font-semibold shadow-lg transition-colors hover:bg-indigo-700 border-[3px] border-black"
               type="button"
             >
-              {t("projects.button")}
+              {t(lang, "projects.button")}
             </button>
           }
         />

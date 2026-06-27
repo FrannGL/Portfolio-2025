@@ -22,14 +22,13 @@
     "testing": "Testing"
   },
   "profile": {
-    "available": "Disponible para trabajar",
+    "available": "Disponible",
     "resume": "CV",
     "emailMe": "Email",
     "whatsappMe": "WhatsApp",
     "badges": {
       "Argentina": "Argentina",
-      "Frontend": "Frontend",
-      "Backend": "Backend",
+      "FullStack": "Full-Stack",
       "Coderhouse": "Coderhouse",
       "ifts": "IFTS N°11",
       "Español": "Español",
@@ -38,7 +37,7 @@
     },
     "name": "Franco Galluccio",
     "roles": ["Diseñador", "Desarrollador", "Freelance", "Creador"],
-    "imA": "Soy un"
+    "imA": "Soy"
   },
   "clients": {
     "title": "Mis Clientes",

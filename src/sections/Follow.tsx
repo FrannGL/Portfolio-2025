@@ -1,17 +1,18 @@
 import CustomCard from "@/components/custom/CustomCard";
 import Header from "@/components/custom/Header";
 import { Icon } from "@iconify/react";
-import { useTranslation } from "react-i18next";
-import "@/i18n";
+import { t } from "@/i18n";
 
-const Follow = () => {
-  const { t } = useTranslation();
+interface Props {
+  lang?: string;
+}
 
+const Follow = ({ lang = "es" }: Props) => {
   return (
     <div className="flex flex-col pt-5 items-center justify-center text-foreground">
       <Header
-        title={t("follow.title")}
-        subtitle={t("follow.subtitle")}
+        title={t(lang, "follow.title")}
+        subtitle={t(lang, "follow.subtitle")}
         icon="mdi:heart"
       />
 

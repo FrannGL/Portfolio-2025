@@ -1,7 +1,10 @@
 import Header from "@/components/custom/Header";
 import TestimonialCard from "@/components/custom/TestimonialCard";
-import { useTranslation } from "react-i18next";
-import "@/i18n";
+import { t } from "@/i18n";
+
+interface Props {
+  lang?: string;
+}
 
 const testimonials = [
   {
@@ -38,14 +41,12 @@ const testimonials = [
   },
 ];
 
-const Testimonials = () => {
-  const { t } = useTranslation();
-
+const Testimonials = ({ lang = "es" }: Props) => {
   return (
     <div className="flex flex-col items-center justify-center px-4 pt-5 gap-2 text-foreground">
       <Header
-        title={t("testimonials.title")}
-        subtitle={t("testimonials.subtitle")}
+        title={t(lang, "testimonials.title")}
+        subtitle={t(lang, "testimonials.subtitle")}
         icon="ion:happy-sharp"
       />
 
