@@ -28,7 +28,7 @@ const ProfileCard = ({ lang = "es" }: Props) => {
             <img
               src="/assets/images/avatar.webp"
               alt="Profile"
-              fetchpriority="high"
+              fetchPriority="high"
               className="w-40 h-35 object-cover mx-auto md:mx-0 rounded-2xl"
             />
           </div>
