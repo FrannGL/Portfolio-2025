@@ -1,3 +1,4 @@
+import "@/lib/iconify-init";
 import { Card, CardContent } from "@/components/ui/card";
 import { useMediaScreen } from "@/hooks/useMediaScreen";
 import { Icon } from "@iconify/react";
@@ -75,9 +76,9 @@ const CustomCard = ({
             isStack
               ? isMobile
                 ? isClicked
-                  ? "-translate-x-[120%]"
+                  ? "translate-x-[-120%]"
                   : ""
-                : "group-hover:-translate-x-[120%]"
+                : "group-hover:translate-x-[-120%]"
               : ""
           }`}
         >

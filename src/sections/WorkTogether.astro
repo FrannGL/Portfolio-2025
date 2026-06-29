@@ -1,7 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
 import AnimatedBorderButton from "@/components/custom/AnimatedBorder";
-import { Icon as Iconify } from "@iconify/react";
 import { t } from "@/i18n";
 
 export interface Props {
@@ -27,13 +26,13 @@ const { lang = "es" } = Astro.props;
   <div class="flex flex-col gap-4 mt-5 w-full">
     <a href="mailto:francoivangalluccio.com" class="w-full">
       <AnimatedBorderButton client:idle className="flex-1 p-6 text-md font-semibold text-muted-foreground">
-        <Iconify icon="mdi:email-outline" className="size-6 mr-2 text-indigo-400" />
+        <Icon name="mdi:email-outline" class="size-6 mr-2 text-indigo-400" />
         {t(lang, "workTogether.email")}
       </AnimatedBorderButton>
     </a>
     <a href="https://wa.me/5491121557802" target="_blank" rel="noopener noreferrer" class="w-full">
       <AnimatedBorderButton client:idle className="flex-1 p-6 text-md font-semibold text-muted-foreground">
-        <Iconify icon="ic:baseline-whatsapp" className="size-6 mr-2 text-indigo-400" />
+        <Icon name="mdi:whatsapp" class="size-6 mr-2 text-indigo-400" />
         {t(lang, "workTogether.whatsapp")}
       </AnimatedBorderButton>
     </a>

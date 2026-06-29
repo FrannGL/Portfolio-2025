@@ -1,6 +1,7 @@
-import TopProjectsModal from "@/components/custom/TopProjectsModal";
-import { useState } from "react";
-import { Icon } from "@iconify/react";
+import { lazy, Suspense, useState } from "react";
+
+const TopProjectsModal = lazy(() => import("@/components/custom/TopProjectsModal"));
+import { Icon } from "@/components/ui/icon";
 import { t } from "@/i18n";
 
 interface Props {
@@ -38,19 +39,21 @@ const Projects = ({ lang = "es" }: Props) => {
       </div>
 
       <div className="w-full relative">
-        <TopProjectsModal
-          open={open}
-          setOpen={setOpen}
-          trigger={
-            <button
-              id="projects-button"
-              className="cursor-pointer absolute left-1/2 top-15 z-20 -translate-x-1/2 rounded-lg bg-indigo-500 px-3 py-1.5 text-xs sm:text-sm text-white font-semibold shadow-lg transition-colors hover:bg-indigo-700 border-[3px] border-black"
-              type="button"
-            >
-              {t(lang, "projects.button")}
-            </button>
-          }
-        />
+        <Suspense fallback={null}>
+          <TopProjectsModal
+            open={open}
+            setOpen={setOpen}
+            trigger={
+              <button
+                id="projects-button"
+                className="cursor-pointer absolute left-1/2 top-15 z-20 -translate-x-1/2 rounded-lg bg-indigo-500 px-3 py-1.5 text-xs sm:text-sm text-white font-semibold shadow-lg transition-colors hover:bg-indigo-700 border-[3px] border-black"
+                type="button"
+              >
+                {t(lang, "projects.button")}
+              </button>
+            }
+          />
+        </Suspense>
 
         <div className="overflow-hidden rounded-lg">
           <div className="flex w-max gap-2 projects-animate-scroll-left">

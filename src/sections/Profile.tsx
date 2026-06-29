@@ -3,7 +3,7 @@ import BlinkingDot from "@/components/custom/BlinkingDot";
 import TypingText from "@/components/custom/TypingText";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { Icon } from "@iconify/react";
+import { Icon } from "@/components/ui/icon";
 import { t } from "@/i18n";
 
 interface Props {
@@ -28,6 +28,7 @@ const ProfileCard = ({ lang = "es" }: Props) => {
             <img
               src="/assets/images/avatar.webp"
               alt="Profile"
+              fetchpriority="high"
               className="w-40 h-35 object-cover mx-auto md:mx-0 rounded-2xl"
             />
           </div>

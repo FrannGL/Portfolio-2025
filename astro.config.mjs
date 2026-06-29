@@ -8,6 +8,9 @@ import path from "path";
 export default defineConfig({
   output: "server",
   adapter: vercel(),
+  build: {
+    inlineStylesheets: "auto",
+  },
   integrations: [react(), icon()],
   vite: {
     plugins: [tailwindcss()],

@@ -1,5 +1,5 @@
 import { AnimatedCount } from "@/components/custom/AnimatedCount";
-import { Icon } from "@iconify/react";
+import { Icon } from "@/components/ui/icon";
 
 interface IndicatorProps {
   value: number | string;

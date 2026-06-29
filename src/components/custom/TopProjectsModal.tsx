@@ -8,7 +8,6 @@ import {
 } from "@/components/ui/dialog";
 import { Github, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
 
 interface TopProjectsModalProps {
@@ -69,7 +68,7 @@ const TopProjectsModal = ({
           <DialogTitle className="text-2xl font-bold">
             <div className="flex flex-col gap-1 items-center justify-center text-foreground">
               <div className="flex justify-center items-center gap-2 text-muted-foreground">
-                <Icon icon="tabler:briefcase-filled" className="w-4.5 h-4 text-indigo-400" />
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-4.5 h-4 text-indigo-400" fill="currentColor"><path d="M20 6h-4V4c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2m-6 0h-4V4h4z"/></svg>
                 <span className="text-sm font-semibold font-raleway">My Works</span>
               </div>
               <h1 className="text-lg xl:text-base font-semibold text-white">My top 6 Projects</h1>
