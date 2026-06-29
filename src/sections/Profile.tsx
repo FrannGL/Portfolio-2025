@@ -13,8 +13,8 @@ interface Props {
 const badgesData = [
   { icon: "ion:location-sharp", label: "Argentina" },
   { icon: "ion:ribbon-sharp", label: "Coderhouse" },
-  { icon: "ion:code-slash-outline", label: "FullStack" },
   { icon: "game-icons:graduate-cap", label: "ifts" },
+  { icon: "ion:code-slash-outline", label: "FullStack" },
   { icon: "ion:language-sharp", label: "Español" },
   { icon: "ion:language-sharp", label: "Ingles" },
 ];
@@ -26,7 +26,7 @@ const ProfileCard = ({ lang = "es" }: Props) => {
         <div className="flex flex-col md:flex-row items-center md:items-start justify-between mb-4 gap-4">
           <div className="w-full md:w-28 shrink-0 rounded-xl overflow-hidden bg-transparent md:bg-muted">
             <img
-              src="/assets/avatar.jpg"
+              src="/assets/images/avatar.webp"
               alt="Profile"
               className="w-40 h-35 object-cover mx-auto md:mx-0 rounded-2xl"
             />
@@ -46,7 +46,7 @@ const ProfileCard = ({ lang = "es" }: Props) => {
                   {t(lang, "profile.resume")}
                 </p>
                 <a
-                  href="/assets/CV.pdf"
+                  href="/assets/documents/CV.pdf"
                   download
                   className="flex items-center gap-2 cursor-pointer select-none text-sm font-semibold text-[rgba(230,230,230,0.8)] group"
                 >
@@ -66,7 +66,7 @@ const ProfileCard = ({ lang = "es" }: Props) => {
               </div>
               <div className="md:hidden pr-2">
                 <a
-                  href="/assets/CV.pdf"
+                  href="/assets/documents/CV.pdf"
                   download
                   className="flex flex-col items-center gap-1.5 cursor-pointer select-none text-sm font-semibold text-[rgba(230,230,230,0.8)] group"
                 >

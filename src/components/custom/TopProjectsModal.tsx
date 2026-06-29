@@ -20,37 +20,37 @@ interface TopProjectsModalProps {
 const projects = [
   {
     name: "Juguetes Perdidos",
-    image: "/assets/juguetes-perdidos.png",
+    image: "/assets/images/projects/juguetes-perdidos.webp",
     githubUrl: "https://github.com/FrannGL/Juguetes-Perdidos-BEER",
     demoUrl: "https://juguetes-perdidos.vercel.app/",
   },
   {
     name: "Helpdesk JST",
-    image: "/assets/helpdesk.png",
+    image: "/assets/images/projects/helpdesk.webp",
     githubUrl: "https://github.com/FrannGL/front-jst-ot-helpdesk",
     demoUrl: "https://front-jst-ot-helpdesk.vercel.app/",
   },
   {
     name: "Job Mapper",
-    image: "/assets/job-mapper-2.png",
+    image: "/assets/images/projects/job-mapper-2.webp",
     githubUrl: "https://github.com/FrannGL/Job-Mapper-Backend",
     demoUrl: "https://job-mapper-web.vercel.app/",
   },
   {
     name: "Finanex Backoffice",
-    image: "/assets/backoffice.png",
+    image: "/assets/images/projects/backoffice.webp",
     githubUrl: "https://github.com/FinanexApp/front-backoffice",
     demoUrl: "https://staging.backoffice.finanex.io/",
   },
   {
     name: "Container IQ",
-    image: "/assets/containeriq.png",
+    image: "/assets/images/projects/containeriq.webp",
     githubUrl: "https://github.com/FinanexApp/front-containeriq",
     demoUrl: "https://staging.container-iq.finanex.io/",
   },
   {
     name: "MNJ Dashboard",
-    image: "/assets/mnj.png",
+    image: "/assets/images/projects/mnj.webp",
     githubUrl: "https://github.com/FrannGL/JST-Dashboard-Administrativo",
     demoUrl: "https://mnj-dashboard.vercel.app/",
   },

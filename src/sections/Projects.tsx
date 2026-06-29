@@ -8,17 +8,17 @@ interface Props {
 }
 
 const images = [
-  "/assets/juguetes-perdidos.png",
-  "/assets/Fuego-burgers.png",
-  "/assets/Notimation.png",
-  "/assets/Maular.png",
-  "/assets/backoffice.png",
-  "/assets/backoffice-2.png",
-  "/assets/containeriq-2.png",
-  "/assets/containeriq.png",
-  "/assets/helpdesk.png",
-  "/assets/job-mapper-2.png",
-  "/assets/job-mapper.png",
+  "/assets/images/projects/juguetes-perdidos.webp",
+  "/assets/images/projects/Fuego-burgers.webp",
+  "/assets/images/projects/Notimation.webp",
+  "/assets/images/projects/Maular.webp",
+  "/assets/images/projects/backoffice.webp",
+  "/assets/images/projects/backoffice-2.webp",
+  "/assets/images/projects/containeriq-2.webp",
+  "/assets/images/projects/containeriq.webp",
+  "/assets/images/projects/helpdesk.webp",
+  "/assets/images/projects/job-mapper-2.webp",
+  "/assets/images/projects/job-mapper.webp",
 ];
 
 const Projects = ({ lang = "es" }: Props) => {
@@ -44,7 +44,7 @@ const Projects = ({ lang = "es" }: Props) => {
           trigger={
             <button
               id="projects-button"
-              className="cursor-pointer absolute left-1/2 top-15 z-20 -translate-x-1/2 rounded-lg bg-indigo-500 px-5 py-2 text-sm sm:text-base text-white font-semibold shadow-lg transition-colors hover:bg-indigo-700 border-[3px] border-black"
+              className="cursor-pointer absolute left-1/2 top-15 z-20 -translate-x-1/2 rounded-lg bg-indigo-500 px-3 py-1.5 text-xs sm:text-sm text-white font-semibold shadow-lg transition-colors hover:bg-indigo-700 border-[3px] border-black"
               type="button"
             >
               {t(lang, "projects.button")}
